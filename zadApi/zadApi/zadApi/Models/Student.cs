@@ -1,22 +1,38 @@
 ﻿using System;
+using Xamarin.Forms;
 
 namespace zadApi.Models
 {
-    public class Student
+    public class Student:BindableObject
     {
+        private int _id;
+        public int Id {
+            get { return _id; }
+            set { _id = value; OnPropertyChanged();}
+        }
 
-        public int Id { get; set; }
+        private string _imie;
+        public string Imie {
+            get { return _imie; }
+            set { _imie = value; OnPropertyChanged(); }
+        }
 
-        
-        public string Imie { get; set; }
+        private string _nazwisko;
+        public string Nazwisko {
+            get { return _nazwisko; }
+            set { _nazwisko = value; OnPropertyChanged(); }
+        }
 
-        
-        public string Nazwisko { get; set; }
+        private string _nralbumu;
+        public string NrAlbumu {
+            get { return _nralbumu; }
+            set { _nralbumu = value; OnPropertyChanged(); }
+        }
 
-       
-        public string NrAlbumu { get; set; }
-
-        
-        public string Plec { get; set; }
+        private string _plec;
+        public string Plec {
+            get { return _plec; }
+            set { _plec = value; OnPropertyChanged(); }
+        }
     }
 }

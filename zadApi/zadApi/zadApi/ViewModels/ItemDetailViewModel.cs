@@ -17,29 +17,5 @@ namespace zadApi.ViewModels
             Item = item;
 
         }
-       //public async Task PutItem()
-       // {
-       //     IsBusy = true;
-
-       //     try
-       //     {
-                
-       //         await DataStore.UpdateItemAsync(Item);
-       //         // var items = await DataStore.GetStudentsAsync();
-       //         //foreach (var item in items)
-       //         //{
-       //         //    Items.Add(item);
-       //         //}
-       //     }
-       //     catch (Exception ex)
-       //     {
-       //         Debug.WriteLine(ex);
-       //     }
-       //     finally
-       //     {
-       //         IsBusy = false;
-       //     }
-       // }
-
     }
 }

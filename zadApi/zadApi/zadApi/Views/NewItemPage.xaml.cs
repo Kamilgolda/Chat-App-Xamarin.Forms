@@ -21,10 +21,10 @@ namespace zadApi.Views
 
             Item = new Student
             {
-                Imie = "Item name",
-                Nazwisko = "This is an item description.",
-                NrAlbumu = "This is an item description.",
-                Plec = "This is an item description."
+                Imie = "",
+                Nazwisko = "",
+                NrAlbumu = "",
+                Plec = ""
             };
 
             BindingContext = this;

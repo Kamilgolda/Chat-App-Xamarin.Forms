@@ -30,19 +30,7 @@ namespace zadApi.ViewModels
 
             MessagingCenter.Subscribe<ItemDetailPage, Student>(this, "UpdateItem", async (obj, item) =>
             {
-                var newItem = item as Student;
-            // Items.Add(newItem);
-            foreach (Student s in Items)
-                {
-                    if(s.Id==newItem.Id)
-                    {
-                        s.Imie = newItem.Imie;
-                        s.Nazwisko = newItem.Nazwisko;
-                        s.NrAlbumu = newItem.NrAlbumu;
-                        s.Plec = newItem.Plec;
-                    }
-                }
-                await DataStore.UpdateItemAsync(newItem);
+                await DataStore.UpdateItemAsync(item);
             });
 
         }
