@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
+using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 using zadApi.Models;
+using zadApi.Services;
 using zadApi.ViewModels;
 
 namespace zadApi.Views
@@ -58,6 +62,51 @@ namespace zadApi.Views
             // await viewModel.PutItem();
             MessagingCenter.Send(this, "UpdateItem", viewModel.Item);
             await Navigation.PopToRootAsync();
+
+        }
+
+        private async void DodajZdjęcie_Clicked (object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+            
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+            var mediaOptions = new PickMediaOptions()
+            {
+                PhotoSize = PhotoSize.Medium
+            };
+           var file = await CrossMedia.Current.PickPhotoAsync(mediaOptions);
+
+            if(file ==null)
+            {
+                await DisplayAlert("Error", "Nie wybrałeś zdjęcia", "Ok");
+                return;
+            }
+
+
+            // await DisplayAlert("File Location", file.Path, "OK");
+            byte[] imgdata;
+            zdjecie.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                return stream;
+            });
+            // imgdata = System.IO.File.ReadAllBytes(file.Path) ;
+            using (var memoryStream = new MemoryStream())
+            {
+                file.GetStream().CopyTo(memoryStream);
+                file.Dispose();
+                imgdata = memoryStream.ToArray();
+            }
+            viewModel.nowe = new Zdjęcia();
+            viewModel.nowe.Id = 1;
+            viewModel.nowe.IdStudent = 1;
+            viewModel.nowe.Zdjęcie = imgdata;
+            viewModel.ZdjeciaStore.AddItemAsync(viewModel.nowe);
+            
 
         }
     }

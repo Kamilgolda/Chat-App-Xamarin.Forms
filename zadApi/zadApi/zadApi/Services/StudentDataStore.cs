@@ -10,17 +10,10 @@ using Xamarin.Essentials;
 
 namespace zadApi.Services
 {
-    class StudentDataStore :IDataStore<Student>
+    class StudentDataStore :Client,IDataStore<Student>
     {
-        HttpClient client;
         IEnumerable<Student> items;
-        bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
-        public StudentDataStore()
-        {
-            client = new HttpClient(GetInsecureHandler());
-            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
-        }
-
+        
         public async Task<Student> GetItemAsync(string id)
         {
             if (id != null && IsConnected)
@@ -97,15 +90,7 @@ namespace zadApi.Services
 
             return response.IsSuccessStatusCode;
         }
-        public HttpClientHandler GetInsecureHandler()
-        {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (message, cert, chain,
-           errors) =>
-            {
-                return true;
-            };
-            return handler;
-        }
+       
+
     }
 }

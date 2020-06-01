@@ -12,8 +12,10 @@ namespace zadApi.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Student> DataStore => DependencyService.Get<IDataStore<Student>>();
+       public IDataStore<Student> DataStore => DependencyService.Get<IDataStore<Student>>();
+       public IDataStore<Zdjęcia> ZdjeciaStore => DependencyService.Get<IDataStore<Zdjęcia>>();
 
+        public Zdjęcia nowe;
         bool isBusy = false;
         public bool IsBusy
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CzysteAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using zadApi.Models;
+using zadApi.Web.Data;
+using zadApi.Web.Models;
 
 namespace zadApi.Web
 {
@@ -24,7 +27,11 @@ namespace zadApi.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-       // services.AddSingleton<IItemRepository, ItemRepository>();
+            // services.AddSingleton<IItemRepository, ItemRepository>();
+           // services.AddScoped<IItemRepository, ItemRepository>();
+            
+            services.AddDbContext<StudentsDbContext>();
+            services.AddScoped<IItemRepository, DbItemRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

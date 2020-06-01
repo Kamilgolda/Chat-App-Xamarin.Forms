@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using System.Reflection.Metadata;
+using Xamarin.Forms;
 
 namespace zadApi.Models
 {
     public class Student
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string Imie { get; set; }
@@ -18,5 +22,6 @@ namespace zadApi.Models
 
         [Required]
         public string Plec { get; set; }
+
     }
 }

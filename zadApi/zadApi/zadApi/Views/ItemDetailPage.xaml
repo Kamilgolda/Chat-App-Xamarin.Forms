@@ -9,9 +9,12 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="edit" Text="Edytuj" Clicked="Edit_Clicked" />
+        <ToolbarItem  Text = "Select" 
+                     Clicked = "DodajZdjęcie_Clicked" />
     </ContentPage.ToolbarItems>
     <StackLayout>
         <StackLayout x:Name="dane" Spacing="20" Padding="15">
+            <Image x:Name="zdjecie"></Image>
             <Label Text="Imie:" FontSize="Medium" />
             <Label Text="{Binding Item.Imie}" d:Text="Item Imie" FontSize="Small"/>
             <Label Text="Nazwisko:" FontSize="Medium" />
@@ -22,6 +25,8 @@
             <Label Text="{Binding Item.Plec}" d:Text="Item Płeć" FontSize="Small"/>
         </StackLayout>
         <StackLayout IsVisible="False" x:Name="edycja" Spacing="20" Padding="15">
+            <!--<Button Text="Dodaj Zdjęcie" Clicked="DodajZdjęcie_Clicked"></Button>-->
+            
             <Label Text="Imie" FontSize="Medium" />
             <Entry Text="{Binding Item.Imie}" d:Text="Item Imie" FontSize="Small" />
             <Label Text="Nazwisko" FontSize="Medium" />
