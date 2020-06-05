@@ -6,11 +6,14 @@ namespace Projekt.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Users Item { get; set; }
+        public string date { get;}
+        public ItemDetailViewModel(Users item = null)
         {
-            Title = item?.Text;
+            Title = item?.Name+" "+item?.LastName;
             Item = item;
+            date = item.Dateofbirth.ToShortDateString();
+            
         }
     }
 }

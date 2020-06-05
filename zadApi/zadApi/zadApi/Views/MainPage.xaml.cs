@@ -36,6 +36,9 @@ namespace zadApi.Views
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
+                    case (int)MenuItemType.Covid:
+                        MenuPages.Add(id, new NavigationPage(new CovidPage()));
+                        break;
                 }
             }
 

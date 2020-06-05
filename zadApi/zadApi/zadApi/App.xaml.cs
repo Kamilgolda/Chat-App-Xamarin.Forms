@@ -15,6 +15,7 @@ namespace zadApi
         //If using other emulators besides stock Google images you may need to adjust the IP address
         public static string AzureBackendUrl =
             DeviceInfo.Platform == DevicePlatform.Android ? "https://192.168.100.7:45455" : "http://localhost:44300";
+        public static string CovidUrl = "https://corona-virus-stats.herokuapp.com";
         public static bool UseMockDataStore = false;
 
         public App()
@@ -30,6 +31,7 @@ namespace zadApi
             {
                 DependencyService.Register<IDataStore<Student>, StudentDataStore>();
                 DependencyService.Register<IDataStore<Zdjęcia>, ZdjeciaDataStore>();
+                DependencyService.Register<IDataStore<Rows>, CovidDataStore>();
                 //     DependencyService.Register<IDataStore<item>,StudentDataStore>();
             }
             MainPage = new MainPage();

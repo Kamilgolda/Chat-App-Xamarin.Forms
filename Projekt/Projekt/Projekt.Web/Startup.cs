@@ -29,6 +29,7 @@ namespace Projekt.Web
 
             services.AddDbContext<UsersDbContext>();
             services.AddScoped<IItemRepository, DbUsersRepository>();
+            services.AddScoped<IMessagesRepository, DbMessagesRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

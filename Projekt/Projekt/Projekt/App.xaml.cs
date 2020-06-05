@@ -13,17 +13,17 @@ namespace Projekt
         //To debug on Android emulators run the web backend against .NET Core not IIS
         //If using other emulators besides stock Google images you may need to adjust the IP address
         public static string AzureBackendUrl =
-            DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
-        public static bool UseMockDataStore = true;
-
+            DeviceInfo.Platform == DevicePlatform.Android ? "https://192.168.100.7:45457" : "http://localhost:44300";
+        public static bool UseMockDataStore = false;
         public App()
         {
             InitializeComponent();
 
-            if (UseMockDataStore)
-                DependencyService.Register<MockDataStore>();
-            else
-                DependencyService.Register<AzureDataStore>();
+            //if (UseMockDataStore)
+            //    DependencyService.Register<MockDataStore>();
+            //else
+                DependencyService.Register<UsersDataStore>();
+                DependencyService.Register<MessagesDataStore>();
             MainPage = new MainPage();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Projekt.Models;
+using Projekt.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,8 +21,8 @@ namespace Projekt.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem {Id = MenuItemType.Browse, Title="Chat" },
+                new HomeMenuItem {Id = MenuItemType.About, Title="Mój profil" }
             };
 
             ListViewMenu.ItemsSource = menuItems;
@@ -32,6 +33,16 @@ namespace Projekt.Views
                 if (e.SelectedItem == null)
                     return;
 
+                if (e.SelectedItem == menuItems[1])
+                {
+                    if (BaseViewModel.zalogowany.IdUser == 0)
+                    {
+                        DisplayAlert("Zaloguj się", "Aby przeglądać swój profil musisz się zalogować", "OK");
+                        ListViewMenu.SelectedItem = menuItems[0];
+                        await RootPage.NavigateFromMenu(0);
+                        return;
+                    }
+                }
                 var id = (int)((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };

@@ -14,6 +14,7 @@ namespace zadApi.ViewModels
     {
        public IDataStore<Student> DataStore => DependencyService.Get<IDataStore<Student>>();
        public IDataStore<Zdjęcia> ZdjeciaStore => DependencyService.Get<IDataStore<Zdjęcia>>();
+       public IDataStore<Rows> CovidStore => DependencyService.Get<IDataStore<Rows>>();
 
         public Zdjęcia nowe;
         bool isBusy = false;

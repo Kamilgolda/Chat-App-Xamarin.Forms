@@ -13,85 +13,50 @@ namespace Projekt.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IItemRepository ItemRepository;
-        private readonly UsersDbContext _dbContext;
+        public UsersDbContext _dbContext;
 
-        public UsersController(IItemRepository DbUsersRepository, UsersDbContext usersDbContext)
+
+        public UsersController(IItemRepository DbUsersRepository, UsersDbContext UsersDbContext)
         {
             ItemRepository = DbUsersRepository;
-            _dbContext = usersDbContext;
+            _dbContext = UsersDbContext;
         }
 
+
+        // GET: api/Students
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<Users>> List()
+        public IEnumerable<Users> Get()
         {
             return ItemRepository.GetAll().ToList();
-        }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Users> GetItem(int id)
+        }
+        // GET: api/Students/5
+        [HttpGet("{id}", Name = "Get")]
+        public Users Get(int id)
         {
-            try { 
-            Users item = ItemRepository.Get(id);
-                if (item == null)
-                    return NotFound();
-                return item;
-            }
-            catch (Exception)
-            {
-                return BadRequest("Error while getting item");
-            }
-            
+            return ItemRepository.Get(id);
         }
-
+        // POST: api/Students
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Users> Create([FromBody]Users item)
+        public void Post([FromBody] Users item)
         {
-            try
-            {
-                ItemRepository.Add(item);
-            }
-            catch (Exception)
-            {
-                return BadRequest("Error while adding item");
-            }
-            return NoContent();
+            ItemRepository.Add(item);
         }
-
+        // PUT: api/Students/5
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Edit([FromBody] Users item)
+        public void Put([FromBody] Users value)
         {
-            try
-            {
-                ItemRepository.Update(item);
-            }
-            catch (Exception)
-            {
-                return BadRequest("Error while editing item");
-            }
-            return NoContent();
+            ItemRepository.Update(value);
+        }
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            ItemRepository.Remove(id);
         }
 
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult Delete(int id)
-        {
-            try
-            {
-                ItemRepository.Remove(id);
-            }
-            catch (Exception)
-            {
-                return BadRequest("Error while removing item");
-            }
-            return NoContent();
-        }
+
+
+
     }
 }

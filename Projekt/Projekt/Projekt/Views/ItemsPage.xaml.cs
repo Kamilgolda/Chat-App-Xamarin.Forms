@@ -19,7 +19,6 @@ namespace Projekt.Views
     public partial class ItemsPage : ContentPage
     {
         ItemsViewModel viewModel;
-
         public ItemsPage()
         {
             InitializeComponent();
@@ -29,8 +28,9 @@ namespace Projekt.Views
 
         async void OnItemSelected(object sender, EventArgs args)
         {
+            
             var layout = (BindableObject)sender;
-            var item = (Item)layout.BindingContext;
+            var item = (Users)layout.BindingContext;
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
         }
 
@@ -45,6 +45,12 @@ namespace Projekt.Views
 
             if (viewModel.Items.Count == 0)
                 viewModel.IsBusy = true;
+           
+        }
+
+        private void NewMessage_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SearchUsersPage());
         }
     }
 }

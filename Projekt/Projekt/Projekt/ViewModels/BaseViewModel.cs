@@ -7,13 +7,15 @@ using Xamarin.Forms;
 
 using Projekt.Models;
 using Projekt.Services;
+using Acr.UserDialogs;
 
 namespace Projekt.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-
+        public IDataStore<Users> DataStoreUsers => DependencyService.Get<IDataStore<Users>>();
+        public MessagesDataStore DataStoreMessages => DependencyService.Get<MessagesDataStore>();
+        public static Users zalogowany = new Users();
         bool isBusy = false;
         public bool IsBusy
         {

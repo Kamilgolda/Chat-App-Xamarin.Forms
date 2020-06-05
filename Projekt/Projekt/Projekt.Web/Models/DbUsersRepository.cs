@@ -8,11 +8,11 @@ namespace Projekt.Models
 {
     public class DbUsersRepository : IItemRepository
     {
-        private readonly UsersDbContext _usersDbContext;
+        private UsersDbContext _usersDbContext;
 
-        public DbUsersRepository(UsersDbContext usersDbContext)
+        public DbUsersRepository(UsersDbContext UsersDbContext)
         {
-            _usersDbContext = usersDbContext;
+            _usersDbContext = UsersDbContext;
         }
 
         public IEnumerable<Users> GetAll()
@@ -45,6 +45,7 @@ namespace Projekt.Models
             itemupd.LastName = item.LastName;
             itemupd.Dateofbirth = item.Dateofbirth;
             itemupd.Email = item.Email;
+            itemupd.Image = item.Image;
             _usersDbContext.Users.Update(itemupd);
             _usersDbContext.SaveChanges();
         }

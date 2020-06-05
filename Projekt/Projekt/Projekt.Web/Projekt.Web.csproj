@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20200601221031_users.Designer.cs" />
     <Compile Remove="Migrations\20200601221126_users.cs" />
     <Compile Remove="Migrations\20200601221126_users.Designer.cs" />
+    <Compile Remove="Migrations\20200602180354_Init.cs" />
+    <Compile Remove="Migrations\20200602180354_Init.Designer.cs" />
+    <Compile Remove="Migrations\20200602180426_Init.cs" />
+    <Compile Remove="Migrations\20200602180426_Init.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

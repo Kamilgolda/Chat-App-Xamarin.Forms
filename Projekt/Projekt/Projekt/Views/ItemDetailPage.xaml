@@ -3,15 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="Projekt.Views.ItemDetailPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="SlateBlue">
+    <ScrollView>
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+<RowDefinition />
+<RowDefinition Height="30"/>
+<RowDefinition Height="30"/>
+<RowDefinition Height="30"/>
+<RowDefinition Height="30"/>
+<RowDefinition Height="50"/>
+</Grid.RowDefinitions>
+            <Frame Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="SlateBlue" HasShadow="True" Padding="0"  BorderColor="DarkSlateBlue" CornerRadius="50" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" >
+                <ffimageloading:CachedImage  WidthRequest="250" HeightRequest="250"     
+                            Aspect="AspectFill"
+                            Source="{Binding Item.ImageSource}"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2">
+                </ffimageloading:CachedImage>
+            </Frame>
+            <Label Text="Imię:" FontSize="Medium" Grid.Row="1" Grid.Column="0"/>
+        <Label Text="{Binding Item.Name}" d:Text="Item name" FontSize="Medium" Grid.Row="1" Grid.Column="1"/>
+        <Label Text="Nazwisko:" FontSize="Medium" Grid.Row="2" Grid.Column="0" />
+        <Label Text="{Binding Item.LastName}" d:Text="Item description" FontSize="Medium" Grid.Row="2" Grid.Column="1"/>
+        <Label Text="Email:" FontSize="Medium" Grid.Row="3" Grid.Column="0" />
+        <Label Text="{Binding Item.Email}" d:Text="Item description" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+        <Label Text="Data urodzenia:" FontSize="Medium" Grid.Row="4" Grid.Column="0"  />
+        <Label Text="{Binding date}" FontSize="Medium" Grid.Row="4" Grid.Column="1" />
+            <Button Text="Wyślij wiadomość" Grid.Row="5" Grid.ColumnSpan="2" Clicked="Send_Clicked" ></Button>
+    </Grid>
+    </ScrollView>
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
-    </StackLayout>
-    
 </ContentPage>

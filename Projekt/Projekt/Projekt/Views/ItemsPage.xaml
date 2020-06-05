@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="Projekt.Views.ItemsPage"
              Title="{Binding Title}"
-             x:Name="BrowseItemsPage">
+             x:Name="BrowseItemsPage"
+             BackgroundColor="SlateBlue">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Nowa wiadomość" Clicked="NewMessage_Clicked" />
     </ContentPage.ToolbarItems>
 
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
@@ -27,20 +29,36 @@
             </d:CollectionView.ItemsSource>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10">
-                        <Label Text="{Binding Text}" 
+                    <StackLayout Orientation="Vertical" Padding="10" HorizontalOptions="FillAndExpand">
+                    <Frame BorderColor="Wheat" CornerRadius="10" HasShadow="True">
+                        <StackLayout Orientation="Horizontal" Spacing="20">
+                                <Frame BackgroundColor="SlateBlue" HasShadow="True" BorderColor="DarkSlateBlue" CornerRadius="50" Padding="0">
+                                    <ffimageloading:CachedImage HorizontalOptions="Start"
+			                           WidthRequest="80" HeightRequest="80"
+			                            Aspect="AspectFill"
+                                        Source="{Binding ImageSource}">
+                                    </ffimageloading:CachedImage>
+                                </Frame>
+                                <Label Text="{Binding Name}" 
                                 d:Text="{Binding .}"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                        <Label Text="{Binding Description}" 
+                                FontSize="20" 
+                                 VerticalTextAlignment="Center"
+                                />
+                            <Label Text="{Binding LastName}" 
                                 d:Text="Item descripton"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+                                FontSize="20"
+                                   VerticalTextAlignment="Center"
+                                   />
+                        </StackLayout>
+                        </Frame>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>
+                    
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

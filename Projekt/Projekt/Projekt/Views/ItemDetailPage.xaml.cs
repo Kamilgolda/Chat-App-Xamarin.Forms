@@ -22,18 +22,28 @@ namespace Projekt.Views
             BindingContext = this.viewModel = viewModel;
         }
 
-        public ItemDetailPage()
+        private async void Send_Clicked(object sender, EventArgs e)
         {
-            InitializeComponent();
-
-            var item = new Item
-            {
-                Text = "Item 1",
-                Description = "This is an item description."
-            };
-
-            viewModel = new ItemDetailViewModel(item);
-            BindingContext = viewModel;
+            //Navigation.PushAsync(new MessagePage());
+            // var layout = (BindableObject)sender;
+            var item = viewModel.Item;
+            await Navigation.PushAsync(new MessagePage(new MessagePageViewModel(item)));
         }
+
+
+
+        //public ItemDetailPage()
+        //{
+        //    InitializeComponent();
+
+        //    var item = new Users
+        //    {
+        //        Name = "Item 1",
+        //        LastName = "This is an item description."
+        //    };
+
+        //    viewModel = new ItemDetailViewModel(item);
+        //    BindingContext = viewModel;
+        //}
     }
 }

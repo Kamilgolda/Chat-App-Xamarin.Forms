@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Projekt.Views.LoginPage"
+             BackgroundColor="SlateBlue">
+    <ContentPage.Content>
+        <StackLayout
+            Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="30" Margin="10,10,10,10" >
+            <Label  Text="Email" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+            <Entry x:Name="Login"  MaxLength="16" Text=""></Entry>
+            <Label Text="Hasło" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+            <Entry x:Name="Haslo" IsPassword="True" Text="" MaxLength="16" ></Entry>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Zaloguj"  Clicked="Zaloguj_Clicked"></Button>
+            <Button Text="Rejestracja" Clicked="Rejestruj_Clicked"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

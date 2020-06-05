@@ -7,7 +7,8 @@ namespace zadApi.Models
     public enum MenuItemType
     {
         Browse,
-        About
+        About,
+        Covid
     }
     public class HomeMenuItem
     {

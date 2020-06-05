@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Projekt.Views.RegistrationPage"
+             BackgroundColor="SlateBlue">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="15" WidthRequest="300" Margin="10,0,10,10">
+            <Label Text="Imie" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+            <Entry MaxLength="16" Text="{Binding Item.Name}" ></Entry>
+            <Label Text="Nazwisko" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+                <Entry MaxLength="16" Text="{Binding Item.LastName}"></Entry>
+            <Label Text="Email" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+                <Entry MaxLength="16" Text="{Binding Item.Email}" ></Entry>
+            <Label Text="Data Urodzenia" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+                <DatePicker MinimumDate="01/01/1900" Date="{Binding Item.Dateofbirth}" ></DatePicker>
+            <Label Text="Hasło" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+                <Entry IsPassword="True"  MaxLength="16" Text="{Binding Item.Password}" ></Entry>
+            <Label Text="Powtórz Hasło" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+            <Entry IsPassword="True" MaxLength="16" ></Entry>
+                <Button Text="ZAREJESTRUJ" Clicked="Zarejestruj_Clicked"></Button>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

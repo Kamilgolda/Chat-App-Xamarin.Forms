@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="Projekt.Views.EditPage"
+             BackgroundColor="SlateBlue">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Anuluj" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0" BackgroundColor="SlateBlue" HasShadow="True" Padding="0"  BorderColor="DarkSlateBlue" CornerRadius="50" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+
+                    <ffimageloading:CachedImage WidthRequest="200" HeightRequest="200" 
+			                Aspect="AspectFill"             
+                            Source="{Binding _zalogowany.ImageSource}"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2">
+                        
+                    </ffimageloading:CachedImage>
+                    
+                </Frame>
+                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="SlateBlue" Padding="0">
+                    <StackLayout Orientation="Vertical" Spacing="0" >
+                        <Button Command="{Binding AddImageFromGalleryCommand}" HeightRequest="100" BackgroundColor="SlateBlue" BorderColor="DarkSlateBlue" BorderWidth="1"  FontSize="Subtitle"  Text="Dodaj z gelerii" ></Button>
+                        <Button Command="{Binding AddImageCommand}" Text="Zrób zdjęcie" HeightRequest="100" BackgroundColor="SlateBlue"  FontSize="Subtitle" BorderColor="DarkSlateBlue" BorderWidth="1" ></Button>
+                    </StackLayout>
+                </Frame>
+                
+                <Label Text="Imię:" FontSize="Medium" Grid.Row="1" Grid.Column="0"/>
+                <Entry Text="{Binding _zalogowany.Name}" d:Text="Item name" FontSize="Medium" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="Nazwisko:" FontSize="Medium" Grid.Row="2" Grid.Column="0" />
+                <Entry Text="{Binding _zalogowany.LastName}" d:Text="Item description" FontSize="Medium" Grid.Row="2" Grid.Column="1"/>
+                <Label Text="Email:" FontSize="Medium" Grid.Row="3" Grid.Column="0" />
+                <Entry Text="{Binding _zalogowany.Email}" d:Text="Item description" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                <Label Text="Data urodzenia:" FontSize="Medium" Grid.Row="4" Grid.Column="0"  />
+                <DatePicker Date="{Binding _zalogowany.Dateofbirth}" Grid.Row="4" Grid.Column="1" />
+                <Label Text="Hasło:" FontSize="Medium" Grid.Row="5" Grid.Column="0" />
+                <Entry Text="{Binding _zalogowany.Password}" d:Text="Item description" FontSize="Medium" Grid.Row="5" Grid.Column="1"/>
+                <Label Text="Powtórz hasło:" FontSize="Medium" Grid.Row="6" Grid.Column="0" />
+                <Entry Text="{}" d:Text="Item description" FontSize="Medium" Grid.Row="6" Grid.Column="1"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="Projekt.Views.AboutPage"
              xmlns:vm="clr-namespace:Projekt.ViewModels"
@@ -20,62 +21,38 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
-                </ContentView>
-            </StackLayout>
-        </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
-                <Label FontSize="22">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="AppName" FontAttributes="Bold" FontSize="22" />
-                                <Span Text=" " />
-                                <Span Text="1.0" ForegroundColor="{StaticResource LightTextColor}" />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="This app is written in C# and native APIs using the" />
-                                <Span Text=" " />
-                                <Span Text="Xamarin Platform" FontAttributes="Bold" />
-                                <Span Text="." />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="It shares code with its" />
-                                <Span Text=" " />
-                                <Span Text="iOS, Android, and Windows" FontAttributes="Bold" />
-                                <Span Text=" " />
-                                <Span Text="versions." />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button Margin="0,10,0,0" Text="Learn more"
-                        Command="{Binding OpenWebCommand}"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
-            </StackLayout>
-        </ScrollView>
-    </Grid>
-    
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="SlateBlue" HasShadow="True" Padding="0"  BorderColor="DarkSlateBlue" CornerRadius="50" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" >
+                
+                    <ffimageloading:CachedImage  WidthRequest="250" HeightRequest="250"
+			                
+                            Aspect="AspectFill"
+                            Source="{Binding _zalogowany.ImageSource}"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2">
+
+                    </ffimageloading:CachedImage>
+                
+            </Frame>
+            <Label Text="Imię:" FontSize="Medium" Grid.Row="1" Grid.Column="0"/>
+            <Label Text="{Binding _zalogowany.Name}" d:Text="Item name" FontSize="Medium" Grid.Row="1" Grid.Column="1"/>
+            <Label Text="Nazwisko:" FontSize="Medium" Grid.Row="2" Grid.Column="0" />
+            <Label Text="{Binding _zalogowany.LastName}" d:Text="Item description" FontSize="Medium" Grid.Row="2" Grid.Column="1"/>
+            <Label Text="Email:" FontSize="Medium" Grid.Row="3" Grid.Column="0" />
+            <Label Text="{Binding _zalogowany.Email}" d:Text="Item description" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+            <Label Text="Data urodzenia:" FontSize="Medium" Grid.Row="4" Grid.Column="0"  />
+            <Label Text="{Binding date}" FontSize="Medium" Grid.Row="4" Grid.Column="1" />
+            <Button Text="Edytuj Profil" Clicked="Edit_Clicked" Grid.Row="5" Grid.ColumnSpan="2"></Button>
+        </Grid>
+    </ScrollView>
+
 </ContentPage>

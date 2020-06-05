@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projekt.Models;
+using Projekt.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace Projekt.Web.Data
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=ProjektDB;Trusted_Connection=True;");
         }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Messages> Messages { get; set; }
     }
 }

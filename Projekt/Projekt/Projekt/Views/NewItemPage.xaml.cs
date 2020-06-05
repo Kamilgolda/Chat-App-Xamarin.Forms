@@ -13,16 +13,19 @@ namespace Projekt.Views
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Users Item { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Item = new Users
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Name = "Item name",
+                LastName = "This is an item description.",
+                Email = "This is an item description.",
+                Password = "This is an item description.",
+
             };
 
             BindingContext = this;

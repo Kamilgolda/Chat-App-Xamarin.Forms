@@ -10,8 +10,8 @@ using Projekt.Web.Data;
 namespace Projekt.Web.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20200601221355_users")]
-    partial class users
+    [Migration("20200602222210_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,9 @@ namespace Projekt.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -43,9 +46,44 @@ namespace Projekt.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("IdUser");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Projekt.Web.Models.Messages", b =>
+                {
+                    b.Property<int>("IdMessage")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdReceiver")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdSender")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Received")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdMessage");
+
+                    b.ToTable("Messages");
                 });
 #pragma warning restore 612, 618
         }
