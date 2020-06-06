@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Projekt.Views.RegistrationPage"
-             BackgroundColor="SlateBlue">
+             Style="{StaticResource BackgroundColor}">
     <ContentPage.Content>
         <ScrollView>
         <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="15" WidthRequest="300" Margin="10,0,10,10">
@@ -14,14 +14,14 @@
             <Label Text="Nazwisko" HorizontalOptions="Center" FontSize="Subtitle"></Label>
                 <Entry MaxLength="16" Text="{Binding Item.LastName}"></Entry>
             <Label Text="Email" HorizontalOptions="Center" FontSize="Subtitle"></Label>
-                <Entry MaxLength="16" Text="{Binding Item.Email}" ></Entry>
+                <Entry Text="{Binding Item.Email}" ></Entry>
             <Label Text="Data Urodzenia" HorizontalOptions="Center" FontSize="Subtitle"></Label>
                 <DatePicker MinimumDate="01/01/1900" Date="{Binding Item.Dateofbirth}" ></DatePicker>
             <Label Text="Hasło" HorizontalOptions="Center" FontSize="Subtitle"></Label>
                 <Entry IsPassword="True"  MaxLength="16" Text="{Binding Item.Password}" ></Entry>
             <Label Text="Powtórz Hasło" HorizontalOptions="Center" FontSize="Subtitle"></Label>
-            <Entry IsPassword="True" MaxLength="16" ></Entry>
-                <Button Text="ZAREJESTRUJ" Clicked="Zarejestruj_Clicked"></Button>
+            <Entry x:Name="passwordp" IsPassword="True" MaxLength="16" ></Entry>
+                <Button Text="ZAREJESTRUJ" Clicked="Zarejestruj_Clicked" Style="{StaticResource ButtonStyle}"></Button>
         </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -11,6 +11,14 @@
               Padding="10"
               HasShadow="false"
               Margin="10,10,80,10">
-        <Label Text="{Binding Text}"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="12"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Text="{Binding Text}"
+                  TextColor="White"/>
+            <Label Grid.Row="1" Text="{Binding Date}" HorizontalOptions="End" FontSize="Micro" TextColor="White"></Label>
+        </Grid>
     </Frame>
 </ViewCell>

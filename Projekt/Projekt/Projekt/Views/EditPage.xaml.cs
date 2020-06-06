@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿using Acr.UserDialogs;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Projekt.Models;
 using Projekt.ViewModels;
@@ -30,7 +31,14 @@ namespace Projekt.Views
         }
         async void Save_Clicked(object sender, EventArgs e)
         {
-           
+            if (viewModel._zalogowany.Name == "" || viewModel._zalogowany.LastName == "" || viewModel._zalogowany.Email == "" || viewModel._zalogowany.Password == "" || passwordp.Text == "")
+                await UserDialogs.Instance.AlertAsync("Uzupełnij wszystkie pola", "Nie wszystkie pola zostały prawidłowo uzupełnione", "Spróbuj ponownie");
+            else if (viewModel._zalogowany.Password != passwordp.Text)
+                await UserDialogs.Instance.AlertAsync("Popraw pola haseł", "Podane hasła się różnią", "Spróbuj ponownie");
+            else
+            {
+
+            
             BaseViewModel.zalogowany.Name = viewModel._zalogowany.Name;
             BaseViewModel.zalogowany.LastName = viewModel._zalogowany.LastName;
             BaseViewModel.zalogowany.Image = viewModel._zalogowany.Image;
@@ -42,7 +50,9 @@ namespace Projekt.Views
 
             
             await viewModel.DataStoreUsers.UpdateItemAsync(BaseViewModel.zalogowany);
+            UserDialogs.Instance.Toast("Succes", TimeSpan.FromSeconds(5));
             await Navigation.PopAsync();
+            }
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)

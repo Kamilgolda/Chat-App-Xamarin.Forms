@@ -13,11 +13,10 @@ namespace Projekt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MessagePage : ContentPage
     {
-        MessagePageViewModel viewModel;
         public MessagePage(MessagePageViewModel ViewModel)
         {
             InitializeComponent();
-            this.BindingContext = viewModel = ViewModel;
+            this.BindingContext = ViewModel;
         }
 
         public void ScrollTap(object sender, System.EventArgs e)
@@ -32,8 +31,6 @@ namespace Projekt.Views
                         
                         vm.ShowScrollTap = false;
                         vm.LastMessageVisible = true;
-                        //vm.PendingMessageCount = 0;
-                        //ChatList?.ScrollToFirst();
                     
 
 
@@ -42,10 +39,6 @@ namespace Projekt.Views
             }
         }
        
-        public void OnListTapped(object sender, ItemTappedEventArgs e)
-        {
-           // chatInput.UnFocusEntry();
-        }
     }
 }
        

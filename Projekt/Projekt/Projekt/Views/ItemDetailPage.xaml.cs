@@ -24,26 +24,9 @@ namespace Projekt.Views
 
         private async void Send_Clicked(object sender, EventArgs e)
         {
-            //Navigation.PushAsync(new MessagePage());
-            // var layout = (BindableObject)sender;
+
             var item = viewModel.Item;
             await Navigation.PushAsync(new MessagePage(new MessagePageViewModel(item)));
         }
-
-
-
-        //public ItemDetailPage()
-        //{
-        //    InitializeComponent();
-
-        //    var item = new Users
-        //    {
-        //        Name = "Item 1",
-        //        LastName = "This is an item description."
-        //    };
-
-        //    viewModel = new ItemDetailViewModel(item);
-        //    BindingContext = viewModel;
-        //}
     }
 }

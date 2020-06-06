@@ -29,23 +29,6 @@ namespace Projekt.Controllers
             return ItemRepository.GetAll(id,id2).ToList();
         }
 
-        //[HttpGet("{id}")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public ActionResult<Users> GetItem(int id)
-        //{
-        //    try { 
-        //    Users item = ItemRepository.Get(id);
-        //        if (item == null)
-        //            return NotFound();
-        //        return item;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest("Error while getting item");
-        //    }
-            
-        //}
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -79,20 +62,5 @@ namespace Projekt.Controllers
             return NoContent();
         }
 
-        //[HttpDelete("{id}")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public ActionResult Delete(int id)
-        //{
-        //    try
-        //    {
-        //        ItemRepository.Remove(id);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest("Error while removing item");
-        //    }
-        //    return NoContent();
-        //}
     }
 }

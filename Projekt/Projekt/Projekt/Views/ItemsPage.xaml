@@ -8,7 +8,7 @@
              x:Class="Projekt.Views.ItemsPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage"
-             BackgroundColor="SlateBlue">
+             Style="{StaticResource BackgroundColor}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Nowa wiadomość" Clicked="NewMessage_Clicked" />
@@ -41,15 +41,13 @@
                                 </Frame>
                                 <Label Text="{Binding Name}" 
                                 d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
+                                LineBreakMode="NoWrap"  
                                 FontSize="20" 
                                  VerticalTextAlignment="Center"
                                 />
                             <Label Text="{Binding LastName}" 
                                 d:Text="Item descripton"
                                 LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="20"
                                    VerticalTextAlignment="Center"
                                    />

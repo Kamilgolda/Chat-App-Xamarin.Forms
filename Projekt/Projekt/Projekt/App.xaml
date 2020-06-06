@@ -14,6 +14,18 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
+            <Style x:Key="BackgroundColor" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="SlateBlue"></Setter>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="25"></Setter>
+                <Setter Property="BackgroundColor" Value="DarkOrange"></Setter>
+            </Style>
+            <Style x:Key="LabelsStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
     

@@ -6,7 +6,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="Projekt.Views.EditPage"
-             BackgroundColor="SlateBlue">
+             Style="{StaticResource BackgroundColor}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Anuluj" Clicked="Cancel_Clicked" />
@@ -32,29 +32,26 @@
                             Source="{Binding _zalogowany.ImageSource}"
                             Grid.Row="0"
                             Grid.ColumnSpan="2">
-                        
+
                     </ffimageloading:CachedImage>
-                    
+
                 </Frame>
-                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="SlateBlue" Padding="0">
-                    <StackLayout Orientation="Vertical" Spacing="0" >
-                        <Button Command="{Binding AddImageFromGalleryCommand}" HeightRequest="100" BackgroundColor="SlateBlue" BorderColor="DarkSlateBlue" BorderWidth="1"  FontSize="Subtitle"  Text="Dodaj z gelerii" ></Button>
-                        <Button Command="{Binding AddImageCommand}" Text="Zrób zdjęcie" HeightRequest="100" BackgroundColor="SlateBlue"  FontSize="Subtitle" BorderColor="DarkSlateBlue" BorderWidth="1" ></Button>
-                    </StackLayout>
-                </Frame>
-                
-                <Label Text="Imię:" FontSize="Medium" Grid.Row="1" Grid.Column="0"/>
+                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" Spacing="2" >
+                    <Button Command="{Binding AddImageFromGalleryCommand}" HeightRequest="98" FontSize="Subtitle"  Text="Dodaj z gelerii" Style="{StaticResource ButtonStyle}" ></Button>
+                    <Button Command="{Binding AddImageCommand}" Text="Zrób zdjęcie" HeightRequest="98" FontSize="Subtitle" Style="{StaticResource ButtonStyle}" ></Button>
+                </StackLayout>
+                <Label Text="Imię:" Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelsStyle}"/>
                 <Entry Text="{Binding _zalogowany.Name}" d:Text="Item name" FontSize="Medium" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="Nazwisko:" FontSize="Medium" Grid.Row="2" Grid.Column="0" />
+                <Label Text="Nazwisko:" Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelsStyle}" />
                 <Entry Text="{Binding _zalogowany.LastName}" d:Text="Item description" FontSize="Medium" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Email:" FontSize="Medium" Grid.Row="3" Grid.Column="0" />
+                <Label Text="Email:" Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelsStyle}" />
                 <Entry Text="{Binding _zalogowany.Email}" d:Text="Item description" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
-                <Label Text="Data urodzenia:" FontSize="Medium" Grid.Row="4" Grid.Column="0"  />
+                <Label Text="Data urodzenia:" Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelsStyle}" />
                 <DatePicker Date="{Binding _zalogowany.Dateofbirth}" Grid.Row="4" Grid.Column="1" />
-                <Label Text="Hasło:" FontSize="Medium" Grid.Row="5" Grid.Column="0" />
+                <Label Text="Hasło:" Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelsStyle}" />
                 <Entry Text="{Binding _zalogowany.Password}" d:Text="Item description" FontSize="Medium" Grid.Row="5" Grid.Column="1"/>
-                <Label Text="Powtórz hasło:" FontSize="Medium" Grid.Row="6" Grid.Column="0" />
-                <Entry Text="{}" d:Text="Item description" FontSize="Medium" Grid.Row="6" Grid.Column="1"/>
+                <Label Text="Powtórz hasło:" FontSize="Medium" Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelsStyle}" />
+                <Entry x:Name="passwordp"  d:Text="Item description" FontSize="Medium" Grid.Row="6" Grid.Column="1"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

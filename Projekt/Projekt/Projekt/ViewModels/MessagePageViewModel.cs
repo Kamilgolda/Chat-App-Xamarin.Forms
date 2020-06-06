@@ -68,23 +68,31 @@ namespace Projekt.ViewModels
             }
         }
 
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
         async Task ExecuteOnSendCommand()
         {
+            IsBusy = true;
+            try
+            {
+                if (!string.IsNullOrEmpty(TextToSend) && Blokujtxt == "Zablokuj")
+                {
+                    newMessage = new Messages() { Date = DateTime.Now, IdSender = zalogowany.IdUser, IdReceiver = rUser.IdUser, Text = TextToSend, Received = false, Blocked = false };
+                    DataStoreMessages.AddItemAsync(newMessage);
+                    TextToSend = string.Empty;
+                }
+                else if (Blokujtxt == "Odblokuj" || Blokujtxt == "Zablokowany")
+                {
+                    UserDialogs.Instance.Toast("Nie możesz wysłać wiadomości", TimeSpan.FromSeconds(2));
 
-            if (!string.IsNullOrEmpty(TextToSend) && Blokujtxt=="Zablokuj")
-            {
-                newMessage = new Messages() { Date = DateTime.Now, IdSender = zalogowany.IdUser, IdReceiver = rUser.IdUser, Text = TextToSend, Received = false, Blocked = false };
-                DataStoreMessages.AddItemAsync(newMessage);
-                TextToSend = string.Empty;
+                }
             }
-            else
+            catch(Exception e)
             {
-                UserDialogs.Instance.Toast("Nie możesz wysłać wiadomości",TimeSpan.FromSeconds(10));
-             
+                await UserDialogs.Instance.AlertAsync("Błąd", "Wystąpił błąd.", "OK");
+                Debug.WriteLine(e);
+            }
+            finally
+            {
+                IsBusy = false;
             }
 
 
@@ -99,16 +107,18 @@ namespace Projekt.ViewModels
                 if (Blokujtxt == "Zablokuj")
                 {
 
-                    Messages item = items.ElementAt(0);
-                    items.ElementAt(0).Blocked = true;
-                    DataStoreMessages.UpdateItemAsync(items.ElementAt(0));
-
+                    Messages item = items.FirstOrDefault(x => x.IdSender == zalogowany.IdUser);
+                    item.Blocked = true;
+                    await DataStoreMessages.UpdateItemAsync(item);
+                    UserDialogs.Instance.Toast("Konwersacja zablokowana", TimeSpan.FromSeconds(2));
                     return;
                 }
                 if (Blokujtxt == "Odblokuj")
                 {
-                    items.ElementAt(0).Blocked = false;
-                    DataStoreMessages.UpdateItemAsync(items.ElementAt(0));
+                    Messages item = items.FirstOrDefault(x => x.IdSender == zalogowany.IdUser);
+                    item.Blocked = false;
+                    await DataStoreMessages.UpdateItemAsync(item);
+                    UserDialogs.Instance.Toast("Konwersacja odblokowana", TimeSpan.FromSeconds(2));
                     return;
                 }
             }
@@ -144,7 +154,7 @@ namespace Projekt.ViewModels
                     {
                         if (item.Blocked == true)
                         {
-                            Blokujtxt = "Zostałeś zablokowany";
+                            Blokujtxt = "Zablokowany";
                             return;
                         }
                     }
@@ -158,14 +168,13 @@ namespace Projekt.ViewModels
                     for (int i = Messages.Count; i < items.Count(); i++)
                     {
                         Messages.Insert(0, items.ElementAt(i));
-
-
                     }
-                    //Odblokuj aby pisac
+                    
                 }
             }
             catch (Exception ex)
             {
+                await UserDialogs.Instance.AlertAsync("Błąd", "Wystąpił błąd.", "OK");
                 Debug.WriteLine(ex);
             }
             finally

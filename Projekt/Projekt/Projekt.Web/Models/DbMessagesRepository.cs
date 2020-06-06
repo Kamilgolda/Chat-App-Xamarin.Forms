@@ -33,21 +33,10 @@ namespace Projekt.Models
 
         public void Add(Messages item)
         {
-            _usersDbContext.Messages.AddAsync(item);
+            _usersDbContext.Messages.Add(item);
             _usersDbContext.SaveChanges();
         }
 
-        //public Users Get(int id)
-        //{
-        //    return _usersDbContext.Messages.FirstOrDefault(x => x.IdUser == id);
-        //}
-
-        //public void Remove(int id)
-        //{
-        //    var item = _usersDbContext.Users.FirstOrDefault(x => x.IdUser == id);
-        //    _usersDbContext.Users.Remove(item);
-        //    _usersDbContext.SaveChanges();
-        //}
 
         public void Update(Messages item)
         {
@@ -64,11 +53,7 @@ namespace Projekt.Models
             
 
             _usersDbContext.SaveChanges();
-                //FirstOrDefault(x => x.IdSender == item.IdSender && x.IdReceiver==item.IdReceiver);
-            //itemupd.Received = item.Received;
-            //itemupd.Blocked = item.Blocked;
-            //_usersDbContext.Messages.Update(itemupd);
-            //_usersDbContext.SaveChanges();
+                
         }
     }
 }

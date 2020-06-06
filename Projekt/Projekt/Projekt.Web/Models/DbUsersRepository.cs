@@ -46,6 +46,7 @@ namespace Projekt.Models
             itemupd.Dateofbirth = item.Dateofbirth;
             itemupd.Email = item.Email;
             itemupd.Image = item.Image;
+            itemupd.Password = item.Password;
             _usersDbContext.Users.Update(itemupd);
             _usersDbContext.SaveChanges();
         }

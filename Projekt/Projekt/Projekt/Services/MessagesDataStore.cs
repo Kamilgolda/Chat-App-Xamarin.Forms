@@ -20,7 +20,7 @@ namespace Projekt.Services
 
         public async Task<IEnumerable<Messages>> GetItemsAsync(int idsender,int idreceiver)
         {
-            if (idsender!=null && idreceiver!=null && IsConnected)
+            if (IsConnected)
             {
                 var json = await client.GetStringAsync($"api/Messages/"+idsender+"/"+idreceiver);
                 items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Messages>>(json));

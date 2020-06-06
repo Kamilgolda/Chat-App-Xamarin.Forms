@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿using Acr.UserDialogs;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Projekt.Models;
 using System;
@@ -32,6 +33,7 @@ namespace Projekt.ViewModels
             _zalogowany.Email = zalogowany.Email;
             _zalogowany.Dateofbirth =zalogowany.Dateofbirth;
             _zalogowany.ImageSource = zalogowany.ImageSource;
+            _zalogowany.Password = "";
             AddImageFromGalleryCommand = new Command(async () => await ExecuteAddImageFromGalleryCommand());
             AddImageCommand = new Command(async () => await ExecuteAddImageCommand());
             
@@ -45,7 +47,7 @@ namespace Projekt.ViewModels
 
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
-               // DisplayAlert("No Camera", ":( No camera available.", "OK");
+               await UserDialogs.Instance.AlertAsync("Brak dostępu do aparatu", "Brak aparatu", "Ok");
                 return;
             }
             var mediaOptions = new PickMediaOptions()
@@ -56,7 +58,7 @@ namespace Projekt.ViewModels
 
             if (file == null)
             {
-               // await DisplayAlert("Error", "Nie wybrałeś zdjęcia", "Ok");
+                await UserDialogs.Instance.AlertAsync("Nie wybrano zdjęcia", "Brak zdjęcia", "Ok");
                 return;
             }
 
@@ -65,11 +67,6 @@ namespace Projekt.ViewModels
 
             byte[] imgdata;
 
-            //Image = ImageSource.FromStream(() =>
-            //{
-            //    var stream = file.GetStream();
-            //    return stream;
-            //});
 
             // imgdata = System.IO.File.ReadAllBytes(file.Path) ;
             using (var memoryStream = new MemoryStream())
@@ -91,7 +88,7 @@ namespace Projekt.ViewModels
 
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
-               // DisplayAlert("No Camera", ":( No camera available.", "OK");
+                await UserDialogs.Instance.AlertAsync("Brak dostępu do aparatu", "Brak aparatu", "Ok");
                 return;
             }
 

@@ -12,7 +12,7 @@
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
-        <NavigationPage BarBackgroundColor="SlateBlue">
+        <NavigationPage Style="{StaticResource NavigationPrimary}">
             <x:Arguments>
                 <views:LoginPage />
             </x:Arguments>

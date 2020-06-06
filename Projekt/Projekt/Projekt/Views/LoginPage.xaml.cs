@@ -1,4 +1,5 @@
-﻿using Projekt.Models;
+﻿using Acr.UserDialogs;
+using Projekt.Models;
 using Projekt.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Projekt.Views
         {
             InitializeComponent();
             viewModel = new ItemsViewModel();
-           // viewModel.LoadItemsCommand.Execute(true);
+
 
             BindingContext = this;
         }
@@ -46,8 +47,8 @@ namespace Projekt.Views
                     break;
                 }
             }
-            if(zalogowano == false) DisplayAlert("Błąd logowania", "Podano błędny login/hasło", "Spróbuj ponownie");
-           
+            if(zalogowano == false) await UserDialogs.Instance.AlertAsync("Podano błędny login/hasło", "Błąd logowania", "Spróbuj ponownie");
+
         }
 
         private async void Rejestruj_Clicked(object sender, EventArgs e)

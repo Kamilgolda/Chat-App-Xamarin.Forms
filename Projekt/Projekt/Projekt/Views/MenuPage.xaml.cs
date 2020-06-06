@@ -1,4 +1,5 @@
-﻿using Projekt.Models;
+﻿using Acr.UserDialogs;
+using Projekt.Models;
 using Projekt.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Projekt.Views
                 {
                     if (BaseViewModel.zalogowany.IdUser == 0)
                     {
-                        DisplayAlert("Zaloguj się", "Aby przeglądać swój profil musisz się zalogować", "OK");
+                        await UserDialogs.Instance.AlertAsync("Aby przeglądać swój profil musisz się zalogować", "Zaloguj się", "OK");
                         ListViewMenu.SelectedItem = menuItems[0];
                         await RootPage.NavigateFromMenu(0);
                         return;

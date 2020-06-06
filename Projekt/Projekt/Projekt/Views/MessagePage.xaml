@@ -28,7 +28,6 @@
                  ItemTemplate="{StaticResource MessageTemplateSelector}" 
                  ItemsSource="{Binding Messages}" 
                  Margin="0"
-                 ItemTapped="OnListTapped"
                  Rotation="180" 
                  FlowDirection="RightToLeft"
                  HasUnevenRows="True" x:Name="ChatList"

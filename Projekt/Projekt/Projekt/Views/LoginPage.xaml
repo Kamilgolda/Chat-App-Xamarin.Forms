@@ -3,20 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="Projekt.Views.LoginPage"
-             BackgroundColor="SlateBlue">
+             Style="{StaticResource BackgroundColor}">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout
-            Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="30" Margin="10,10,10,10" >
+            Orientation="Vertical" Padding="20" HorizontalOptions="CenterAndExpand" Spacing="30" Margin="10,10,10,10" >
+            <ffimageloading:CachedImage HorizontalOptions="CenterAndExpand"
+			                           WidthRequest="150" HeightRequest="150"
+			                            Aspect="AspectFill"
+                                        Source="logo.png">
+            </ffimageloading:CachedImage>
             <Label  Text="Email" HorizontalOptions="Center" FontSize="Subtitle"></Label>
-            <Entry x:Name="Login"  MaxLength="16" Text=""></Entry>
+            <Entry x:Name="Login" Text="" WidthRequest="300"></Entry>
             <Label Text="Hasło" HorizontalOptions="Center" FontSize="Subtitle"></Label>
-            <Entry x:Name="Haslo" IsPassword="True" Text="" MaxLength="16" ></Entry>
+            <Entry x:Name="Haslo" IsPassword="True" Text="" ></Entry>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Zaloguj"  Clicked="Zaloguj_Clicked"></Button>
-            <Button Text="Rejestracja" Clicked="Rejestruj_Clicked"></Button>
+                <Button Text="Zaloguj" Clicked="Zaloguj_Clicked" Style="{StaticResource ButtonStyle}"></Button>
+                <Button Text="Rejestracja" Clicked="Rejestruj_Clicked" Style="{StaticResource ButtonStyle}"></Button>
             </StackLayout>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

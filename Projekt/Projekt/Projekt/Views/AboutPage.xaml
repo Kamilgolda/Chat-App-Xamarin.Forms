@@ -13,22 +13,12 @@
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
     
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="Accent">#96d1ff</Color>
-            <Color x:Key="LightTextColor">#999999</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <ScrollView>
-        <Grid Padding="20">
+        <Grid Padding="20" RowSpacing="20">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="220"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Frame Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="SlateBlue" HasShadow="True" Padding="0"  BorderColor="DarkSlateBlue" CornerRadius="50" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" >
@@ -43,15 +33,23 @@
                     </ffimageloading:CachedImage>
                 
             </Frame>
-            <Label Text="Imię:" FontSize="Medium" Grid.Row="1" Grid.Column="0"/>
-            <Label Text="{Binding _zalogowany.Name}" d:Text="Item name" FontSize="Medium" Grid.Row="1" Grid.Column="1"/>
-            <Label Text="Nazwisko:" FontSize="Medium" Grid.Row="2" Grid.Column="0" />
-            <Label Text="{Binding _zalogowany.LastName}" d:Text="Item description" FontSize="Medium" Grid.Row="2" Grid.Column="1"/>
-            <Label Text="Email:" FontSize="Medium" Grid.Row="3" Grid.Column="0" />
-            <Label Text="{Binding _zalogowany.Email}" d:Text="Item description" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
-            <Label Text="Data urodzenia:" FontSize="Medium" Grid.Row="4" Grid.Column="0"  />
-            <Label Text="{Binding date}" FontSize="Medium" Grid.Row="4" Grid.Column="1" />
-            <Button Text="Edytuj Profil" Clicked="Edit_Clicked" Grid.Row="5" Grid.ColumnSpan="2"></Button>
+            <Frame Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="25">
+                <StackLayout Orientation="Horizontal" Spacing="30" HorizontalOptions="Center" >
+                    <StackLayout Spacing="20">
+                        <Label Text="Imię:" Style="{StaticResource LabelsStyle}"/>
+                        <Label Text="Nazwisko:" Style="{StaticResource LabelsStyle}" />
+                        <Label Text="Email:"  Style="{StaticResource LabelsStyle}" />
+                        <Label Text="Data urodzenia:" Style="{StaticResource LabelsStyle}"  />
+                    </StackLayout>
+                    <StackLayout Spacing="20">
+                        <Label Text="{Binding _zalogowany.Name}" d:Text="Item name"  Style="{StaticResource LabelsStyle}"/>
+                        <Label Text="{Binding _zalogowany.LastName}" d:Text="Item description" Style="{StaticResource LabelsStyle}"/>
+                        <Label Text="{Binding _zalogowany.Email}" d:Text="Item description"  Style="{StaticResource LabelsStyle}"/>
+                        <Label Text="{Binding date}" Style="{StaticResource LabelsStyle}" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Button Text="Edytuj Profil" Clicked="Edit_Clicked" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource ButtonStyle}"></Button>
         </Grid>
     </ScrollView>
 

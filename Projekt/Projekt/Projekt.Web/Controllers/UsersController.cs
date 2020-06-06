@@ -48,12 +48,7 @@ namespace Projekt.Controllers
         {
             ItemRepository.Update(value);
         }
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            ItemRepository.Remove(id);
-        }
+       
 
 
 

@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Projekt.Models;
 using Projekt.Views;
 using System.IO;
+using Acr.UserDialogs;
 
 namespace Projekt.ViewModels
 {
@@ -15,18 +16,11 @@ namespace Projekt.ViewModels
     {
         public ObservableCollection<Users> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        public ImageSource img = "https://image.ceneostatic.pl/data/products/58871271/i-4rooms-obrazek-na-plotnie-panda.jpg";
         public ItemsViewModel()
         {
             Title = "Użytkownicy";
             Items = new ObservableCollection<Users>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            //MessagingCenter.Subscribe<RegistrationPage, Users>(this, "AddItem", async (obj, item) =>
-            //{
-            //    Users newItem = item as Users;
-            //    Items.Add(newItem);
-            //    await DataStoreUsers.AddItemAsync(newItem);
-            //});
         }
 
 
@@ -58,6 +52,7 @@ namespace Projekt.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                await UserDialogs.Instance.AlertAsync("Wystąpił Błąd", "Błąd", "Ok");
             }
             finally
             {
