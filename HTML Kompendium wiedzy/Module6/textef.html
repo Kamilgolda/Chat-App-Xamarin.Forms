@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+<img src="img/textef.png" style="float:right" />
+<h2>
+    Podstawowe właściwości to: letter-spacing(odstepy miedzy literami), lineheight(wysokosc linii),
+    text-align(wyrownanie tekstu), text-decoration, and texttransform. CSS3
+    definiuje kilka innych właściwości, które
+    zapewniają jeszcze większą kontrolę nad układem
+    twojej treści tekstowej.
+</h2>
+    <ul>
+        <li><h4>
+    text-indent - wskazuje
+    jak daleko pierwszy wiersz każdego nowego bloku tekstu
+    powinien być wcięty.<br />
+    <code>text-indent: 3rem;</code>
+</h4></li>
+        
+        <li><h4>
+    hyphens - wskazuje, w jaki sposób przeglądarka powinna dzielić wyrazy podczas łączenia linii.
+    Możliwe wartości to none (no hyphenating),manual (use the & shy; sequence in your text to
+    indicate where hyphens can be placed), i auto.<br />
+                                                  <code>
+                                                      hyphens: manual;<br />
+                                                      -ms-hyphens : manual;
+                                                  </code>
+</h4></li>
+        <li><h4>
+    word-wrap - wskazuje, czy przeglądarka może łamać wiersze w słowach, kiedy
+    zawijana linia. Możliwe wartości są normal(domyślnie nie) i break-word(przeglądarka może łamać
+    słowa w dowolnym punkcie).<br />
+                              <code>word-wrap : normal;</code>
+</h4></li>
+        <li><h4>
+    word-spacing - umożliwia ustawienie odstępów między wyrazami w bloku tekstu.
+    Możesz użyć zarówno pomiarów względnych, jak i bezwzględnych.<br />
+                                                                 <code>
+                                                                     word-spacing : 5px;<br />
+                                                                     word-spacing : 2rem;
+                                                                 </code>
+</h4></li>
+        <li><h4>
+    text-shadow - umożliwia zastosowanie cieniowania do zaznaczonego tekstu. Cień jest
+    zdefiniowane przez cztery właściwości:
+                <p>
+                    x-offset: jak daleko w prawo zaczyna się cień. Użyj wartości ujemnej, aby przesunąć ją w lewo.<br />
+                    y-offset: jak daleko pionowo zaczyna się cień. Użyj wartości ujemnej, aby przenieść ją w górę.<br />
+                    blur (opcjonalnie): jak szerokie jest rozmycie cienia. Wartość domyślna to 0.<br />
+                    color: może mieć dowolną wartość koloru. Domyślnie jest czarny.
+                </p>
+                <code>
+                    text-shadow: 0 1px 0 #000; // not supported in Internet Explorer 9 and earlier
+                    versions.
+                </code>
+</h4></li>
+    </ul>
+</body>
+</html>

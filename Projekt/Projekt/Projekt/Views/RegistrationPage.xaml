@@ -8,7 +8,7 @@
              Style="{StaticResource BackgroundColor}">
     <ContentPage.Content>
         <ScrollView>
-        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="15" WidthRequest="300" Margin="10,0,10,10">
+        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="15" WidthRequest="300" Padding="10">
             <Label Text="Imie" HorizontalOptions="Center" FontSize="Subtitle"></Label>
             <Entry MaxLength="16" Text="{Binding Item.Name}" ></Entry>
             <Label Text="Nazwisko" HorizontalOptions="Center" FontSize="Subtitle"></Label>

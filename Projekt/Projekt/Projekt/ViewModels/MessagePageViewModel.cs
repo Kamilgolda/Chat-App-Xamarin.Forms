@@ -15,7 +15,7 @@ namespace Projekt.ViewModels
 {
     public class MessagePageViewModel:BaseViewModel
     {
-        public bool ShowScrollTap { get; set; } = false;
+       // public bool ShowScrollTap { get; set; } = false;
         public bool LastMessageVisible { get; set; } = true;
         public Users rUser { get; set; }
         public ObservableCollection<Messages> Messages { get; set; } = new ObservableCollection<Messages>();
@@ -62,7 +62,7 @@ namespace Projekt.ViewModels
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     
-                    ShowScrollTap = true;
+                    //ShowScrollTap = true;
                     LastMessageVisible = true;
                 });
             }

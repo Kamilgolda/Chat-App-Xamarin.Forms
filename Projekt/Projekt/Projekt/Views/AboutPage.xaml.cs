@@ -1,7 +1,9 @@
-﻿using Projekt.ViewModels;
+﻿using Projekt.Models;
+using Projekt.ViewModels;
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -31,6 +33,12 @@ namespace Projekt.Views
         private async void Edit_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new EditPage());
+        }
+
+        private void Wyloguj_Clicked(object sender, EventArgs e)
+        {
+            BaseViewModel.zalogowany = new Users();
+            (Application.Current).MainPage = new MainPage();
         }
     }
 }

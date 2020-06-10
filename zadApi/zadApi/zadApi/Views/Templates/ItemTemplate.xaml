@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="zadApi.Views.Templates.ItemTemplate">
+  <ContentView.Content>
+        <StackLayout x:Name="Stack">
+            <Frame Margin="10,10,10,10"
+                        HasShadow="True"
+                           BorderColor="Red"
+                            CornerRadius="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ffimageloading:CachedImage x:Name="ffimage" HorizontalOptions="Start" VerticalOptions="End"
+			WidthRequest="60" HeightRequest="60"
+			DownsampleToViewSize="true"
+                                                            Source="{Binding Zdjęcie}"
+                                                            Grid.Column="0"
+                                                            Grid.RowSpan="3">
+                    </ffimageloading:CachedImage>
+                    <Label Text="{Binding Imie}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16"
+                               Grid.Column="1"
+                                       Grid.Row="0"/>
+
+                    <Label Text="{Binding NrAlbumu}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16"
+                               Grid.Column="2"/>
+                    <Label Text="{Binding Nazwisko}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16"
+                               Grid.Column="1"
+                               Grid.Row="2"/>
+
+                    <Label Text="{Binding Plec}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16"
+                               Grid.Column="2"
+                               Grid.Row="2"/>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"></TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:templates="clr-namespace:zadApi.Views.Templates"
              mc:Ignorable="d"
              x:Class="zadApi.Views.ItemsPage"
              Title="{Binding Title}"
@@ -16,71 +16,10 @@
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
         <CollectionView x:Name="ItemsCollectionView"
                 ItemsSource="{Binding Itemks}">
-            <d:CollectionView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Fourth Item</x:String>
-                    <x:String>Fifth Item</x:String>
-                    <x:String>Sixth Item</x:String>
-                </x:Array>
-            </d:CollectionView.ItemsSource>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Frame Margin="10,10,10,10"
-                        HasShadow="True"
-                           BorderColor="Red"
-                            CornerRadius="5">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"></RowDefinition>
-                                    <RowDefinition Height="20"></RowDefinition>
-                                    <RowDefinition Height="20"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <ffimageloading:CachedImage x:Name="ffimage" HorizontalOptions="Start" VerticalOptions="End"
-			WidthRequest="60" HeightRequest="60"
-			DownsampleToViewSize="true"
-                                                            Source="{Binding Zdjęcie}"
-                                                            Grid.Column="0"
-                                                            Grid.RowSpan="3">
-                                </ffimageloading:CachedImage>
-                                <Label Text="{Binding Imie}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"
-                               Grid.Column="1"
-                                       Grid.Row="0"/>
-
-                                <Label Text="{Binding NrAlbumu}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"
-                               Grid.Column="2"/>
-                                <Label Text="{Binding Nazwisko}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"
-                               Grid.Column="1"
-                               Grid.Row="2"/>
-
-                                <Label Text="{Binding Plec}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"
-                               Grid.Column="2"
-                               Grid.Row="2"/>
-                            </Grid>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                    </StackLayout>
+                    <templates:ItemTemplate>
+                    </templates:ItemTemplate>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

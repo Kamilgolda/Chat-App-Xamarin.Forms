@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+    <img src="img/style.png" />
+
+    <hr />
+    <p id="czcionka">font-family : Arial, Candara, Verdana, sans-serif;</p>
+    <p id="czcionka2">font-family : Georgia, Corbel, "Times New Roman", serif;</p>
+    <p id="czcionka3">font-family : Consolas, "Courier New", monospaced;</p>
+    <p>
+        font-family ustawia rozdzieloną przecinkami listę preferowanych rodzin czcionek dla
+        określonego tekstu. Powinieneś napisać listę w kolejności preferencji i w cudzysłwoie wszystkie nazwy rodzin czcionek
+        zawierające spacje. Podczas renderowania tekstu przeglądarka użyje pierwszej czcionki, która
+        jest dostępna na komputerze. Jeśli żadna z podanych czcionek nie jest dostępna, przeglądarka użyje własnej
+        algorytmu
+    </p>
+    <hr />
+    <p>
+        font-size określa wielkosc czcionki. Możesz ustawić wartość rozmiaru czcionki na  wartość bezwzględna w pikselach (do wyświetlania na ekranie), w punktach (do drukowania) lub do wartości względem
+        rozmiar czcionki elementu nadrzędnego (w procentach) lub w stosunku do podstawowego rozmiaru czcionki strony (w ems).
+    </p>
+    <p id="size">font-size : 16px;</p>
+    <p id="size2">font-size : 150%; /* Font-size of the parent element * 150% */</p>
+    <p id="size3">font-size : 1em; /* 1em = base font-size of the page. Usually 16px */</p>
+    <hr />
+    <p id="fontstyle">
+        font-style umożliwia wybranie normalnej (pionowej), pochyłej lub ukośnej wersji
+        czcionki do wyświetlenia.
+    </p>
+    <hr />
+    <p>
+        font-weight umożliwia ustawienie grubości czcionki. Zwykle oznacza to ustawienie
+        jej pogrubienia, ale można również ustawić jedną z dziewięciu wartości liczbowych (100, 200,…, 900)
+        odzwierciedlające różne grubości czcionek w tej rodzinie (black, book, semi-bold, itd.)
+    </p>
+    <p style="font-weight:bold;">font-weight : bold;</p>
+    <p style="font-weight:normal;">font-weight : normal;</p>
+    <p style="font-weight:800;">font-weight : 800;</p>
+    <hr />
+    <p>
+        Można czcionke opisac skrótowo stosując te reguly: 1. font-style
+        2. font-weight
+        3. font-size/line-height
+        4. font-family
+    </p>
+    <p id="skrot">font : bold 16px/1.5 "Arial";</p>
+    <hr />
+    <p style="color : olive;">color : olive;</p>
+    <p style="color : #808000;">color : #808000;</p>
+    <p style="color : rgb(128, 128, 0);">color : rgb(128, 128, 0);</p>
+    <hr />
+    <p style="opacity : 0.4;">opacity - przezroczystosc- przyjmuje wartosci od 0 do 1</p>
+    <hr />
+    <p>
+        letter-spacing - odstępy między literami Możesz ustawić wartość rozmiaru czcionki na wartość bezwzględną w pikselach lub punktach albo na wartość względna w procentach lub w ems.
+    </p>
+    <p style="letter-spacing : 2em;">letter-spacing : 2em;</p>
+    <p style="letter-spacing : -2px;">letter-spacing : -2px;</p>
+    <hr />
+    <p>
+        line-height umożliwia zwiększenie lub zmniejszenie odstępu między wierszami tekstu w bloku tekstu. Możesz ustawić tę wartość na wartość bezwzględną w pikselach lub punktach lub wartość względem
+        bieżący rozmiar czcionki za pomocą wartości procentowej lub dodatniej.
+    </p>
+    <p style="width: 60px;line-height : 30px;">line-height : 30px;</p>
+    <p style="width: 60px;line-height : normal;">line-height : normal;</p>
+    <p style="width: 60px;line-height : 1.6;">line-height : 1.6;</p>
+    <p style="width: 60px;line-height : 140%;">line-height : 140%;</p>
+    <hr />
+    <p>
+        text-align umożliwia ustawienie sposobu wyrównania tekstu w wybranych blokach. Dla
+        na przykład  left, right, or justify.
+    </p>
+    <p style="text-align : center;">text-align : center;</p>
+    <hr />
+    <p>
+        text-decoration umożliwia określenie, czy tekstem w wybranych elementach będzie
+        ozdobiony linią, a jeśli tak, to gdzie. Możliwe wartości to none (the default), underline, overline, and
+        line-through.
+    </p>
+    <p style="text-decoration : underline;">text-decoration : underline;</p>
+    <hr />
+    <p>
+        text-transform pozwala ustawić wielkie litery w wybranych blokach.
+        Możliwe wartości to none (the default), capitalize (kazde slowo z duzej litery, uppercase, and lowercase.
+    </p>
+    <p style="text-transform : uppercase;">text-transform : uppercase;</p>
+    <hr />
+
+</body>
+</html>

@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Tworzenie grafiki SVG</h1>
+    <img src="img/svg.png" style="float:right;" />
+    <h3>
+        Aby użyć SVG na stronie internetowej, dodaj element svg
+        i określ przestrzeń nazw XML w następujący sposób: <br />
+        <code>
+            &lt;svg xmlns="http://www.w3.org/2000/svg"> <br />
+            ... </br>
+            &lt;/svg>
+        </code>
+    </h3>
+    <h3>
+        Element svg może zawierać dowolną liczbę
+        Elementy związane z SVG, takie jak rec or
+        ellipse . Każdy z tych elementów ma zestaw
+        właściwości, które umożliwiają skonfigurowanie jego
+        wygląd.
+        Poniższa lista opisuje niektóre z typowych
+        właściwości, które można ustawić dla elementów związanych z SVG:
+    </h3>
+    <h3>
+        • x i y: Pozycja kształtu w elemencie svg
+        względem lewej strony i
+        odpowiednio na górze elementu
+        svg. <br />
+        • width and height: szerokość i wysokość kształtu. <br />
+        • fill and stroke: kolor wypełnienia i kolor obrysu kształtu. <br />
+    </h3>
+    <h4>
+        Poniższy przykład tworzy element svg
+        , który zawiera dwa prostokąty. Pierwszy prostokąt jest czerwony
+        i ma zaokrąglone rogi, zgodnie z atrybutami rx i ry. Drugi prostokąt jest żółty i
+        częściowo zasłania pierwszy prostokąt, ponieważ jest on zdefiniowany po nim w elemencie
+        svg:
+    </h4>
+    <textarea rows="8" cols="90">
+    <svg xmlns="http://www.w3.org/2000/svg">
+    <rect x="50" y="50" width="100" height="75" rx="20" ry="20" fill="red"
+          stroke="blue" />
+    <rect x="75" y="75" width="100" height="75" fill="yellow" stroke="blue" />
+        </svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <rect x="50" y="50" width="100" height="75" rx="20" ry="20" fill="red"
+              stroke="blue" />
+        <rect x="75" y="75" width="100" height="75" fill="yellow" stroke="blue" />
+    </svg>
+
+    <h3>
+        Poniższy przykład definiuje regułę arkusza stylów dla wszystkich elementów <svg>
+            . Reguła określa to
+            wszystkie elementy
+            svg
+            mają ciemnoniebieską ramkę, jasnozielony kolor tła, szerokość 300 pikseli i
+            wysokość 200 pikseli:
+    </h3>
+    <textarea rows="9" cols="50">
+    <style type="text/css">
+        svg {
+            border: 2px solid darkblue;
+            background-color: lightgreen;
+            width: 300px;
+            height: 200px;
+        }
+</style>
+</textarea>
+    <h1>Drawing Circles and Ellipses</h1>
+    <img src="img/svg2.png" style="float:right;" />
+    <h3>
+        SVG definiuje elementy circle
+        i ellipse
+        które pozwalają rysować koła i elipsy w
+        element svg
+    </h3>
+    <h3>
+        Element circle
+        ma właściwości cx i cy
+        które określają położenie punktu środkowego
+        okrąg wewnątrz elementu svg.
+        circle
+        również
+        ma atrybut r, który określa promień
+        okrąg.
+    </h3>
+    <h4>
+        pierwsze koło jest czerwone, a drugie koło jest żółte.
+        Drugi krąg częściowo zasłania pierwszy krąg, ponieważ jest zdefiniowany po nim w elemencie svg:
+    </h4>
+    <textarea rows="7" cols="70">
+<svg xmlns="http://www.w3.org/2000/svg">
+    <circle cx="120" cy="80" r="40" stroke="blue" fill="red" />
+    <circle cx="160" cy="120" r="60" stroke="blue" fill="yellow" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg" style="height:200px;">
+        <circle cx="120" cy="80" r="40" stroke="blue" fill="red" />
+        <circle cx="160" cy="120" r="60" stroke="blue" fill="yellow" />
+    </svg>
+    <h3>
+        Element ellipse
+        ma właściwości cx i cy, które określają położenie punktu środkowego. ellipse
+        ma również atrybuty rx i ry, które określają promień elipsy w kierunkach X i Y. Jeśli rx i ry są
+        tak samo, elipsa pojawi się jako koło.
+    </h3>
+    <h4>
+        Pierwsza elipsa jest czerwona, a druga elipsa jest żółta. The
+        elipsy mają ten sam kształt, ponieważ mają te same właściwości rx i ry. Jednak elipsy mają
+        różne właściwości cy, więc pojawiają się przy różnych przesunięciach pionowych w elemencie svg:
+    </h4>
+    <textarea rows="7" cols="75">
+<svg xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="150" cy="60" rx="110" ry="30" stroke="blue" fill="red" />
+<ellipse cx="150" cy="140" rx="110" ry="30" stroke="blue" fill="yellow" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg" style="height:170px;">
+        <ellipse cx="150" cy="60" rx="110" ry="30" stroke="blue" fill="red" />
+        <ellipse cx="150" cy="140" rx="110" ry="30" stroke="blue" fill="yellow" />
+    </svg>
+
+    <hr />
+    <h1>Rysowanie złożonych kształtów</h1>
+    <img src="img/svg3.png" style="float:right;" />
+    <h3>
+        SVG definiuje polyline, polygon, and
+        path
+        , które umożliwiają rysowanie
+        złożone kształty w elemencie svg.
+    </h3>
+    <h2>Polyline</h2>
+    <h3>
+        Element polyline
+        tworzy rysunek linii
+        składający się z szeregu połączonych punktów. The
+        punkty są określone przez atrybut points, który
+        definiuje rozdzieloną przecinkami serię X i Y
+        współrzędne Polilinia nie łączy ostatniego
+        wskaż z powrotem do pierwszego punktu.
+    </h3>
+    <h4>Poniższy przykład tworzy polilinię, która rysuje poszarpaną niebieską linię:</h4>
+    <textarea rows="5" cols="80">
+<svg xmlns="http://www.w3.org/2000/svg">
+<polyline points="105 100, 120 100, 125 90, 135 110, 145 90, 155 110, 165 90, 175
+110, 180 100, 195 100" fill="none" stroke="blue" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <polyline points="105 100, 120 100, 125 90, 135 110, 145 90, 155 110, 165 90, 175
+110, 180 100, 195 100" fill="none" stroke="blue" />
+    </svg>
+    <h2>Polygon</h2>
+    <h3>
+        Element polygon
+        jest podobny do elementu polyline
+        , tyle że wielokąt łączy ostatni
+        skieruj z powrotem do pierwszego punktu, aby utworzyć zamknięty kształt.
+    </h3>
+    <textarea cols="80" rows="6">
+<svg xmlns="http://www.w3.org/2000/svg">
+<polygon points="110 70, 150 40, 190 70, 190 160, 150 130, 110 160" fill="yellow"
+         stroke="blue" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg" style="height:160px;">
+        <polygon points="110 70, 150 40, 190 70, 190 160, 150 130, 110 160" fill="yellow"
+                 stroke="blue" />
+    </svg>
+    <h2>Path</h2>
+    <h3>
+        Element path
+        umożliwia narysowanie złożonego kształtu jako serii segmentów ścieżki. path
+        element ma atrybut d, który definiuje kontur kształtu. Atrybut d składa się z szeregu
+        rysowanie poleceń w następujący sposób: <br />
+        • M: przejście do nowej lokalizacji bez rysowania linii.<br />
+        • L: Narysuj linię z bieżącej lokalizacji do nowej lokalizacji.<br />
+        • O: Narysuj łuk eliptyczny.<br />
+        • P: Narysuj kwadratową krzywą Beziera. Kwadratowa krzywa Beziera to krzywa, która łączy dwa punkty i ma
+        jeden punkt zwrotny na swojej drodze.<br />
+        • C: Narysuj sześcienną krzywą Beziera. Sześcienna krzywa Beziera to krzywa, która łączy dwa punkty i ma dwa zakręty
+        wskazuje na swojej drodze.<br />
+        • Z: Zamknij bieżącą ścieżkę, łącząc ostatni punkt z powrotem z pierwszym punktem.<br />
+    </h3>
+    <h4>
+        Poniższy przykład tworzy prostą ścieżkę, która rysuje jednolity czerwony trójkąt z niebieskim konturem. M
+        przesuwa bieżącą lokalizację do (150, 50). polecenie L rysuje linię od bieżącego
+        lokalizacja do (250, 150). Następne polecenie L rysuje linię z bieżącej lokalizacji do (50, 150). Z
+        zamyka ścieżkę, rysując linię z powrotem do punktu początkowego (150, 50):
+    </h4>
+<textarea rows="5" cols="80">
+<svg xmlns="http://www.w3.org/2000/svg">
+<path d="M 150 50 L 250 150 L 50 150 Z" fill="red" stroke="blue" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <path d="M 150 50 L 250 150 L 50 150 Z" fill="red" stroke="blue" />
+    </svg>
+    <hr />
+    <h1>Określanie stylów wypełnienia i stylów obrysu</h1>
+    <img src="img/svg4.png" style="float:right;" />
+    <h3>
+        Elementy związane z SVG mają szereg atrybutów
+        które umożliwiają określenie sposobu wypełnienia elementu
+        i jak narysować jego zarys. Te atrybuty
+        zawierają: <br />
+        • stroke and fill: określ kolor konturu i
+        odpowiednio kolor wypełnienia kształtu.<br />
+
+        • stroke-opacity and fill-opacity: Określ
+        nieprzezroczystość konturu i wypełnienie
+        odpowiednio kształt. opacity jest ułamkowe
+        wartość między 0,0 a 1,0. Wartość 0,0
+        oznacza całkowicie przezroczysty i wartość
+        1.0 oznacza całkowicie nieprzezroczyste. Domyślny
+        opacity wynosi 1,0.<br />
+
+        • stroke-width: Określa szerokość stroke, jako rozmiar bezwzględny lub procent
+        rozmiar kształtu.<br />
+
+        • fill-rule: określa, jak ustalić, która strona ścieżki znajduje się wewnątrz kształtu. fill-rule wypełnienia to
+        co ważniejsze w złożonych nakładających się kształtach, ponieważ SVG umożliwia  określenie, które części
+        kształtu, aby wypełnić kolorem wypełnienia. Istnieją dwie możliwe wartości reguły wypełniania: nonzero and evenodd.<br />
+
+        • stroke-dasharray: Określa wzór patternów, które będą używane podczas rysowania konturu.
+        Atrybut dasharray to ciąg liczb określony spacjami lub przecinkami. Pierwszy numer określa
+        długość kreski; druga liczba określa długość przerwy; trzecia liczba określa
+        długość następnego patternu; czwarta liczba określa długość następnej przerwy; i tak dalej. Liczby
+        można wyrazić jako wartości bezwzględne lub jako wartości procentowe.
+    </h3>
+
+    <h4>Poniższy przykład tworzy prostokąt z czarnym wnętrzem i bez konturu:</h4>
+    <textarea rows="6" cols="60">
+<svg xmlns="http://www.w3.org/2000/svg">
+<rect x="10" y="10" width="50" height="50" fill="black" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="50" height="50" fill="black" />
+    </svg>
+
+    <h4>Następny przykład tworzy prostokąt bez wnętrza i jasnoniebieskiego konturu:</h4>
+    <textarea rows="6" cols="60">
+<svg xmlns="http://www.w3.org/2000/svg">
+<rect x="70" y="10" width="50" height="50" fill="none" stroke="lightblue" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <rect x="70" y="10" width="50" height="50" fill="none" stroke="lightblue" />
+    </svg>
+    <h4>Następny przykład tworzy prostokąt z żółtym wnętrzem i grubym, półprzezroczystym fioletowym konturem</h4>
+    <textarea rows="9" cols="60">
+<svg xmlns="http://www.w3.org/2000/svg">
+<rect x="10" y="70" width="50" height="50"
+      fill="yellow"
+      stroke="purple"
+      stroke-width="5"
+      stroke-opacity="0.5" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="70" width="50" height="50"
+              fill="yellow"
+              stroke="purple"
+              stroke-width="5"
+              stroke-opacity="0.5" />
+    </svg>
+    <h4>
+        Ostatni przykład tworzy prostokąt z półprzezroczystym żółtym wnętrzem i przerywanym fioletowym konturem
+    </h4>
+    <textarea rows="9" cols="60">
+<svg xmlns="http://www.w3.org/2000/svg">
+<rect x="70" y="70" width="50" height="50"
+      fill="yellow"
+      fill-opacity="0.5"
+      stroke="purple"
+      stroke-width="2"
+      stroke-dasharray="2 2" />
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <rect x="70" y="70" width="50" height="50"
+              fill="yellow"
+              fill-opacity="0.5"
+              stroke="purple"
+              stroke-width="2"
+              stroke-dasharray="2 2" />
+    </svg>
+    <hr />
+    <h1>Using Gradients and Patterns</h1>
+    <img src="img/svg5.png" style="float:right;" />
+    <h3>
+        SVG zapewnia trzy elementy, które ci to umożliwiają
+        określ gradienty i wzory, których możesz użyć
+        wypełnij kształt lub narysuj kontur: <br />
+        • linearGradient<br />
+        • radialGradient<br />
+        • pattern<br />
+    </h3>
+    <h2>linearGradient</h2>
+    <h3>
+        Element linearGradient
+        tworzy liniowy
+        gradient kolorów, które można zastosować do kształtu.
+        ma cztery atrybuty
+        zdefiniuj początkową i końcową lokalizację gradientu liniowego na docelowym kształcie: <br />
+
+        • x1 i y1: Określa punkt początkowy gradientu liniowego na kształcie docelowym.<br />
+        • x2 i y2: Określa punkt końcowy gradientu liniowego na kształcie docelowym.<br />
+        Możesz określić dowolną liczbę punktów przejścia koloru w gradiencie liniowym. Każdy punkt zatrzymania koloru jest określony jako stop
+        element potomny i ma dwa atrybuty:<br />
+        • offset: Określa położenie punktu zatrzymania koloru wzdłuż gradientu liniowego.<br />
+        • stop-color: Określa kolor do zastosowania w tym miejscu wzdłuż gradientu liniowego.<br />
+
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak zdefiniować gradient liniowy. Gradient liniowy zaczyna się w lewym górnym rogu
+        róg kształtu, do którego jest stosowany, ponieważ wartości x1 i y1 wynoszą 0%. Gradient liniowy kończy się
+        w prawym górnym rogu docelowego kształtu, ponieważ wartość x2 wynosi 100%, a wartość y2 wynosi 0%. The
+        gradient liniowy określa zatem poziomą linię w poprzek górnej części docelowego kształtu. Istnieją trzy kolory
+        przystanki, które są stosowane wzdłuż tej linii, tworząc gradient liniowy w zakresie od żółtego do zielonego, oraz
+        następnie z zielonego na czerwony:
+    </h4>
+    <textarea rows="10" cols="60">
+<svg xmlns="http://www.w3.org/2000/svg">
+<linearGradient x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0.2" stop-color="yellow" />
+<stop offset="0.5" stop-color="green" />
+<stop offset="1.0" stop-color="red" />
+</linearGradient>
+</svg>
+</textarea>
+
+    <h2>radialGradient</h2>
+    <h3>
+        <radialGradient>
+            tworzy promieniowy gradient kolorów, który można zastosować do kształtu. The
+            Element radialGradient
+            ma dwa atrybuty o nazwach fx i fy, które definiują punkt centralny radialu
+            gradient na docelowym kształcie.
+            Możesz określić dowolną liczbę punktów przejścia koloru w gradiencie promieniowym. Każdy kolor stopu ma przesunięcie i kolor stopu
+            atrybuty; atrybut offset reprezentuje procentową odległość od (fx, fy) do krawędzi najbardziej zewnętrznego
+            okrąg.
+
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak zdefiniować gradient promieniowy. Gradient promieniowy jest skupiony na punkcie
+        30% od lewego górnego rogu docelowego kształtu, ponieważ wartości fx i fy wynoszą 0,3. Istnieją dwa kolory
+        przystanki, które są stosowane jako koncentryczne okręgi wyśrodkowane na (fx, fy), tworząc gradient promieniowy w zakresie
+        żółty do czerwonego:
+    </h4>
+    <textarea rows="10" cols="60">
+<svg xmlns="http://www.w3.org/2000/svg">
+<radialGradient id="gradient2" fx="0.3" fy="0.3">
+<stop offset="0.1" stop-color="yellow" />
+<stop offset="0.7" stop-color="red" />
+</radialGradient>
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <radialGradient id="gradient2" fx="0.3" fy="0.3">
+            <stop offset="0.1" stop-color="yellow" />
+            <stop offset="0.7" stop-color="red" />
+        </radialGradient>
+        <rect x="10" y="10" width="50" height="50" fill="url(#gradient2)" />
+    </svg>
+    <h2>pattern</h2>
+    <h3>
+        Element pattern
+        tworzy wzór, który można zastosować do kształtu. pattern
+        ma
+        atrybuty określające width and height wzoru. Zawartość do wyświetlenia we wzorcu to
+        określony jako element potomny elementu pattern
+            .
+            Poniższy przykład pokazuje, jak zdefiniować wzór na podstawie pliku obrazu o nazwie „wales.png”, który
+            zawiera obraz flagi walijskiej.
+    </h3>
+    <textarea rows="8" cols="85">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <pattern patternUnits="userSpaceOnUse" width="100" height="100">
+                <image xlink:href="wales.png" x="0" y="0" width="100" height="100" />
+            </pattern>
+        </svg>
+</textarea>
+    <h2>Tworzenie gradientów i wzorów wielokrotnego użytku</h2>
+    <h3>
+        Strona internetowa może używać określonego gradientu lub wzoru w kilku różnych miejscach. Zamiast definiować
+        każdy gradient lub wzór osobno, możesz zdefiniować je raz w elemencie defs
+            , a następnie odwołać się
+            do nich według ich identyfikatora, gdy chcesz zastosować je do elementów na swojej stronie.
+            Poniższy przykład definiuje trzy gradienty i wzory wielokrotnego użytku i nadaje każdemu z nich unikalny identyfikator. The
+            przykład tworzy następnie kilka kształtów. Kształty odwołują się do gradientów i wzorów
+            ich wartości id:
+    </h3>
+    <textarea rows="15" cols="80">
+<svg xmlns="http://www.w3.org/2000/svg">
+<!-- Define some gradients and patterns, for use later -->
+<defs>
+<linearGradient id="gradient1" ... />
+<radialGradient id="gradient2" ... />
+<pattern id="wales" ... />
+</defs>
+<!-- Draw shapes that make use of the gradients and patterns -->
+<polygon points="50,50 250,50 150,200" fill="url(#gradient1)" />
+<ellipse cx="150" cy="50" rx="100" ry="20" fill="url(#wales)" />
+<circle cx="150" cy="250" r="50" fill="url(#gradient2)" />
+</svg>
+</textarea>
+
+</body>
+</html>

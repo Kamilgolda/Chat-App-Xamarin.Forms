@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img style="float:right" src="img/zmienne.png" />
+    <h1>Zmienne:</h1>
+    <h2>
+        Zmienne są używane do przechowywania danych. Są cztery
+        sposoby deklarowania zmiennej:
+    </h2>
+    <ol>
+        <li>
+            <p>Nadaj mu nazwę i wartość.</p>
+            <code>greeting = "Hello";</code>
+        </li>
+        <li>
+            <p>
+                Deklaracja bez nadawania wartości za pomocą
+                słowa kluczowego let lub var. Dopóki wartosc zmiennej nie jest
+                brana pod uwagę, JavaScript zwróci wartość
+                jako niezdefiniowany.
+            </p>
+            <code>let mystery;</code>
+        </li>
+        <li>
+            <p>Połącz powyższe dwa podejścia (jest to zalecany styl).</p>
+            <code>let code = "Spang";</code>
+        </li>
+        <li>
+            <p>
+                Zadeklaruj odwołanie tylko do odczytu do wartości, używając słowa kluczowego const:
+            </p>
+            <code>const constant = "foo";</code>
+        </li>
+    </ol>
+    <h3>
+        1. Nazwy zmiennych muszą zaczynać się od litery lub znaku podkreślenia.
+    </h3>
+    <h3>2. W nazwach zmiennych rozróżniana jest wielkość liter.</h3>
+    <hr />
+    <h1>Typy danych:</h1>
+    <h2>JavaScript rozpoznaje trzy proste typy:</h2>
+    <ol>
+        <li>
+            <p>String</p>
+            <textarea rows="5" cols="80">
+let simple = "Green Eggs and Ham";
+let escaped = "\"Green Eggs \& Ham \"";
+let verylong = "Cracked, fried, overripe ovoids and \
+porcine strips cooked medium well and allowed to cool";
+</textarea>
+        </li>
+        <li>
+            <p>
+                Liczba
+            </p>
+            <textarea rows="2" cols=" 70">
+let answer = 42;
+let actuallyAString = "42"; // not treated as a number
+</textarea>
+        </li>
+        <li>
+            <p>Boolean</p>
+            <textarea rows="1" cols=" 50">
+let canYouReadThis = true;
+</textarea>
+        </li>
+    </ol>
+    <h4>Możesz także zadeklarować zmienną i ustawić ją na null</h4>
+    <code>let variableWithNullvalue = null;</code>
+
+    <h2>Możesz określić bieżący typ danych w zmiennej za pomocą operatora typeof:</h2>
+    <textarea rows="6">
+let data = 99;
+...
+if (typeof data == "number") {
+// data is numeric
+}</textarea>
+    <hr />
+    <h1>Operatory:</h1>
+    <p>+ (addition)</p>
+    <p>- (subtraction)</p>
+    <p>* (multiplication)</p>
+    <p>/ (division)</p>
+    <p>% (modulus)</p>
+    <p>++ (increment)</p>
+    <p>-- (decrement)</p>
+
+    <h2>Operatorzy przypisania:</h2>
+    <p>x = y</p>
+    <p>x += y (x = x + y)</p>
+    <p>x -= y (x = x - y)</p>
+    <p>x *= y (x = x * y)</p>
+    <p>x /= y (x = x / y)</p>
+    <p>x %= y (x= x % y)</p>
+
+    <h2>Operatory porównania</h2>
+    <p>== (is equal to)</p>
+    <p>!= (is not equal to)</p>
+    <p>> (is greater than)</p>
+    <p>< (is less than)</p>
+    <p>>= (is greater than or equal to)</p>
+    <p><= (is less than or equal to)</p>
+    <p>=== (is equal in value and in type)</p>
+    <p>!== (is not equal in value or in type)</p>
+
+    <h2>Operatory boolowskie </h2>
+
+    <p>x && y returns true if x and y are both true, false otherwise.</p>
+    <p>x || y returns true if either x or y or both are true, false otherwise.</p>
+    <p>!x returns true if x is false, false otherwise.</p>
+
+    <h2>Trójskładnikowy operator warunkowy</h2>
+    <p>
+        x = (warunek)? wartość1: wartość2;
+    </p>
+    <h2>Operator ciągu</h2>
+    <p>"Bo" + "om" returns "Boom".</p>
+    <textarea cols="100" rows="7">
+let zero = 0;
+let emptyString = "";
+let falseVar = false;
+zero == falseVar; // returns true;
+zero === falseVar; // returns false;
+emptyString == False; // returns true;
+emptyString === False; // returns false;</textarea>
+</body>
+</html>

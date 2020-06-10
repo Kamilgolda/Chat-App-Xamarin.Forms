@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img src="img/ps.png" style="float:right" />
+    <h2>Pseudoelementy tekstowe</h2>
+    <h4>
+        first-letter wybiera pierwszy znak
+        pierwszy wiersz treści tekstu elementu.
+    </h4>
+    <h4>
+        first-line wybiera pierwszy wiersz treści tekstowej
+        elementu.
+    </h4>
+    <h4>before / after  wybiera przestrzeń bezpośrednio przed / za elementem.</h4>
+    <h4>selection zaznacza część strony, która została wyróżniona przez użytkownika.(chyba chodzi o em)</h4>
+
+    <h3>
+        zresetowanie arkusza stylów często normalizują sposób, w jaki przeglądarki radzą sobie z elementami q i blockquote, usuwając wszelkie inteligentne
+        cytaty, które mogą dodać wokół nich.
+    </h3>
+<textarea cols="50" rows="8">
+blockquote::before, blockquote::after,
+q::before, q::after {
+content:'';
+content:none;
+}
+</textarea>
+    <hr />
+    <h2>Link and Form Pseudo-Classes</h2>
+    <img src="img/ps2.png" style="float:right" />
+    <h4>• a:link selects all unvisited links.</h4>
+    <h4>• a:visited selects all visited links.</h4>
+    <h4>• a:focus selects all links in focus.</h4>
+    <h4>
+        • a:hover selects all links with the cursor hovering over them.
+    </h4>
+    <h4>
+        • a:active selects all selected links.
+    </h4>
+    <h4>
+        Jeśli zdefiniujesz reguły CSS pasujące do więcej niż jednej z tych pseudoklas, ważne jest, abyś Ty
+        określ te pseudoklasy w następującej kolejności: link, visited, focus, hover, and active
+    </h4>
+
+    <h3>Istnieją trzy pseudoklasy, których często używasz dla elementów formularzy:</h3>
+    <h4>• input:enabled selects all enabled input controls.</h4>
+    <h4>• input:disabled selects all user interface elements that are disabled.</h4>
+    <h4>• input:checked selects all user interface elements that are checked.</h4>
+    <hr />
+    <h2>Pseudoklasy związane z DOM</h2>
+    <img src="img/dom.png" style="float:right" />
+
+
+    <h4>
+        •:first-child selects the item that's the first
+        child of its parent. As an example, to find the
+        first element in a list, use li:first-child.
+    </h4>
+
+    <h4>
+        • :last-child selects the list item that's the last
+        child of its parent.
+    </h4>
+
+    <h4>
+        • :only-child wybiera element listy, jeśli jest on jedynym
+        dzieciem rodzica.
+    </h4>
+
+    <h4>• :nth-child(n) selects a list item if it is the nth child of its parent.</h4>
+
+    <h4>
+        • :nth-last-child(n) wybiera element listy, jeśli jest n-tym dzieckiem swojego rodzica, odliczając wstecz od ostatniego
+        dziecka.
+    </h4>
+    <br />
+    <h3>zamiast type wpisujemy element ktory nas interesuje</h3>
+    <h4>• :first-of-type selects a list item if it is the first list item child of its parent.</h4>
+    <h4>• :last-of-type selects a list item if it is the last list item child of its parent.</h4>
+    <h4>• :only-of type selects a list item if it is the only list item child of its parent.</h4>
+    <h4>• :nth-of-type(n) selects a list item if it is the nth list item child of its parent.</h4>
+    <h4>• :nth-last-of-type(n) selects a list item if it is the nth list item child of its parent, counting backwards
+    from its last child.</h4>
+
+    <h3>
+        Dostępny jest również zestaw pseudoklas strukturalnych. Klasy te pozwalają wybrać elementy na podstawie
+        obecna struktura dokumentu. Te klasy obejmują:
+    </h3>
+    <h4>
+        E:root wybiera element główny dokumentu. W przypadku dokumentu HTML zawsze wybierze
+        html
+        element.
+    </h4>
+    <h4>E:empty wybiera element typu E, jeśli nie ma on elementów potomnych ani treści.</h4>
+    <h4>E:target wybiera element typu E, jeśli jest on celem odsyłającego adresu URL.</h4>
+    <h4>E:not(s) wybiera dowolny element, który nie pasuje do łańcuchów selektora.</h4>
+</body>
+</html>

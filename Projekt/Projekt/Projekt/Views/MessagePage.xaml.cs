@@ -29,7 +29,7 @@ namespace Projekt.Views
 
                    
                         
-                        vm.ShowScrollTap = false;
+                        //vm.ShowScrollTap = false;
                         vm.LastMessageVisible = true;
                     
 
