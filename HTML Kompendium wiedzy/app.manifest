@@ -1,8 +1,0 @@
-﻿#version=1.2.3
-CACHE MANIFEST
-CACHE:
-Module9/data2.html
-NETWORK:
-login
-# alternatives paths
-FALLBACK:
