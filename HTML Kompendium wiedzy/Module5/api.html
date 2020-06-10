@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img src="img/fetch.png" style="float:right" />
+    <h1>Korzystanie z Fetch API do wysyłania żądań asynchronicznych</h1>
+    <h2>
+        Aby wysłać zapytanie do serwera, używamy funkcji fetch()
+        Ta metoda ma dwa
+        argumenty: pierwszy to URL, który jest
+        wymagany. Drugi to obiekt opcji
+        które pozwalają skonfigurować metodę, treść,
+        nagłówki itp., co jest opcjonalne.
+    </h2>
+    <h3>Żądanie GET przy użyciu metody fetch():</h3>
+    <code>fetch("http://contoso.com/resources/...");</code>
+    <h4>
+        Jeśli nie skonfigurujesz metody żądania, fetch() użyje GET jako swojej
+        domyślnej metody żądania.
+    </h4>
+
+    <h3>
+        Możemy również wysyłać dane za pomocą funkcji fetch(). Musimy tylko użyć opcjonalnego obiektu opcji i ustawić przynajmniej
+        trzy z jego opcji:
+    </h3>
+    <ul>
+        <li><h4>Metoda żądania(method). Opcjonalne wartości to POST, PUT lub DEL.</h4></li>
+        <li><h4>Nagłówki żądania(headers). Najważniejszym nagłówkiem jest Content-Type.</h4></li>
+        <li><h4>Treść żądania(body). Rzeczywista zawartość do wysłania na serwer. </h4></li>
+    </ul>
+    <h3>
+        Możesz przekazać obiekt opcji do fetch() jako zewnętrzny obiekt JavaScript lub za pomocą dosłownego obiektu
+        notacji, jak pokazano w poniższym przykładzie:
+    </h3>
+    <h4>
+        Wysyłanie danych do serwera za pomocą Fetch API.
+        Użycie obiektu opcji do skonfigurowania żądania:
+    </h4>
+    <textarea rows="10" cols="100">
+fetch("http://contoso.com/resources/...", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({name: "James"})
+});
+</textarea>
+
+    <h3>
+        Jeśli chcesz wysłać dane formularza, które zwykle są danymi wprowadzanymi przez użytkownika podczas wypełniania formularza na stronie,
+        możemy użyć obiektu FormData.
+    </h3>
+    <textarea rows="5" cols="100">
+fetch("http://contoso.com/resources/...", {
+method: "POST",
+body: new FormData(document.getElementById("UserDetailsForm"))
+});
+</textarea>
+
+    <h3>
+        Poniższy przykład pokazuje, jak dołączyć pliki cookie do żądania za pomocą Fetch API:
+        Korzystanie z opcji obiektu w celu uwzględnienia plików cookie w żądaniu.
+    </h3>
+    <textarea rows="5" cols="100">
+fetch("http://contoso.com/resources/...", {
+credentials: "include"
+});
+</textarea>
+    <hr />
+    <h1>Obsługa Promises</h1>
+    <h2>
+        API Fetch został zbudowany do użycia
+        Promises. Podczas wywoływania metody fetch():
+        Obiekt Promise jest zwracany i
+        będzie zawierać obiekt Response i można pobierać dane zwrócone przez
+        serwer, używając znanej metody then() z
+        obiekt Promise:
+    </h2>
+    <code>
+        fetch("http://contoso.com/resources/...")<br />
+        .then(response => {/* get server response and do something… */});
+    </code>
+
+    <h2>
+        Odpowiedź zachowuje dane we właściwości body. Dane są opakowane w obiekt typu:
+        ReadableStream. Aby pobrać dane z tego strumienia, użyj jednej z następujących metod:
+    </h2>
+    <ul>
+        <li><h4>json(). Dla danych sformatowanych jako JSON.</h4></li>
+        <li><h4>blob(). W przypadku danych typu: obraz itp.</h4></li>
+        <li><h4>text(). Dla danych sformatowanych jako ciąg znaków, takich jak dane XML lub HTML</h4></li>
+    </ul>
+    <h3>
+        Każdy z nich zwraca obiekt Promise, który rozpoznaje dane w odpowiednim formacie.
+        Oto przykład, jak wyodrębnić dane JSON z odpowiedzi:
+    </h3>
+    <code>
+        fetch("http://contoso.com/resources/...")<br />
+        .then(response => response.json())<br />
+        .then(data => console.log(data));
+    </code>
+
+    <h3>
+        Błędy w interfejsie Fetch API są obsługiwane tak, jak w przypadku Promises. Używamy metody catch() promise
+        obiekt:
+    </h3>
+    <textarea rows="6" cols="100">
+fetch("http://contoso.com/resources/...")
+.then(response => response.json())
+.then(data => console.log("received data: ", data))
+.catch(error => console.log("error occurred: ", error));
+</textarea>
+    <hr />
+    <h1>Korzystanie z funkcji asynchronicznych</h1>
+    <img src="img/async.png" style="float:right" />
+    <h3>
+        Fetch API i funkcje asynchroniczne mogą działać
+       razem. Dzięki nim możemy zrobić
+        program do czyszczenia kodu. 
+        Poniższy przykład pokazuje, jak połączyć
+        Fetch API z async/await:
+    </h3>
+    <textarea rows="10" cols="100">
+async function getResponse(){
+let response = await fetch("http://contoso.com/resources/...");
+let json = await response.json();
+console.log(json);
+};
+getResponse();
+</textarea>
+    <h3>
+        Zarówno fetch(), jak i response.json() zwracają obiekt Promise, więc możemy użyć await
+        aż Promise zostanie rozwiązany, aby uzyskać jego wartość.
+        Na koniec poprawmy poprzedni kod, łącząc funkcje Fetch API, async/await i arrow functions
+        razem:
+    </h3>
+    <textarea rows="10" cols="100">
+let getResponse = async () => {
+let response = await fetch("http://contoso.com/resources/...");
+let json = await response.json();
+console.log(json);
+};
+</textarea>
+</body>
+</html>

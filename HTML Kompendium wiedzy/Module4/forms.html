@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img style="float:right" src="img/form.png" />
+
+    <h2>Element form ma następujące atrybuty</h2>
+    <ul>
+        <li>name - atrybut jest używany przez serwer do odwoływania się do pól w formularzu podczas przetwarzania.</li>
+        <li>action - gdy użytkownik prześle formularz na serwer. To jest adres URL, na który formularz zostanie wysłany. Jeśli pominiesz adres URL, formularz zostanie wysłany na bieżący adres URL strony internetowej.</li>
+        <li>method - Metoda stosowana do wysyłania danych. Podczas przesyłania danych na serwer za pomocą formularza, atrybut powinien normalnie być ustawiony na post.</li>
+    </ul>
+
+    <h3>
+        fieldset - Ten element służy do rysowania pola wokół zestawu pól i dodaje etykietę do zestawu za pomocą elementu &lt;legend&gt;.
+        fieldset jest opcjonalny, ale może być bardzo przydatny w większych formularzach, w których użytkownik może zobaczyć etykietę sekcji.
+    </h3>
+    <h4>dobrą praktyką jest dodawanie elementu &lt;div&gt; dla każdego pola w formularzu</h4>
+
+    <h4>
+        Do diva dodajesz element &lt;input&gt; w celu gromadzenia danych. Element wejściowy powinien zawierać następujące atrybuty:
+    </h4>
+    <ul>
+        <li>id and name attribute.</li>
+        <li>type attribute</li>
+        <li>placeholder attribute</li>
+    </ul>
+    <h4>Większość elementów wejściowych ma powiązany element label</h4>
+
+    <h4>
+        Na końcu element input z typem danych „submit”. Ten znacznik tworzy klikalną kontrolkę, która wysyła dane z formularza do serwera.
+    </h4>
+    <hr />
+    <h3> W input type można zastowować:</h3>
+    <ul>
+        <li>button</li>
+        <li>checkbox</li>
+        <li>color</li>
+        <li>date</li>
+        <li>datetime</li>
+        <li>datetime-local</li>
+        <li>email</li>
+        <li>file</li>
+        <li>hidden</li>
+        <li>image</li>
+        <li>month</li>
+        <li>number</li>
+        <li>password</li>
+        <li>radio</li>
+        <li>range</li>
+        <li>reset</li>
+        <li>search</li>
+        <li>submit</li>
+        <li>tel</li>
+        <li>text</li>
+        <li>time</li>
+        <li>url</li>
+        <li>week</li>
+    </ul>
+
+    <h2> Możesz użyć elementu &lt;datalist&gt; z wprowadzaniem tekstu, aby zapewnić opcje autouzupełniania. </h2>
+
+    <textarea rows="10" cols="100">
+<input id="ageCategory" name="ageCategory" list="ageRanges" />
+<datalist id="ageRanges">
+<option value="Under twos"></option>
+<option value="2 - 7"></option>
+<option value="8 - 12"></option>
+<option value="13-17"></option>
+<option value="Adult"></option>
+</datalist>
+</textarea>
+
+    <input id="ageCategory" name="ageCategory" list="ageRanges" />
+    <datalist id="ageRanges">
+        <option value="Under twos"></option>
+        <option value="2 - 7"></option>
+        <option value="8 - 12"></option>
+        <option value="13-17"></option>
+        <option value="Adult"></option>
+    </datalist>
+
+    <hr />
+
+    <h2>
+        &lt;textarea&gt; formant jest renderowany
+        jako obszar wielowierszowy przy użyciu czcionki o stałej szerokości. Atrybuty cols i rows kontrolują jego szerokość i ilosc wierszy Możesz ustawić jego atrybut maxlength, aby ustawić maksymalną liczbę znaków.
+    </h2>
+
+    <textarea id="carDescription" name="carDescription" cols="80" rows="5"
+              placeholder="Enter a short description of your car" maxlength="399">
+
+    <textarea id="carDescription" name="carDescription" cols="80" rows="5"
+    placeholder="Enter a short description of your car" maxlength="399" />
+</textarea>
+
+    <h2>
+        Element &lt;select&gt; jest pojemnikiem na pewną liczbę stałych elementów.
+        &lt;option&gt; predefiniują dane wejściowe
+        Aby pogrupować opcje w mniejsze listy logiczne, użyj
+        element &lt;optgroup&gt;
+    </h2>
+    <textarea rows="15" cols="50">
+    <select id="carManufacturer" name="carManufacturer">
+    <optgroup label="European">
+    <option value="volvo">Volvo</option>
+    <option value="audi">Audi</option>
+            </optgroup>
+    <optgroup label="American">
+    <option value="chrysler">Chrysler</option>
+    <option value="ford">Ford</option>
+            </optgroup>
+        </select>
+</textarea>
+
+    <select id="carManufacturer" name="carManufacturer">
+        <optgroup label="European">
+            <option value="volvo">Volvo</option>
+            <option value="audi">Audi</option>
+        </optgroup>
+        <optgroup label="American">
+            <option value="chrysler">Chrysler</option>
+            <option value="ford">Ford</option>
+        </optgroup>
+    </select>
+    <hr />
+    <h1>Atrybuty inputa</h1>
+    <img style="float:right" src="img/inputa.png" />
+    <h2>
+        atrybut autocomplete - Jeśli użytkownik wprowadził wcześniej te same dane,
+        poprzednia wartość jest automatycznie kopiowana do danych wejściowych przez przeglądarkę.
+    </h2>
+
+
+    <textarea rows="10" cols="100">
+<form id="loginForm" action="login.aspx" method="post" autocomplete="on">
+Email: <input name="email" type="email" placeholder="Email address" autofocus="autofocus" /> //autofocus wiadomo co robi
+Password: <input name="password" type="password" autocomplete="off" />
+<input type="submit" />
+</form>
+</textarea>
+
+
+    <form id="loginForm" action="login.aspx" method="post" autocomplete="on">
+        Email: <input name="email" type="email" placeholder="Email address" autofocus="autofocus" /> 
+        Password: <input name="password" type="password" autocomplete="off" />
+        <input type="submit" />
+    </form>
+
+    <h3>
+        required  wskazuje, że pole jest obowiązkowe.
+    </h3>
+    <h3>
+        pattern umożliwia zastosowanie wyrażenia regularnego do pola wprowadzania tekstu, aby się upewnić
+        jest zgodny z określonym wzorem.
+    </h3>
+    <h3>
+        placeholder umieszcza zawartość tymczasową w polu tekstowym
+    </h3>
+</body>
+</html>

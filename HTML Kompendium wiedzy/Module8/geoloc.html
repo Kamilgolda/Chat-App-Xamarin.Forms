@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img src="img/geo.png" style="float:right;" />
+    <h1>
+        Żądanie informacji o geolokalizacji
+    </h1>
+    <h2>
+        Interfejs API geolokalizacji HTML5 obsługuje dwa typy
+        zapytanie o pozycję:
+    </h2>
+    <h3>
+        Prośba o pozycję, wywołaj
+        navigator.geolocation.getCurrentPosition()
+    </h3>
+    <h3>
+        Aktualizacje pozycji. Aby rozpocząć otrzymywanie aktualizacji pozycji, wywołaj
+        Metoda navigator.geolocation.watchPosition()<br />
+        Aby zatrzymać
+        odbieranie aktualizacji pozycji, wywołaj navigator.geolocation.clearWatch ()
+    </h3>
+    <h2>getCurrentPosition() i watchPosition() przyjmują następujące parametry:</h2>
+    <h4>call-back function, która zostanie wywołana przez przeglądarkę, gdy będą dostępne dane lokalizacji.</h4>
+    <h4>Opcjonalna funkcja call-back po błędach, która zostanie wywołana przez przeglądarkę.</h4>
+    <h4>Opcjonalny obiekt PositionOptions, który umożliwia konfigurację żądania geolokalizacji : </h4>
+    <h5>
+        enableHighAccuracy. Właściwość logiczna, która daje wskazówkę, że urządzenie ma używać
+        najdokładniejsza technika uzyskiwania informacji o geolokalizacji. Wartość domyślna dla
+        właściwość enableHighAccuracy ma wartość false.
+    </h5>
+    <h5>
+        timeout - Maksymalny czas w milisekundach, jaki może uzyskać przeglądarka
+        dane lokalizacji. Jeśli dane nie są dostępne w tym czasie, wywoływana jest funkcja zwrotnego błędu. Domyślny
+        wartość właściwości timeout to infinity
+    </h5>
+    <h5>
+        maximumAge. Ile danych lokalizacji może być w milisekundach, zanim przeglądarka będzie musiała
+        odświeżyć dane. Domyślna wartość właściwości maximumAge wynosi zero sekund.
+    </h5>
+    <h2>jednorazowe żądanie informacji o geolokalizacji.</h2>
+    <textarea rows="4" cols="80">
+navigator.geolocation.getCurrentPosition(myPositionCallbackFunction,
+myPositionErrorCallbackFunction,
+{enableHighAccuracy: true, timeout: 5000} );
+</textarea>
+    <h2>powtarzanie żądania geolokalizacji.</h2>
+    <textarea rows="4" cols="80">
+const watchID = navigator.geolocation.watchPosition(myPositionCallbackFunction,
+myPositionErrorCallbackFunction,
+{enableHighAccuracy: true, maximumAge: 10000} );
+</textarea>
+    <h2>zatrzymanie otrzymywania informacji o geolokalizacji.</h2>
+    <code>navigator.geolocation.clearWatch(watchID);</code>
+    <h3>
+        Gdy dostępne są informacje geolokalizacyjne,
+        przeglądarka wywołuje funkcję call-back, którą
+        określiłeś podczas wywoływania
+        getCurrentPosition() lub watchPosition().
+        Funkcja zwrotna odbiera obiekt, który ma
+        właściwość coords, która ma następujące cechy
+        właściwości zapewniające informacje o współrzędnych:
+    </h3>
+    <h4>latitude(szerokość geograficzna), w stopniach.<br />
+    longitude(długość geograficzna), w stopniach.<br />
+    accuracy(dokładność) w metrach.
+    </h4>
+    <h3>
+        Właściwość coords ma również następujące parametry, które mogą być zerowe, jeśli urządzenie nie może okreslić wartości:
+    </h3>
+    <h4>
+        • altitude, in meters above sea level.<br />
+        • altitudeAccuracy, in meters.<br />
+        • heading, in degrees relative to the North direction.<br />
+        • speed, in meters/second.<br />
+    </h4>
+    <h2>Poniższy przykład pokazuje, jak zaimplementować funkcję call-back dla informacji geolokalizacyjnych:</h2>
+    <textarea rows="13" cols="80">
+function myPositionCallbackFunction(position) {
+const latitude = position.coords.latitude;
+const longitude = position.coords.longitude;
+const accuracy = position.coords.accuracy;
+const heading = position.coords.heading;
+const speed = position.coords.speed;
+const altitude = position.coords.altitude;
+const altitudeAccuracy = position.coords.altitudeAccuracy;
+// Add code here, to process the information.
+}
+</textarea>
+    <h1>Obsługa błędów geolokalizacji</h1>
+    <h2>
+        Funkcja callback błędu
+        otrzymuje obiekt błędu, który ma następujące cechy:
+    </h2>
+    <h4>
+        • code: The error code can be one of the following values:<br />
+        PositionError.PERMISSION_DENIED,<br />
+        PositionError.POSITION_UNAVAILABLE, or PositionError.TIMEOUT. <br />
+        • message: A string that identifies the reason for the error.
+    </h4>
+    <textarea rows="6" cols="80">
+function myPositionErrorCallbackFunction(error) {
+const errorMessage = error.message;
+const errorCode = error.code;
+// Add code here, to process the information.
+}
+</textarea>
+    <hr />
+    <h1>Wykrywanie widoczności strony</h1>
+    <h2>
+        HTML5 zapewnia interfejs API widoczności strony
+        umożliwia określenie, czy strona internetowa jest
+        obecnie widoczne. W zależności od tego, czy strona jest
+        widoczne lub nie, możesz zmodyfikować
+        zachowanie.
+    </h2>
+    <h3>
+        np jeśli internetowa łamigłówka jest ukryta,
+        gra może zostać wstrzymana, dopóki się nie stanie
+        znów widoczna.
+    </h3>
+    <h2>Interfejs API widoczności strony składa się z dwóch właściwości i zdarzenia:</h2>
+    <h3>
+        document.hidden opisuje, czy strona jest visible, czy nie. <br />
+        document.visibilityState wskazuje szczegółowy stan widoczności strony, taki jak
+        PAGE_VISIBLE lub PAGE_PREVIEW. </br>
+        Zdarzenie visibilitychange  jest uruchamiane za każdym razem, gdy zmienia się stan widoczności strony. <br />
+        navigator.onLine, która wskazuje, czy przeglądarka jest w trybie online, czy offline. <br />
+        online event które jest uruchamiane, gdy przeglądarka jest w trybie offline i staje się online. <br />
+        offline event, które jest uruchamiane, gdy przeglądarka była w trybie online i przechodzi w tryb offline. <br />
+        navigator.userAgent, która zwraca ciąg znaków wskazujący ciąg agenta użytkownika dla przeglądarki.
+    </h3>
+<hr />
+    <h1> Pełny kod do geolokalizacji</h1>
+    <textarea rows="30" cols="100" style="float:left">
+<button onclick="getposition()">Sprawdz lokalizacje</button>
+    <div id="geoloc"></div>
+    <script>
+        function getposition() {
+            navigator.geolocation.getCurrentPosition(myPositionCallbackFunction,
+                myPositionErrorCallbackFunction);
+        }
+        function myPositionCallbackFunction(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            const heading = position.coords.heading;
+            const speed = position.coords.speed;
+            const altitude = position.coords.altitude;
+            const altitudeAccuracy = position.coords.altitudeAccuracy;
+            let div = document.getElementById("geoloc");
+            div.innerHTML = latitude + " " + longitude + "<br/>";
+            div.innerHTML += navigator.userAgent;
+        }
+
+        function myPositionErrorCallbackFunction(error) {
+            const errorMessage = error.message;
+            const errorCode = error.code;
+            // Add code here, to process the information.
+        }
+
+</script>
+</textarea>
+    <button onclick="getposition()">Sprawdz lokalizacje</button>
+    <div id="geoloc" style="float:left"></div>
+    <script>
+        function getposition() {
+            navigator.geolocation.getCurrentPosition(myPositionCallbackFunction,
+                myPositionErrorCallbackFunction);
+        }
+        function myPositionCallbackFunction(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            const heading = position.coords.heading;
+            const speed = position.coords.speed;
+            const altitude = position.coords.altitude;
+            const altitudeAccuracy = position.coords.altitudeAccuracy;
+            let div = document.getElementById("geoloc");
+            div.innerHTML = latitude + " " + longitude + "<br/>";
+            div.innerHTML += navigator.userAgent;
+        }
+
+        function myPositionErrorCallbackFunction(error) {
+            const errorMessage = error.message;
+            const errorCode = error.code;
+            // Add code here, to process the information.
+        }
+
+    </script>
+</body>
+</html>

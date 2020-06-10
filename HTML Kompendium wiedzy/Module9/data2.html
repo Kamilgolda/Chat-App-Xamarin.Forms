@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html manifest="/app.manifest">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Konfigurowanie pamięci podręcznej aplikacji</h1>
+    <img src="img/data2.png" style="float:right" />
+    <h3>
+        Plik manifestu pamięci podręcznej określa dane, które przeglądarka internetowa powinna przechowywać w pamięci podręcznej aplikacji. To
+        plik to lista zasobów podzielona na osobne sekcje oznaczone jako CACHE, NETWORK i FALLBACK. The
+        informacje w tych sekcjach określają, w jaki sposób przeglądarka reaguje na żądanie dotyczące
+        zasób, gdy aplikacja internetowa działa w trybie online lub offline.
+    </h3>
+    <h2>
+        Aby dodać plik manifestu do aplikacji, utwórz nowy plik tekstowy i zapisz go w folderze głównym z końcówką .manifest
+        W tym pliku wypisz wszystkie zasoby statyczne, które powinny zostać pobrane i zapisane w pamięci podręcznej.
+    </h2>
+    <textarea rows="13" cols="50">
+CACHE MANIFEST
+CACHE:
+index.html
+verification.js
+site.css
+graphics/logo.jpg
+NETWORK:
+login
+# alternatives paths
+FALLBACK:
+ajax/account/ noCode.htm
+</textarea>
+    <h3>Plik może zawierać następujące sekcje:</h3>
+    <h4>
+        CACHE: Zasoby wymienione w tej sekcji są pobierane raz, gdy strona jest początkowo ładowana
+        do przeglądarki użytkownika. Następnie buforowana wersja tych zasobów będzie używana i będą one aktualizowane z serwera <br />
+        NETWORK: Zasoby wymienione w tej sekcji będą zawsze pobierane, jeśli sieć jest dostępna.
+        Nie są buforowane. <br />
+        FALLBACK: Zasoby wymienione w tej sekcji nie są buforowane, ale podajesz alternatywny adres URL
+        jeśli serwer stanie się niedostępny. W pokazanym przykładzie wszystkie adresy URL poprzedzone znakiem
+        ajax / account / path zostaną zastąpione plikiem noCode.htm, jeśli nie można ich odzyskać. The
+        zasoby alternatywne, takie jak plik noCode.htm w przykładzie, są buforowane.
+    </h4>
+    <h3>
+        Określ nazwę pliku manifestu, który ma być używany na stronie internetowej, dodając manifest
+        atrybut elementu
+        html
+        <code>
+            &lt;html manifest="appcache.manifest"&gt;
+        </code>
+    </h3>
+    <hr />
+    <h1>Monitorowanie pamięci podręcznej aplikacji</h1>
+    <img src="img/data3.png" style="float:right" />
+    <h3>
+        Pamięć podręczna aplikacji jest dostępna dla JavaScript
+        za pośrednictwem właściwości applicationCache
+        Obiekt pamięci podręcznej aplikacji
+        zwrócone przez tę właściwość wprowadza
+        kompleksowy model wydarzeń obejmujący cykl życia
+        i zachowanie pamięci podręcznej. Te wydarzenia obejmują
+        następujące:
+    </h3>
+    <h4>
+        checking : to zdarzenie jest uruchamiane, gdy przeglądarka sprawdza pamięć podręczną aplikacji pod kątem aktualizacji. <br />
+        downloading :To zdarzenie jest uruchamiane, gdy przeglądarka rozpoczyna pobieranie zasobów do aplikacji <br />
+        updateready: To zdarzenie jest uruchamiane, gdy pojawiła się nowa wersja buforowanych obiektów dla strony internetowej<br />
+        obsolete: To zdarzenie jest uruchamiane, jeśli plik manifestu nie jest już dostępny, a pamięć podręczna aplikacji nie
+        dłużej obowiązuje dla bieżącej strony internetowej. <br />
+        cached : To zdarzenie jest uruchamiane, gdy pamięć podręczna aplikacji jest gotowa i dostępna do użycia. <br />
+        error: To zdarzenie jest uruchamiane, jeśli wystąpi błąd podczas pobierania zasobów do pamięci podręcznej lub podczas sprawdzania
+        zasoby do pobrania. <br />
+        noupdate: To zdarzenie jest uruchamiane, jeśli nie znaleziono żadnych zmian po sprawdzeniu manifestu pod kątem aktualizacji. <br />
+        progress: To zdarzenie jest uruchamiane, gdy każdy zasób określony w manifeście jest pobierany do aplikacji <br />
+    </h4>
+    <h3>Poniższy przykład pokazuje, jak złapać zdarzenie błędu pamięci podręcznej aplikacji:</h3>
+    <textarea rows="5" cols="80">
+applicationCache.addEventListener( "error", function() {
+alert( "Error while downloading resources to the application cache");
+}, true );
+</textarea>
+
+    <h3>Pamięć podręczna aplikacji implementuje także właściwość stanu numerycznego: status</h3>
+    <img src="img/data4.png" />
+
+    <h1>Wywoływanie aktualizacji zasobów za pomocą manifestu</h1>
+    <h3>
+        Aby wymusić aktualizację, aby uzyskać nową wersję
+        istniejący zasób, musisz zrobić znaczący
+        przejdź do pliku manifestu. Po prostu aktualizuję
+        data ostatniej modyfikacji nie wystarcza, aby uruchomić
+        całkowite odświeżenie w przeglądarce. Najlepsza droga do
+        wymuszenie aktualizacji polega na dodaniu pola komentarza do manifestu z numerem wersji, na przykład:
+    </h3>
+    <code>#version=1.2.3</code>
+    <h3>
+        Możesz także użyć funkcji update() obiektu applicationCache, aby zainicjować sprawdzanie dostępności aktualizacji Wszelkie istniejące zasoby buforowane będą używane do momentu ponownego załadowania strony lub wywołania funkcji swapCache() w applicationCache
+    </h3>
+    <h3>
+        W poniższym przykładzie kodu funkcja swapCache () jest wywoływana, jeśli pamięć podręczna została zaktualizowana o nową
+        zasoby (kod statusu 4 to UPDATEREADY). Ten kod zmusza stronę do korzystania z nowego
+        zasoby.
+    </h3>
+    <textarea rows="6" cols="50">
+applicationCache.update();
+...
+if (applicationCache.status == 4 ) {
+applicationCache.swapCache();
+}
+</textarea>
+    <hr />
+    <h1>Testowanie łączności sieciowej</h1>
+    <h3>
+        Poniższy przykład kodu pokazuje, jak wykryć stan sieci strony podczas ładowania. Obciążenie
+        moduł obsługi zdarzeń sprawdza właściwość onLine obiektu nawigatora i wyświetla status w
+        statusDiv div na stronie. Programy obsługi zdarzeń online i offline uruchamiają i aktualizują wyświetlany status, jeśli
+        łączność sieciowa się zmienia.
+    </h3>
+    <textarea rows="20" cols="80">
+var s;
+function onlineStatus() {
+s.innerHTML = "Online.";
+}
+function offlineStatus() {
+s.innerHTML = "Offline.";
+}
+onload = function() {
+s = document.getElementById("statusDiv");
+if( navigator.onLine ) {
+onlineStatus();
+} else {
+offlineStatus();
+}
+window.addEventListener("online", onlineStatus, true);
+window.addEventListener("offline", offlineStatus, true);
+}
+</textarea>
+</body>
+
+</html>
