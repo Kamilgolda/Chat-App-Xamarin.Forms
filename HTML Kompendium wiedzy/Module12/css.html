@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    
+</head>
+<body>
+    <h1>
+        Stosowanie prostych przejść za pomocą CSS
+    </h1>
+    <img src="img/css.png" style="float:right;" />
+    <h3>
+        Zmiana z 300px na
+        600 pikseli zacznie obowiązywać, gdy użytkownik najedzie myszą
+        nad elementem div
+        . Podobnie jest odwrotnie
+        zmiana z 600 na 300 pikseli zostanie zastosowana
+        natychmiast, gdy użytkownik odsunie mysz
+        z elementu div:
+    </h3>
+    <textarea rows="8" cols="50">
+div {
+width: 300px;
+}
+div:hover {
+width: 600px;
+}
+</textarea>
+
+    <div id="d1"></div>
+    <style>
+        #d1 {
+            background-color: rebeccapurple;
+            width: 300px;
+            height: 20px;
+        }
+
+            #d1:hover {
+                width: 600px;
+            }
+    </style>
+    <h3>
+        Poniższy przykład pokazuje te same style co poprzednio, z tym wyjątkiem, że zmienia się szerokość elementów div
+        przez okres dwóch sekund, gdy mysz przesuwa się nad nimi. Kiedy mysz się odsuwa, symbol
+        odwrotne przejście jest automatycznie stosowane w tym samym okresie.
+    </h3>
+    <textarea rows="8" cols="50">
+div {
+width: 300px;
+transition: width 2s;
+}
+div:hover {
+width: 600px;
+}
+</textarea>
+    <div id="d2"></div>
+    <style>
+        #d2 {
+            width: 300px;
+            height: 20px;
+            background-color: springgreen;
+            transition: width 2s;
+        }
+
+            #d2:hover {
+                width: 600px;
+            }
+    </style>
+    <h3>
+        Jeśli chcesz zastosować wiele przejść jednocześnie, określ listę właściwości CSS oddzieloną przecinkami
+        nazwy i czasy trwania właściwości przejścia. Poniższy przykład definiuje przejścia dla różnych
+        Właściwości CSS dla elementów div
+        . Gdy użytkownik najedzie kursorem na div
+        , szerokość, wysokość i rozmiar czcionki
+        właściwości przechodzą do nowych wartości w ciągu dwóch sekund, a właściwość kolor tła przechodzi
+        do nowej wartości w 3,75 sekundy. Gdy użytkownik odsunie mysz od div
+        , szerokość, wysokość,
+        i właściwości rozmiaru czcionki przechodzą do pierwotnych wartości w ciągu dwóch sekund, a kolor tła
+        właściwość przechodzi do oryginalnej wartości w 3,7 sekundy:
+    </h3>
+    <textarea rows="13" cols="80">
+div {
+width: 400px;
+height: 60px;
+background-color: yellow;
+transition: width 2s, height 2s, font-size 2s, background-color 3750ms;
+}
+div:hover {
+width: 600px;
+height: 80px;
+font-size: large;
+background-color: red
+}
+</textarea>
+    <div id="d3">text</div>
+    <style>
+        #d3 {
+            width: 400px;
+            height: 60px;
+            background-color: yellow;
+            transition: width 2s, height 2s, font-size 2s, background-color 3750ms;
+        }
+
+            #d3:hover {
+                width: 600px;
+                height: 80px;
+                font-size: large;
+                background-color: red
+            }
+    </style>
+    <hr />
+    <h1>Konfigurowanie przejść</h1>
+    <img src="img/css1.png" style="float:right;" />
+    <h3>
+        CSS3 definiuje pięć właściwości, których możesz użyć
+        skonfiguruj przejście:<br />
+
+        • transition-property: The name of the CSS
+        property to which the transition is applied.<br />
+        • transition-duration: The length of time that
+        the transition takes. The default value is zero
+        seconds, which means the transition happens
+        all at once. This has the same effect as not
+        applying a transition.<br />
+        • transition-timing-function: Specifies how
+        the speed of the transition varies during its
+        execution. Possible values include "linear", "ease", "ease-in", "ease-out", and "ease-in-out". The
+        default value is "ease".<br />
+        • transition-delay: The length of time that must elapse before the transition starts. The default value is
+        zero seconds, which means the transition starts immediately.<br />
+        • transition: Skrócona właściwość dla pozostałych czterech właściwości przejścia, w kolejności transition-property
+        transition-duration transition-timing-function transition-delay. Jeśli którakolwiek z tych wartości
+        nie są określone, obowiązują wartości domyślne opisane powyżej.<br />
+    </h3>
+    <h4>
+        Poniższy przykład definiuje przejścia dla różnych właściwości CSS dla elementów div
+        . Przykład
+        animuje szerokość, wysokość, rozmiar czcionki i kolor tła CSS dla div
+        , gdy użytkownik
+        unosi się nad nim. Przejście szerokości, wysokości i rozmiaru czcionki zajmuje dwie sekundy, a operacja
+        ukończenie właściwości kolor tła zajmuje 3,75 sekundy. Wszystkie przejścia korzystają z łatwego pomiaru czasu
+        funkcję, a przed rozpoczęciem przejścia występuje opóźnienie o jedną sekundę.
+    </h4>
+    <textarea rows="17" cols="80">
+div {
+width: 400px;
+height: 60px;
+background-color: yellow;
+transition-property: width, height, font-size, background-color;
+transition-duration: 2s, 2s, 2s, 3750ms;
+transition-timing-function: ease-in;
+transition-delay: 1s;
+}
+div:hover {
+width: 600px;
+height: 80px;
+font-size: large;
+background-color: red
+}
+</textarea>
+    <div id="d4">abcd</div>
+    <style>
+        #d4 {
+            width: 400px;
+            height: 60px;
+            font-size: smaller;
+            background-color: yellow;
+            transition-property: width, height, font-size, background-color;
+            transition-duration: 2s, 2s, 2s, 3750ms;
+            transition-timing-function: ease-in;
+            transition-delay: 1s;
+        }
+
+            #d4:hover {
+                width: 600px;
+                height: 80px;
+                font-size: large;
+                background-color: red
+            }
+    </style>
+    <h2>Wykrywanie końca przejścia</h2>
+    <img src="img/css2.png" style="float:right;" />
+    <h3>
+        jeśli potrzebujesz
+        zaimplementować funkcjonalność, która działa tylko wtedy, gdy
+        przejście zostało zakończone, takie jak wdrożenie
+        seria animacji. Jeśli zastosujesz wiele
+        przejścia do tego samego elementu, oddzielnego
+        Zdarzenie przejścia jest uruchamiane dla każdego przejścia
+        kiedy będzie koniec.
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak obsługiwać zdarzenie przejściowe we wszystkich elementach div
+        w pliku
+        dokument (w tym przykładzie założono, że elementy div
+        są stylizowane za pomocą przejść zgodnie z opisem w
+        poprzedni temat). Funkcja obsługi zdarzenia dla zdarzenia przejściowego dodaje komunikat do select
+        rozwijana lista, aby wskazać nazwę właściwości, której przejście zostało zakończone i upłynęło
+        czas przejścia.
+    </h4>
+    <textarea rows="20" cols="90">
+<script>
+    function onLoad() {
+        const divElements = document.querySelectorAll("div");
+        for (let i = 0; i < divElements.length; i++) {
+            divElements[i].addEventListener("transitionend", onTransitionend, true);
+        }
+    }
+    const messagesElement = document.querySelector("messages");
+    function onTransitionend(e) {
+        messages.add(new Option(e.propertyName + ", elapsedTime " + e.elapsedTime));
+    }
+</script>
+...
+<body onload="onLoad()">
+<div>Text appearing in a div</div>
+<div>More text appearing in a div</div>
+<select id="messages"></select>
+</body>
+</textarea>
+    <select id="messages"></select>
+    <script>
+        const divElements = document.querySelectorAll("div");
+        for (let i = 0; i < divElements.length; i++) {
+            divElements[i].addEventListener("transitionend", onTransitionend, true);
+        }
+
+        const messagesElement = document.querySelector("messages");
+        function onTransitionend(e) {
+            messages.add(new Option(e.propertyName + ", elapsedTime " + e.elapsedTime));
+        }
+    </script>
+
+</body>
+</html>

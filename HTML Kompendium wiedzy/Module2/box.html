@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img style="float:right" src="img/box.png" />
+
+    <p><strong>padding</strong> -  aby ustawić szerokość pola wypełnienia</p>
+    <p><strong>border</strong> - obramowanie może również pełnić funkcję widocznej linii wokół zawartości. Użyj właściwości border, aby ustawić jej szerokość, kolor i styl</p>
+    <p><strong>margin</strong> - aby ustawić szerokość pola marginesu</p>
+
+    <h2 class="highlight" style="height : 100px;
+width : 500px;
+padding : 10px;
+border : 2px dotted blue;
+margin : 25px 0 25px 0;"><textarea cols="60" rows="6">h2.highlight {
+height : 100px;
+width : 500px;
+padding : 10px;
+border : 2px dotted blue;
+margin : 25px 0 25px 0; /* Could also be written 25px 0 */
+}</textarea></h2>
+
+    <textarea rows="10">Marginesu i paddingu można używać dla każdej ze stron :  padding-top: 10px;
+padding-right : 10px;
+padding-bottom : 10px;
+padding-left : 10px;</textarea>
+
+    <p>
+        border : 2px dotted blue; == border-width: 2px;
+        border-style: dotted;
+        border-color: blue;
+    </p>
+
+    <p class="example" style="padding: 10px;
+        border-bottom: solid 1px black;
+        border-left-style: dotted;
+        border-left-width: 2px;" >
+        <textarea rows="10" cols="70">p.example {
+padding: 10px;
+border-bottom: solid 1px black;  //border-top, border-right, 
+                                 border-bottom, and border-left
+border-left-style: dotted;
+border-left-width: 2px;
+}
+        </textarea>
+    </p>
+
+    <p style="visibility: ">
+        <strong>visiblity</strong> umożliwia zmiane widocznosci wybranych elementów ale ich miejsca umieszczenia pozostaną zarezerwowane.
+    </p>
+    <p>
+        <strong>display</strong> umożliwia ustawienie sposobu wyświetlania wybranych elementów na stronie. To zawiera
+        ukrywanie wybranych elementów lub całkowite usunięcie ich ze strony.
+    </p>
+
+    <p>
+        <strong>position</strong> umożliwia ustawienie metody pozycjonowania dla wybranych elementów
+        Cztery możliwe wartości to: static (the default), fixed, absolute, and relative.
+    </p>
+    <p>
+        <strong>float</strong>  umożliwia usunięcie wybranych elementów z przepływu treści i przyciągniecie
+        je do lewej lub prawej strony zawierających je elementów.
+    </p>
+
+    <p>
+        <strong>overflow</strong> umożliwia ustawienie, co dzieje się, gdy zawartość elementu jest zbyt duża
+        dla pudełka, które go zawiera.
+    </p>
+
+    <p>
+        box-sizing pozwala ustawić sposób, w jaki właściwości szerokości i wysokości mają się stosować do
+        modelu pudełkowoego elementu. Jeśli ustawione na content-box (domyślne), działają one jak opisano powyżej. Jeśli ustawione na
+        border-box, szerokość i wysokość dotyczą całkowitej zawartości, wypełnienia, obramowania i marginesu
+        razem.
+    </p>
+</body>
+</html>

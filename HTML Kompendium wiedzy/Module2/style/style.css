@@ -1,0 +1,26 @@
+﻿body {
+}
+#czcionka {
+    font-family: Arial, Candara, Verdana, sans-serif;
+}
+#czcionka2 {
+    font-family: Georgia, Corbel, "Times New Roman", serif;
+}
+#czcionka3 {
+    font-family: Consolas, "Courier New", monospaced;
+}
+#size {
+    font-size: 16px;
+}
+#size2 {
+    font-size: 150%;
+}
+#size3 {
+    font-size: 1em;
+}
+#fontstyle{
+    font-style:italic;
+}
+#skrot {
+    font: oblique bold 16px/1.5 "Arial";
+}

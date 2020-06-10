@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Łączenie z serwerem za pomocą WebSocket</h1>
+    <h3>
+        Istnieją dwa ustalone sposoby wdrażania w czasie rzeczywistym
+        komunikacja:<br />
+        • Continuous polling. Strona łączy się z serwerem i wysyła do serwera żądanie AJAX
+        nowe dane. Serwer natychmiast odpowiada, wskazując, że dane nie uległy zmianie od ostatniego
+        żądać lub odsyła nowe dane. Następnie strona zamyka połączenie. Ten proces się powtarza
+        co kilka sekund.<br />
+        • Long polling. Strona łączy się z serwerem, ustawiając wartość limitu czasu połączenia na bardzo długi
+        okres czasu (do kilku godzin, w zależności od aplikacji), a następnie wysyła zapytanie do
+        serwer dla nowych danych. Serwer odpowiada tylko wtedy, gdy ma nowe dane do wysłania.
+    </h3>
+    <h3>
+        WebSockets zapewniają prostą, lekką metodę
+        do włączania pełnego dupleksu w czasie rzeczywistym
+        komunikacja między klientem a serwerem
+        bez polegania na HTTP.
+    </h3>
+
+    <img src="img/s.png" style="float:right;" />
+    <h3>
+        WebSocket zapewnia metody, które obiekt klienta
+        służy do łączenia się z serwerem oraz wysyłania i
+        odbierania wiadomości. Obiekt WebSocket również
+        zawiera szereg właściwości, które zachowują
+        informacje o stanie
+        połączenia.
+    </h3>
+    <h4>
+        Sprawdzenie czy przeglądarka obsługuje WebSocket:
+    </h4>
+    <textarea rows="7" cols="50">
+if (window.WebSocket) {
+alert("WebSocket is supported");
+} else {
+alert("WebSocket is not supported");
+}
+</textarea>
+    <h2>Otwieranie połączenia</h2>
+    <h3>
+        Rozpoczęcie wszelkiej komunikacji z serwerem WebSocket jest otwierającym uzgadnianiem protokołu HTTP między
+        kod klienta działający na stronie internetowej i serwerze. Konstruktor WebSocket umożliwia utworzenie pliku
+        nowe połączenie i określić adres URL serwera, z którym chcesz się połączyć. Ten adres URL używa schematu ws lub wss do
+        wskaż, że jest to adres WebSocket: <br />
+        <code>const socket = new WebSocket('ws://websocketserver.contoso.com/bookings');</code>
+    </h3>
+    <h3>
+        Domyślnym portem dla protokołu ws: // jest port 80 (podobnie jak http). Jeśli serwer oczekuje na połączenie
+        żądań na innym porcie, wystarczy podać port jako część adresu URL. Na przykład:<br />
+        <code>const socket = new WebSocket("ws://localhost:55981/bookings");</code>
+    </h3>
+    <h3>
+        eśli potrzebujesz nawiązać szyfrowane połączenie, możesz użyć bezpiecznego protokołu WebSockets wss: //.
+        Ten protokół domyślnie używa portu 443.:<br />
+        <code>const socket = new WebSocket('wss://secure.websocketserver.contoso.com/bookings');</code>
+
+    </h3>
+    <h3>
+        Początkowy połączenia przez HTTP jest wykonywane automatycznie, a jeśli serwer zaakceptuje żądanie od
+        klienta zostanie ustanowione nowe połączenie za pomocą protokołu transportowego WebSocket.
+    </h3>
+    <h3>
+        nterfejs API WebSocket jest asynchroniczny. Jest tak, ponieważ nawiązanie połączenia może zająć trochę czasu, a po nim
+        połączenie zostało otwarte, wiadomości mogą być odbierane w dowolnym momencie przez to połączenie. Po tym jak masz
+        utworzył obiekt WebSocket, nie powinieneś próbować go używać, dopóki nie będzie gotowy. Możesz określić
+        stan obiektu WebSocket poprzez sprawdzenie właściwości readyState. Ta właściwość może mieć
+        następujące wartości:<br />
+        • CONNECTING (0), co oznacza, że ​​został utworzony obiekt WebSocket, ale połączenie
+        wciąż powstaje między stroną a serwerem.<br />
+        • OPEN (1), który wskazuje, że ustanowiono połączenie między stroną a serwerem.<br />
+        • CLOSING (2), co oznacza, że ​​trwa uzgadnianie zamknięcia.<br />
+        • CLOSED (3), co oznacza, że ​​połączenie między stroną a serwerem zostało zamknięte lub mogło zostać
+        nie można ustalić.<br />
+    </h3>
+    <textarea rows="5" cols="60">
+while (socket.readyState != 1) {
+... // wait until the socket is open before continuing
+...
+}
+</textarea>
+    <h3>
+        Lepszym sposobem na wykrycie, kiedy połączenie zostało pomyślnie otwarte, jest obsługa zdarzenia otwarcia
+        obiekt WebSocket. W tym momencie możesz zacząć wysyłać i odbierać wiadomości za pośrednictwem połączenia
+    </h3>
+    <textarea rows="23" cols="60">
+socket.onopen = function() {
+// WebSocket Server is connected
+alert("Connection to server now open!");
+//send message etc ...
+};
+
+
+/// Za pomocą listenera:
+function sendMessage() {
+// Create a message and send it to the server
+...
+};
+socket.addEventListener("open", sendMessage);
+
+
+// Obsługa błędów
+socket.onerror = function(event) {
+// An error has occurred
+alert("An error has occurred: " + event.data);
+};
+</textarea>
+    <h2>Zamykanie połączenia</h2>
+    <h3>
+        Aby zamknąć połączenie z serwerem, wywołaj funkcję close() obiektu WebSocket. Ta funkcja
+        pobiera dwa opcjonalne parametry, code and reason , które umożliwiają wysłanie do serwera kodu statusu wyjścia
+        (opisany w RFC6455) i tekstowy powód zamknięcia połączenia.<br />
+        <code>
+            socket.close();<br />
+            socket.close(1000, "No Error. All communication finished with.");<br />
+        </code>
+    </h3>
+
+    <h3>
+        Zdarzenie close uruchamia się, gdy połączenie zostanie zamknięte. Obiekt zdarzenia ma trzy właściwości:<br />
+        • wasClean, która jest wartością logiczną wskazującą, czy połączenie zostało poprawnie zamknięte (prawda) czy
+        wystąpił problem (fałsz).<br />
+        • code, który jest kodem stanu wyjścia (określonym w RFC6455) wskazującym, dlaczego połączenie zostało zamknięte<br />
+
+        • reason, który jest ciągiem tekstowym podającym powód, dla którego połączenie zostało zamknięte.<br />
+    </h3>
+    <h4>Poniższy kod pokazuje przykład, który wykrywa, czy połączenie zostało pomyślnie zamknięte, czy nie</h4>
+    <textarea rows="10" cols="80">
+socket.onclose = function(event) {
+// Connection has been closed
+if (event.wasClean) {
+alert("Connection closed OK");
+} else {
+alert("Connection closed with issues. Code " + event.code);
+}
+};
+</textarea>
+    <hr />
+    <h1>Wysyłanie wiadomości przez WebSocket</h1>
+    <img src="img/s1.png" style="float:right;" />
+    <h3>
+        Po ustanowieniu połączenia z
+        serwer przez WebSocket, możesz wysłać
+        wiadomość do serwera za pomocą send()
+    </h3>
+    <textarea rows="3" cols="50">
+const message = ...; // Message to be sent
+socket.send(message);
+</textarea>
+    <h4>jeśli podczas wysyłania wystąpi błąd, wystąpi zdarzenie błędu.</h4>
+
+    <h3>Dane wiadomości można wysłać jako jeden z czterech typów obiektów:</h3>
+    <h4>
+        • Dowolny typ danych tekstowych UTF8; zwykły tekst, JSON, kodowany w standardzie base64 i tak dalej. W poniższym przykładzie użyto
+        funkcja JSON.stringify() do serializacji obiektu jako tekstu i wysłania go:
+    </h4>
+    <textarea rows="3" cols="60">function sendRequest(socket, text) {
+socket.send(JSON.stringify({ request : text }));
+}</textarea>
+    <h4>• Blobs, takie jak files or images. Poniższy przykład wysyła plik określony przez pole w formularzu HTML5</h4>
+    <textarea rows="5" cols="80">
+function sendFile(socket) {
+const file = document.querySelector('input[type="file"]').files[0];
+socket.send(file);
+}
+</textarea>
+    <h4>
+        • Obiekt ArrayBuffer. Ten obiekt reprezentuje bufor używany do przechowywania surowych danych binarnych. Dane mogą
+        dostęp do nich można uzyskać tylko przy użyciu widoku tablic maszynowych, takich jak Uint8Array i Int32Array. Następujące
+        przykład wysyła tablicę liczb całkowitych:
+    </h4>
+    <textarea rows="6" cols="60">
+function sendRawData(socket) {
+const numbers = new Uint8Array([8,6,7,5,3,0,9]);
+socket.send(numbers.buffer);
+}
+</textarea>
+    <h4>
+        • Obiekt ArrayBufferView. Ten obiekt reprezentuje typ tablicowy, do którego można uzyskać dostęp
+        dane binarne w ArrayBuffer. Poniższy przykład wysyła dane z obrazu wyświetlanego przez
+        za pomocą elementu canvas:
+    </h4>
+    <textarea rows="10" cols="70">
+function sendCanvasImage(socket, canvas) {
+const image = canvas.getImageData(0,0,50,50);
+const binArray = new Uint8Array(image.data.length);
+for (let i=0; i<image.data.length; i++) {
+binArray[i] = image.data[i];
+}
+socket.send(binArray);
+}
+</textarea>
+    <h4>
+        Po wysłaniu wiadomości możesz sprawdzić, czy przesłano ją pomyślnie, sprawdzając, czy
+        Właściwość bufferedAmount obiektu WebSocket wynosi zero.
+    </h4>
+    <hr />
+    <h1>Odbieranie wiadomości z  WebSocketu</h1>
+    <img src="img/s2.png" style="float:right;" />
+    <h3>
+        Protokół WebSocket jest dwukierunkowy, a protokół
+        serwer, z którym jesteś połączony, może wysłać Ci
+        wiadomość w dowolnym momencie. Zdarzenie wiadomości zostanie uruchomione
+        po otrzymaniu wiadomości z serwera,
+        dając ci możliwość otrzymywania i przetwarzania
+        wiadomość. Obiekt zdarzenia przekazany do
+        moduł obsługi zdarzeń wiadomości ma dwie właściwości:<br />
+
+        • type, który wskazuje, czy typ
+        otrzymana wiadomość to dane tekstowe lub binarne.<br />
+        • data, które zawierają dane wiadomości.<br />
+    </h3>
+    <textarea rows="30" cols="70">
+socket.onmessage = function(event) {
+// Message has been received
+if (event.type == "Text") {
+handleTextMessage(event.data);
+} else {
+handleBinaryMessage(socket.binaryType, event.data);
+}
+};
+
+function handleTextMessage(text) {
+const message = JSON.parse(text);
+if (message.request) { // do something }
+}
+
+function handleBinaryMessage(binaryType, data) {
+if (binaryType == "arrayBuffer") {
+const binArray = new Uint8Array(data);
+...
+} else {
+const canvas = document.getElementById("serverCanvas");
+const image = canvas.getImageData(0,0,50,50);
+for (let i=8; i<image.data.length; i++) {
+image.data[i] = binArray[i];
+}
+canvas.putImageData(image.data,0,0);
+...
+}
+}
+</textarea>
+    <hr />
+    <h1>gotowy kod dla JSON:</h1>
+    <textarea rows="35" cols="90">
+        <script>
+            const socket = new WebSocket("ws://localhost:55981/bookings");
+
+            socket.onopen = function () {
+                // WebSocket Server is connected
+                alert("Connection to server now open!");
+                sendRequest(socket, text);
+            };
+
+            socket.onmessage = function (event) {
+                // Message has been received
+                if (event.type == "Text") {
+                    handleTextMessage(event.data);
+                }
+            };
+
+            function sendRequest(socket, text) {
+                socket.send(JSON.stringify({ request: text }));
+            }
+
+            function handleTextMessage(text) {
+                const message = JSON.parse(text);
+                if (message.request) { // do something }
+                }
+        </script>
+</textarea>
+</body>
+</html>

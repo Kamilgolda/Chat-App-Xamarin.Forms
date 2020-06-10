@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2><p>&lt;form&gt;zawartosc  &lt;/form&gt; - wstawianie formularza</p></h2>
+    <h3>atrybuty:</h3>
+    <p>action="identyfikuje adres URL strony, na którą przesłane bedą dane formularza""</p>
+    <p>
+        method="określa sposób przesyłania danych na serwer. Prawidłowe wartości to:
+    <p>• GET dla HTTP GET. Jest to wartość domyślna, ale nie jest bezpieczna</p>
+    <p>• POST dla HTTP POST. To jest preferowana wartość</p>
+    </p><br />
+    <p>accept-charset="identyfikuje kodowanie znaków danych przesłanych w formularzu"</p>
+    <p>enctype="identyfikuje typ MIME używany podczas kodowania danych formularza gdy metodą jest POST"</p>
+    <p>target="określa, gdzie przeglądarka wyświetli stronę akcji; prawidłowe wartości to _blank, _parent, _self i _top"</p>
+
+    <br /><h3>kontrolki formularza:</h3>
+    <h2><p>&lt;input /&gt; - wstawianie kontrolki</p></h2>
+    <p></p><form><input type="text" /></form> type="text" -Jednowierszowe pole tekstowe</p>
+    <p><form><input type="password" /></form> type="password" -Jednowierszowe pole tekstowe, w którym tekst wprowadzony do pola jest zastępowany gwiazdkami</p>
+    <p><form><input type="hidden" /></form> type="hidden" -Pole niewidoczne dla użytkownika</p>
+    <p><form><input type="checkbox" checked /></form> type="checkbox" checked -Pole wyboru Zapewnia wybór tak / nie :checked -domyślnie zaznaczone.</p>
+    <p><form><input type="radio" name="group">wybor1</input><input type="radio" name="group">wybor2</input></form> type="radio" -Pole wyboru radiobutton, dopisując name grupujemy pola.</p>
+    <p><form><input type="reset" /></form> type="reset" -Przycisk resetowania. Kliknięcie tego przycisku resetuje wszystkie pola do ich wartości początkowych.</p>
+    <p><form><input type="submit" /></form> type="submit" -Przycisk przesyłania. Kliknięcie tego spowoduje przesłanie bieżących wartości formularza</p>
+    <p><form><input type="image" src="https://programmergirlsite.files.wordpress.com/2017/03/programista.jpg?w=663" height="50px" /></form> type="image" -Obraz do użycia jako przycisk przesyłania. Użyj atrybutu src, aby zidentyfikować obraz</p>
+    <p><form><input type="button" /></form> type="button" -Przycisk. Nie ma to domyślnego zachowania i może być użyte do uruchomienia skryptu, kiedy na przykład kliknięty.</p>
+    <p><form><input type="file" /></form> type="file" -Kontrola pliku. Zapewnia sposób przesłania pliku do serwera</p>
+    <p><form><textarea rows="3" cols="10"></textarea></form> &lt;textarea&gt; -generuje dowolne, wielowierszowe pole edycji tekstu jawnego; użyj rows i cols, aby ustawić jego rozmiar.</p>
+    <p>
+        <form><select multiple> <option selected value="1">element1</option><option value="1">element2</option></select></form> &lt;select&gt; -definiuje pole listy lub listę rozwijaną. ; multiple - użytkownik
+        może wybrać więcej niż jeden element ; &lt;option>&gt; - element ; selected -domyslnie wybrany ; value - wartosc ktora ma zostac wyslana
+    </p>
+    <p>
+        <form><button type="reset"></button></form> &lt;button&gt; -definiuje przycisk. Użyj atrybutu type, aby wskazać, czy jest to przesyłanie, resetowanie czy
+        przycisk (nic nie robi). Domyślnie jest to przesyłane.
+    </p>
+
+    <hr /><h3>Elementy układu formularza</h3>
+
+    <p>Możesz zastosować znaczniki &lt;p&gt; ​​i &lt;div&gt;, aby zastosować podstawowy układ do formularza.</p>
+    <p>
+        <form><fieldset><legend>Personalia:</legend></fieldset></form> &lt;fieldset&gt; -identyfikuje grupę formantów w formularzu. Przeglądarka odzwierciedla to, rysując ramkę
+        wokół zawartości, oznaczając ramkę nazwą. Ta nazwa jest ustawiana za pomocą elementu &lt;legend&gt;
+    </p>
+    <p>
+        <form><label>tekst kontrolki <input type="text" /></label></form> &lt;label&gt; -identyfikuje etykietę tekstową powiązaną z kontrolką formularza, Czyni to albo przez obejmowanie
+        zarówno tekstu, jak i kontrolki, lub otaczając tekst i ustawiając atrybut for na id kontrolki
+    </p>
+
+    <a href="Dołączanie skryptów.html">Dołączanie skryptów</a>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2>
+        Promise
+        pomaga sprawdzić succes lub failure w
+        operacjach asynchronicznych, aby zwrócić potrzebne
+        wartości w każdym przypadku i odpowiednio zareagować.
+    </h2>
+    <h3>
+        Obiekt Promise reprezentuje przyszły wynik
+        operacji asynchronicznej. Wartość tego wyniku
+        jeszcze nie istnieje, ale zostanie rozwiązana w
+        przyszłości.
+    </h3>
+    <h3>
+        Ta wartość może być zwykle
+        jedną z dwóch: wartość rozwiązana lub wartość odrzucona.
+    </h3>
+
+    <h2>Obiekt Promise może znajdować się w jednym z następujących stanów:</h2>
+    <ul>
+        <li><h3>Resolved - Zadanie związane z Promise się powiodło.</h3></li>
+        <li><h3>Rejected - Zadanie związane z Promise się nie powiodło.</h3></li>
+        <li><h3>Pending - Zadanie związane z Promise nie zostało jeszcze spełnione ani odrzucone.(w oczekiwaniu)</h3></li>
+        <li><h3>Settled - Zadanie związane z Obietnicą zostało spełnione lub odrzucone.</h3></li>
+    </ul>
+    <h2>
+        Obiekt Promise może być używany do dowolnego zadania asynchronicznego. Na przykład, aby wysłać żądanie do pilota
+        serwer za pomocą XMLHttpRequest lub do wywołania funkcji JavaScript setTimeout i setInterval.
+    </h2>
+    <h3>Przyklad dla setTimeout -wykonaj raz po okreslonym czasie</h3>
+    <textarea rows="5" cols="200">
+let getPromise = timeToWait => new Promise(resolve => setTimeout(resolve, timeToWait, "bar"));
+//  zmienna      f.1param      nowy obiekt f.1param              funkcja, czas_w_ms, parametr przekazywany dalej
+getPromise(5000).then(data => console.log(data)); //jak wykona sie getPromis to później wykonuje funkcje (za data podstawia parametr z setTimeout "bar");
+                            //alert(data));
+</textarea>
+    <br />
+    <button onclick="f1()">Wyświetli alert po 5s</button>
+
+    <h3>
+        konstruktor Promise przyjmuje funkcję jako parametr
+    </h3>
+    <code>
+        let newPromise = new Promise((resolve(przyjąć), reject(odrzucic)) => { });
+    </code>
+
+
+    <h3>Przyklad dla XMLHttpRequest </h3>
+
+    <textarea cols="100" rows="25">
+let getRemoteData = url => new Promise((resolve, reject) => {
+let request = new XMLHttpRequest();
+request.onload = () => {
+if (request.status === 200){
+resolve(request.response);
+}
+else {
+reject(Error(request.statusText));
+}
+};
+// Handle network errors
+request.onerror = () => {
+reject(Error("Network error occurred"));
+};
+request.open("GET", url);
+request.send();
+});
+
+
+getRemoteData("http://contoso.com/resources/...")
+.then(data => console.log("success!", data))
+.catch(error => console.log("failed!", error));
+</textarea>
+
+    <h3>
+        Aby zareagować na spełnienie lub odrzucenie Promise, używamy metody then().
+        Ta Metoda otrzymuje dwie callback functions jako parametry: a success callback and a failure callback.
+        Kiedy Promise jest settled, jedna z dwóch funkcji odpala w zależności od stanu obiektu Promise Sukces.
+        funkcja success callback po spełnieniu Promise, failure callback po rejected. then()
+         zwraca nową obietnicę, która różni się od oryginału, a to daje nam możliwość tworzenia łańcuchów
+        Promise razem.
+    </h3>
+    <h3>Przykład łancucha Promises</h3>
+    <textarea cols="100" rows="6">
+getRemoteData("http://contoso.com/resources/...")
+.then(result => getMoreRemoteData("http://fake.com/resources/...", result))
+.then(newResult => getOtherKindOfRemoteData("http://dummy.com/resources/...", newResult))
+.then(finalResult => console.log('Final result arrived', finalResult));
+</textarea>
+
+    <h3>
+        Przy tego rodzaju łańcuchach obietnice są uporządkowane w kolejności, ponieważ każda z nich zależy od
+        sukces poprzedniego. W przypadku, gdy nie ma zależności między obietnicami i chcemy wszystkich
+        aby kontynuować, bez względu na ich kolejność, możemy rozwiązać je wszystkie jednocześnie, używając all ()
+    </h3>
+
+    <textarea cols="100" rows="7">
+Promise.all([
+getForecast(/* here will come the first url */),
+getFootballScores(/* here will come the second url */),
+getShirtsPrices(/* here will come the third url */)
+]).then(results => console.log('All results arrived!', results));
+</textarea>
+
+
+    <script type="text/javascript">
+        function f1() {
+            let getPromise = timeToWait => new Promise(resolve => setTimeout(resolve, timeToWait, "bar"));
+            getPromise(5000).then(data => alert(data));
+        }
+
+
+    </script>
+</body>
+</html>

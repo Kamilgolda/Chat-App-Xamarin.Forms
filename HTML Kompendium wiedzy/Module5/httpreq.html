@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img src="img/xml.png" style="float:right" />
+    <h1>Korzystanie z obiektu XMLHttpRequest w celu uzyskania dostępu do danych zdalnych</h1>
+
+    <h3>
+        Obiekt XMLHttpRequest zapewnia dostęp do dowolnego rodzaju danych zdalnych;
+        nie jest ograniczonydo danych dla elementów, które zapewniają atrybut src. Częstym zastosowaniem jest wywoływanie usługi internetowej, przekazywanie jej danych
+        wpisanych przez użytkownika w formularzu, a następnie przetworzone zwrócone odpowiedzi.
+    </h3>
+    <code>const request = new XMLHttpRequest();</code>
+
+    <h3>
+        Następnie możesz użyć tego obiektu do zainicjowania zdalnego żądania. Aby to zrobić, ustaw właściwości określające
+        URL zdalnych danych, które określają typ danych w żądaniu;
+    </h3>
+    <code>
+        const url = "http://contoso.com/resources/...";<br />
+        request.open( "GET", url );
+    </code>
+    <h2>Metoda open() definiuje metodę HTTP i adres URL tego żądania. Metodę HTTP można ustawić na:</h2>
+    <ul>
+        <li><h3>GET, aby zażądać znanego zasobu bez parametrów podczas korzystania</h3></li>
+        <li><h3>POST, aby wysłać sparametryzowane dane do serwera, najczęściej tworzą dane, które zostaną przeanalizowane jako część żądania.</h3></li>
+        <li><h3>HEAD określa, że ​​odpowiedź powinna być tylko informacją nagłówka i może być przydatna na przykład, aby uzyskać podsumowanie dużego zasobu przed jego pobraniem.</h3></li>
+    </ul>
+    <h3>Aby przesłać żądanie, wywołaj metodę send().</h3>
+    <h4>
+        Wywołania metody send() są domyślnie asynchroniczne, co oznacza, że ​​kod JavaScript nie będzie blokowany
+        w czasie czekania na odpowiedź. Jeśli potrzebujesz odpowiedzi przed kontynuowaniem, użyj opcjonalnego trzeciego argumentu metody open():
+    </h4>
+    <code>request.open(method, url, false);</code>
+    <hr />
+    <img src="img/obsbl.png" style="float:right" />
+    <h3>
+        Powinieneś sprawdzić wynik send()
+        tworząc funkcje do sprawdzenia, czy żądanie
+        zostało wysłane. Aby to zrobić, sprawdź status
+        właściwość obiektu żądania. Ta właściwość
+        zawiera kod statusu HTTP wysyłanej
+        operacji. Kod stanu 200 oznacza sukces;
+        inne kody wskazują na jakiś błąd lub
+        ostrzeżenie. Na przykład kod stanu 404
+        wskazuje, że żądanego zasobu
+        nie można znaleźć. Właściwość statusText zapewnia
+        więcej informacji w formie tekstowej.
+    </h3>
+    <textarea rows="14" cols="100">
+function tryMyLuck() {
+const request = new XMLHttpRequest();
+request.open("GET", "/luckydip/enter");
+request.send();
+...
+// wait for the request status to be returned
+...
+if (request.status != 200) {
+alert("Error " + request.status + " - " + request.statusText);
+}
+...
+}
+</textarea>
+    <h3>
+        Powinieneś zawinąć kod  JavaScript w try… catch block, aby obsłużyć wszelkie inne nieoczekiwane wyjątki
+        spowodowane awarią sieci lub komunikacji w przeglądarce.
+    </h3>
+    <textarea cols="100" rows="10">
+try {
+/* JavaScript code that might trigger an exception */
+...
+} catch (exception) {
+/* Handle any exceptions here. This example displays the exception to the user */
+alert(exception);
+}
+</textarea>
+
+    <hr />
+    <img src="img/resp.png" style="float:right" />
+    <h1>Odpowiedzi serwera</h1>
+    <h3>
+        Właściwość responseText może być  dowolnym tekstem
+        sformatowanym czy nie. To znaczy że
+        serwer może zwrócić dane w formacie HTML, JSON,
+        XML, CSV, format ciągu zapytania lub po prostu zwykły tekst.
+    </h3>
+    <h3>
+        Możesz użyć funkcji getResponseHeader()
+        w celu ustalenia rodzaju danych
+        w odpowiedzi.
+    </h3>
+    <h3>Typ zwracanych danych jest określony w odpowiedzi na nagłówek Content-Type</h3>
+    <h3>
+        Jeśli odpowiedzią są dane XML, możesz użyć
+        właściwość responseXML, aby pobrać poprawnie sformułowaną odpowiedź XML.
+    </h3>
+    <textarea rows="13" cols="100">
+function getResponse(request) {
+const type = request.getResponseHeader("Content-Type");
+switch (type) {
+case "text/xml" :
+return request.responseXML;
+default :
+return request.responseText;
+}
+}
+</textarea>
+    <h3>Przyklad JSON</h3>
+    <textarea rows="14" cols="100">
+function getResponse(request) {
+const type = request.getResponseHeader();
+switch( type ) {
+case "text/xml" :
+return request.responseXML;
+case "application/json" :
+return JSON.parse(request.responseText);
+default :
+return request.responseText;
+}
+}
+</textarea>
+    <hr />
+    <img src="img/resp2.png" style="float:right" />
+    <h1>Obsługa odpowiedzi asynchronicznej</h1>
+
+    <h3>
+        XMLHttpRequest
+        udostępnia zdarzenie readystatechange, którego
+        możesz użyć do wykrycia, czy dane zostały
+        zwrócone.
+    </h3>
+    <h2>
+        XMLHttpRequest ma właściwość readyState
+        , która może mieć jedną z następujących
+        wartości:
+    </h2>
+    <ul>
+        <li>
+            <h4>
+                0: Obiekt XMLHttpRequest ma
+                nie został otwarty.
+            </h4>
+        </li>
+        <li><h4>1: Obiekt XMLHttpRequest został otwarty.</h4></li>
+        <li>
+            <h4>
+                2: Obiekt XMLHttpRequest wysłał żądanie.
+            </h4>
+        </li>
+        <li><h4>3: Obiekt XMLHttpRequest zaczął otrzymywać odpowiedź.</h4></li>
+        <li><h4>4: Obiekt XMLHttpRequest zakończył odbieranie odpowiedzi.</h4></li>
+    </ul>
+    <textarea rows="7" cols="100">
+request.onreadystatechange = function() {
+if (request.readyState === 4) {
+const response = JSON.parse(request.responseText);
+...
+}
+};
+</textarea>
+    <hr />
+    <h1>Przesyłanie danych z żądaniem</h1>
+    <img src="img/send.png" style="float:right" />
+    <h3>
+        Żądania HTTP GET zwracają dane do przeglądarki
+        z serwera. Możesz także użyć HTTP POST
+        przesłania danych z przeglądarki na
+        serwer. Aby przesłać żądanie zawierające dane,
+        określ metodę POST zamiast GET jako
+        parametr funkcji open(). Wywołanie send()
+        działa jak poprzednio, ale musi być podany
+        parametr.
+        może to byc dowolnym ciąg tekstowy, który metoda sieciowa serwera może
+        analizować.
+    </h3>
+
+    <h2>Powinieneś także określić format danych, aby upewnić się, że jest on poprawnie interpretowany przez serwer.</h2>
+    <code>request.setRequestHeader("Content-Type", "application/json");</code>
+    <h3>Dla danych wprowadzonych przez użytkownika w formularzu HTML5</h3>
+    <code>request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");</code>
+</body>
+</html>

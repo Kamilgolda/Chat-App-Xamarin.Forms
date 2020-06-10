@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Odtwarzanie treści wideo za pomocą znacznika video</h1>
+    <img src="img/video.png" style="float:right;" />
+    <h4>
+        Atrybut poster umożliwia określenie obrazu, który ma być wyświetlany na stronie internetowej podczas gdy
+        wideo jest pobierane lub dopóki użytkownik nie naciśnie przycisku odtwarzania.
+    </h4>
+    <h4>
+        controls określa, że ​​odtwarzacz wideo powinien wyświetlać przyciski sterowania wideo
+        takich jak Play, Pause i Mute.
+    </h4>
+    <h4>
+        autoplay określa, że ​​wideo rozpocznie się automatycznie, gdy tylko
+        treść wideo została załadowana.
+    </h4>
+    <h4>
+        loop określa, że ​​wideo rozpocznie się od nowa, gdy tylko się skończy
+        gra.
+    </h4>
+    <h4>muted określa, że ​​wyjście audio wideo zostanie wyciszone.</h4>
+    <textarea rows="10" cols="40">
+<video src="MyVideo.mp4"
+     width="300" height="200"
+     poster="MyPoster.jpg"
+     autoplay="autoplay"
+     muted="muted"
+     controls="controls"
+     loop="loop">
+</video>
+</textarea>
+    <img src="img/video2.png" style="float:right;" />
+    <h4>
+        Jeśli do znacznika video
+            zostanie dołączonych wiele znaczników
+            source, odtwarzacz wideo odtworzy pierwsze wideo
+            format obsługiwany przez przeglądarkę.
+    </h4>
+    <textarea rows="10" cols="70">
+<video poster="MyPoster.jpg" autoplay controls>
+    <source src="MyVideos/MyVideo.mp4" type='video/mp4' />
+    <source src="MyVideos/MyVideo.webm" type='video/webm' />
+    <source src="MyVideos/MyVideo.ogv" type='video/ogg' />
+    <!-- You can embed Flash or Silverlight content here, as a fallback -->
+    <!-- You can also display some simple text in case the browser does not support the video tag -->
+    Cannot play video. Download video
+    <a href="MyVideos/MyVideo.webm">here</a>
+</video>
+</textarea>
+    <h1>Interakcja z wideo w kodzie JavaScript</h1>
+    <textarea rows="15" cols="80">
+function createVideoElement(nameOfVideoFile) {
+// Create a video object and set its properties.
+const newVideo = document.createElement("video");
+newVideo.src = nameOfVideoFile;
+newVideo.loop = true;
+newVideo.autoplay = true;
+newVideo.controls = true;
+newVideo.poster = "ImageLoading.png";
+// Add the video object to an existing element on the web page.
+const hostElem = document.getElementById("videoDir");
+hostElem.appendChild(newVideo);
+}
+</textarea>
+    <img src="img/video3.png" />
+    <h2> Odtwarzanie video</h2>
+    <textarea rows="10" cols="50">
+if (aVideo.paused) {
+alert("Video current time: " + aVideo.currentTime + ", total duration: " +
+aVideo.duration);
+aVideo.play();
+}
+else {
+aVideo.pause();
+}
+</textarea>
+    <h2>
+        wideo ma zdarzenia, które pozwalają sprawdzić, czy treść jest dostępna, aby sprawdzić stan
+        odtwarzanie wideo oraz monitorowanie bieżącej pozycji odtwarzania w filmie
+    </h2>
+    <h4>
+        loadmetadata jest uruchamiane, gdy obiekt wideo otrzymuje wystarczającą ilość informacji o zawartości
+        i zna czas trwania.
+    </h4>
+    <h4>loaddata jest uruchamiane po załadowaniu wszystkich danych wideo.</h4>
+    <h4>timeupdate jest uruchamiane podczas odtwarzania wideo, aby wskazać bieżący czas video. </h4>
+    <textarea cols="80" rows="10">
+aVideo.addEventListener("loadedmetadata", function() {
+alert("Video duration: " + aVideo.duration);
+}, false);
+aVideo.addEventListener("loadeddata", function() {
+aVideo.play();
+}, false);
+aVideo.addEventListener("timeupdate", function() {
+alert("Video current time: " + aVideo.currentTime);
+}, false);
+</textarea>
+    <hr />
+    <h1>Odtwarzanie treści audio za pomocą znacznika audio</h1>
+    <code>&lt;audio src="MyAudio.mp3"&gt;&lt;/audio&gt;</code>
+    <h3> Ma takie same zdarzenia jak video i podobne atrybuty</h3>
+    <h4>
+        source, play() and pause() controls, autoplay, loop, paused,
+        currentTime, duration, volume, muted, and playbackRate loadedmetadata, loadeddata,
+        and timeupdate.
+    </h4>
+</body>
+</html>
