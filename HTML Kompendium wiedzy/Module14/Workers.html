@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>
+        Tworzenie i zabijanie Dedicated Web Worker
+    </h1>
+    <img src="img/w.png" style="float:right;" />
+    <h3>
+        Worker jest idealny do wykonywania długotrwałego zadania
+        w imieniu strony internetowej, na przykład przesyłając duży plik lub przetwarzając dużą ilość danych.
+    </h3>
+    <h3>
+        Aby utworzyć dedykowanego pracownika sieci web, najpierw należy utworzyć
+        nowy obiekt roboczy. Konstruktor Workera
+        oczekuje adresu URL pliku JavaScript jako parametru.
+        Ten plik JavaScript zawiera kod internetowy
+        pracownika. Poniższy przykładowy kod sprawdza
+        czy przeglądarka obsługuje pracowników sieci, a następnie
+        tworzy nowy proces roboczy, który uruchamia JavaScript
+        kod w pliku processScript.js:
+    </h3>
+    <textarea rows="6" cols="50">
+const webWorker;
+if( typeof(Worker)!== "undefined") {
+webWorker = new Worker("processScript.js");
+}
+</textarea>
+    <h3>
+        Ważne jest, aby zrozumieć, że adres URL skryptu to plik hostowany w Internecie, który musi być jego częścią
+        aplikacja internetowa jako strona HTML5 uruchamiająca skrypt; nie można użyć tego mechanizmu do uruchomienia JavaScript
+        kod znajdujący się w innej witrynie.
+        Pracownicy sieci Web kończą się automatycznie, gdy strona zawierająca jest zamknięta, a zasoby używane przez
+        pracownik sieciowy jest zwolniony. Jednak strona internetowa, która tworzy dedykowanego pracownika sieci, może zakończyć sieć
+        pracownik w dowolnym momencie za pomocą funkcji terminate ():
+    </h3>
+    <textarea rows="6" cols="30">
+webWorker.terminate();
+
+//w Workerze:
+self.close();
+</textarea>
+    <h3>
+        Możesz utworzyć wbudowany moduł roboczy na kilka różnych sposobów. Poniższy przykład kodu tworzy obiekt Blob
+        zawierający kod JavaScript dla Workera sieci, a następnie używa funkcji createObjectURL() w pliku
+        Obiekt URL, aby utworzyć adres URL, który odwołuje się do tego obiektu. Kod przekazuje ten adres URL do Worker
+        konstruktor.
+    </h3>
+    <textarea rows="6" cols="70">
+const workerBlob = new Blob(["{ /* Code for web worker goes here */ }"]);
+const workerURL = URL.createObjectURL(workerBlob);
+const webWorker = new Worker(workerURL);
+...
+</textarea>
+    <h4>
+        nną techniką jest zdefiniowanie kodu dla pracownika sieci w elemencie script, jak pokazano w
+        następującym przykładzie:
+    </h4>
+    <textarea rows="25" cols="70">
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+
+</head>
+<body>
+...
+<script id="web-worker" type="javascript/worker">
+    // Code for web worker goes here
+</script>
+<script type="text/javascript">
+...
+        const workerBlob = new Blob([document.querySelector('#webworker').
+            textContent]);
+        const workerURL = URL.createObjectURL(workerBlob);
+        const webWorker = new Worker(workerURL);
+...
+</script>
+</body>
+</html>
+</textarea>
+    <hr />
+    <h1>Komunikacja z Dedicated Web Worker</h1>
+    <img src="img/w1.png" style="float:right;" />
+    <h3>
+        Web worker scripts są całkowicie odizolowane od
+        strony internetowej, co oznacza, że ​​nie mają dostępu
+        do obiektów na tej stronie lub w DOM. Zamiast tego strona internetowa i web worker
+        komunikują się, przekazując sobie wiadomości.
+    </h3>
+    <h3>
+        Aby wysłać wiadomość do web worker, strona internetowa
+        może korzystać z funkcji postMessage(). Ta funkcja przyjmuje parametr
+        zawierający dane do wysłania do web workera.
+        Ten parametr może być łańcuchem lub obiektem JSON.
+        Aby otrzymać wiadomość, web worker obsługuje
+        zdarzenie wiadomości. Aby wysłać wiadomość
+        z powrotem do strony internetowej proces jest odwrócony; web worker używa postMessage ()
+        , a strona internetowa odbiera wiadomość, obsługując zdarzenie komunikatu web workera.
+    </h3>
+    <textarea rows="25" cols="80">
+            // processScript.js
+            function messageHandler(event) {
+            self.postMessage("Received: " + event.data);
+            }
+            self.addEventListener("message", messageHandler, false);
+
+//Kod na stronie wygląda następująco:
+
+function replyHandler(event) {
+alert("Reply: " + event.data); // Display the reply in an alert
+}
+const webWorker;
+...
+webWorker = new Worker("processScript.js"); // The web worker code is in this file
+webWorker.addEventListener("message", replyHandler, false);
+webWorker.postMessage("Here is some data");
+...
+
+function errorHandler(event) {
+console.log(event.message);
+}
+...
+webWorker.addEventListener("error", errorHandler, false);
+...
+        </textarea>
+    <h3>
+        Obiekt zdarzenia przekazany do procedury obsługi błędów zawiera następujące właściwości: <br />
+        • message. A human-readable error message.<br />
+        • filename. The name of the script file (as a URL) in which the error occurred.<br />
+        • lineno. The line number of the script file where the error occurred.<br />
+    </h3>
+    <hr />
+    <h1>Structure of a Web Worker</h1>
+    <img src="img/w2.png" style="float:right;" />
+    <h3>
+        Typowy Web Worker używa zdarzenia message do
+        odbierania wiadomości, a następnie wykonuje przetwarzanie
+        na podstawie danych zawartych w wiadomości przed czekaniem
+        do następnej wiadomości. Powszechnym idiomem jest
+        zaimplementuj wzorzec poleceń, w którym każdy
+        wiadomość zawiera pole wskazujące akcję
+        który powinien wykonać Web Worker. Inne pola
+        może zawierać informacje, które Web Worker
+        powinien przetworzyć, wykonując akcję. Dla
+        na przykład kod JavaScript dla strony internetowej może
+        zbuduj wiadomość zawierającą akcję
+        „DOWORK”, wraz z danymi w sieci
+        Web Worker powinien przetworzyć:
+    </h3>
+
+    <textarea rows="27" cols="80">
+const msg = {
+"command": "DOWORK",
+"data": ...
+};
+webWorker.postMessage(msg);
+
+//message handler w web workerze
+
+function messageHandler(event) {
+const data = event.data; // Input data is expected in JSON format
+switch (data.command) {
+case "DOWORK": // process the DOWORK command
+...
+break;
+case "DOMOREWORK": // process the DOMOREWORK command
+...
+break;
+case "FINISH": // tidy up and shut down
+...
+self.postMessage("Shutting down");
+self.close();
+}
+}
+</textarea>
+    <h3>
+        Web Worker
+        sam mogłby delegować pracę innym Web Workerom, które tworzy i którymi zarządza, pozostawiając swobodę obsługi
+        wiadomości po ich otrzymaniu.
+        Web Worker może wymagać dostępu do funkcji i narzędzi zdefiniowanych w innych plikach JavaScript. Na przykład
+        Web Worker może korzystać z biblioteki jQuery w celu wysyłania żądań do zewnętrznej usługi internetowej. Web Worker robi
+        nie na DOM, więc nie można odwoływać się do skryptów za pomocą elementów
+        script
+        (także wielu z jQuery
+        funkcje uzyskujące dostęp do DOM lub obiektu Window spowodują błędy w skrypcie procesu roboczego).Zamiast tego
+        pracownik WWW może korzystać z funkcji importScripts(), jak pokazano w poniższym przykładzie: <br />
+        <code>importScripts("myfunctions.js");</code>
+    </h3>
+    <h4>
+        Web Workery  mają dostęp do obiektu navigator. Ten obiekt zawiera informacje, które Web Worker
+        może używać identyfikatora przeglądarki, w tym appName, appVersion, platformy i userAgent. Web Workery
+        mają również dostęp tylko do odczytu do obiektu location, który zapewnia informacje o adresie URL
+        bieżąca strona, taka jak hostname, pathname, and port properties.
+    </h4>
+
+    <hr />
+    <h1>Tworzenie Shared Web Worker</h1>
+    <img src="img/w3.png" style="float:right;" />
+    <h3>
+        dedicated web worker jest dostępny tylko z poziomu
+        strona, która to zadeklarowała. Aby utworzyć web workera
+        który jest dostępny ze wszystkich stron w sieci
+        aplikacji, możesz utworzyć shared web worker.
+    </h3>
+    <h3>
+        Udostępniasz shared web workera za pomocą
+        Konstruktora SharedWorker. Jednak aby włączyć
+        wiele stron do wysyłania wiadomości do web
+        worker, każda strona ma własny port, którego używa.
+        strona wysyła wiadomości do web workera
+        przez jego port za pomocą postMessage()
+        Wszelkie odpowiedzi są odbierane za pomocą
+        zdarzenie message na tym samym porcie. Następujące
+        przykładowy kod pokazuje, jak shared web workera WWW do wysyłania i odbierania wiadomości. Zauważ, że a
+        strona internetowa musi użyć funkcji start() portu przed wysłaniem pierwszego komunikatu. Ta funkcja ostrzega
+        web workera, który ustanawia nowe połączenie i umożliwia mu przygotowanie się do odbierania wiadomości
+        na tym porcie:
+    </h3>
+    <textarea rows="25" cols="70">
+function replyHandler(event) {
+...
+}
+const sharedWebWorker;
+...
+sharedWebWorker = new SharedWorker("sharedProcessScript.js");
+sharedWebWorker.port.addEventListener("message", replyHandler, false);
+sharedWebWorker.port.start();
+...
+const data = ...;
+sharedWebWorker.port.postMessage(data);
+
+//w shared web workerze:
+
+function messageHandler(event) {
+// Handle messages received on a port
+...
+}
+function connectHandler(event) {
+const port = event.ports[0];
+port.addEventListener("message" messageHandler, false);
+port.start();
+}
+self.addEventListener("connect", connectHandler, false);
+</textarea>
+    <h3>
+        shared web worker wysyła odpowiedź z powrotem na stronę internetową za pomocą funkcji postMessage() portu
+        że strona się otworzyła. Obecnie mechanizm obsługi zdarzeń shared web workers działa tak że
+        nie zapewnia żadnego wbudowanego sposobu identyfikowania, który port należy do której strony internetowej, więc web worker must
+        track this information itself.
+    </h3>
+</body>
+</html >

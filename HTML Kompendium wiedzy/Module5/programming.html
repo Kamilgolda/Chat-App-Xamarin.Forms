@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2>
+        Arrow functions Nazywa się je tak, ponieważ używają znaku =>. Strzałka.
+    </h2>
+    <h2>
+        Są to funkcje są anonimowe, jednowierszowe mini funkcje, i są bardziej zwięzłe niż funkcja w starym stylu wyrażenia.
+    </h2>
+    <h3>
+        podstawowa konstrukcja funkcji strzałki
+        to:
+    </h3>
+    <h3>(parameters) => { statements(instrukcje) }</h3>
+
+    <h4>Szybkie porównanie:</h4>
+
+    <textarea rows="12" cols="50">
+const combineText = function(text){
+return "I love to " + text;
+};
+combineText("eat"); // will return: "I love to eat".
+
+/////////////////////////////////
+
+let combineText = (text) => {
+return "I love to " + text;
+};
+combineText("eat");
+</textarea>
+    <h3>Jeśli funkcja ma tylko jeden parametr możemy pominąć nawiasy przy parametrze:</h3>
+    <textarea rows="6" cols="50">
+let combineText = text => {
+return "I love to " + text;
+};
+combineText("eat");
+</textarea>
+
+    <h3>
+        Jeśli w treści funkcji mamy tylko jedną instrukcję return, możemy również pominąć słowo kluczowe return i
+        nawiasy klamrowe wokół oświadczenia. W takim przypadku słowo kluczowe return jest dodawane niejawnie:
+    </h3>
+
+    <textarea rows="3" cols="50">
+let combineText = text => "I love to " + text;
+combineText("eat");
+</textarea>
+
+    <h3>Gdy nie mamy parametrów funkcji, wymagane są puste nawiasy</h3>
+    <textarea rows="3" cols="50">
+let logToConsole = () => console.log("logging…");
+logToConsole ();
+</textarea>
+</body>
+</html>

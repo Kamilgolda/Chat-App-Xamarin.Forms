@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>CSS Media Types</h1>
+    <img src="img/media.png" style="float:right" />
+    <h4>
+        wbr jest podobny do tagu br z tym wyjątkiem, że określa, że ​​przeglądarka powinna wstawiać tylko
+        podział linii, jeśli jest to konieczne, aby zapobiec zawijaniu tekstu do następnego wiersza.
+    </h4>
+    <h3>
+        HTML4 rozpoznawał
+        następujące typy mediów:
+    </h3>
+    <h3>
+        • speech: syntezatory mowy <br />
+
+        • braille: Czytniki dotykowe w alfabecie Braille'a. <br />
+
+        • embossed: drukarki brajlowskie. <br />
+
+
+        • handheld: urządzenia mobilne (opisane jako
+        „mały ekran, monochromatyczny, mapowany bitowo
+        grafika, ograniczona przepustowość ”w specyfikacji HTML4, datowanej na 1999 rok!). <br />
+
+        • print: Ekrany podglądu wydruku i wydruk. <br />
+
+        • projection: Projectors. <br />
+
+        • screen: Computer screens <br />
+
+        • tty: Teletypes <br />
+
+
+        • tv: Telewizory i inne urządzenia o niskiej rozdzielczości z ograniczoną możliwością przewijania. <br />
+
+
+        • all: dotyczy wszystkich urządzeń <br />
+    </h3>
+    <h3>
+        Wiele stron internetowych nadal korzysta z tych atrybutów, zwłaszcza jeśli chodzi o dołączanie stylu drukowania
+        arkusz do strony. Na przykład dwa elementy przedstawione w poniższym przykładzie prowadzą najpierw do arkusza stylów
+        zawierający reguły dla dowolnego urządzenia (głównie ekrany), a następnie do drugiego arkusza stylów tylko dla drukarek <br />
+        <code>
+            &lt;link rel="stylesheet" type="text/css" href="core.css" media="all" /> <br />
+            &lt;link rel="stylesheet" type="text/css" href="print.css" media="print" />
+        </code>
+    </h3>
+    <h3>
+        Reguła CSS @media wykonuje podobne zadanie jak atrybut media. Umożliwia identyfikację zestawu
+        reguły stylów dla typu nośnika w istniejącym arkuszu stylów, zamiast tworzenia osobnego arkusza stylów
+        specyficzne dla każdego rodzaju nośnika. Korzystasz z reguły @media w następujący sposób:
+    </h3>
+    <textarea rows="5" cols="50">
+@media print, projection {
+header, footer { display: none; }
+...
+}
+</textarea>
+    <hr />
+    <h1>Wykrywanie możliwości urządzeń za pomocą zapytań o media</h1>
+    <img src="img/media2.png" style="float:right" />
+    <h3>
+        umożliwiają programistom
+        sprawdzić właściwości fizyczne urządzenia,
+        w tym wysokość i szerokość urządzenia, orientacja,
+        i rozdzielczość.
+    </h3>
+    <h3>
+        Zapytanie o media składa się z dwóch części:
+        • Rodzaj nośnika, taki jak ekran, druk, mowa itp.
+        • Zestaw nawiasów zawierających zapytanie, który zawiera charakterystykę urządzenia, dwukropek, a następnie
+        wartość docelowa.
+    </h3>
+
+    <h3>
+        Poniższe przykłady pokazują, jak zdefiniować zapytanie o media w elemencie HTML <link> i regule CSS.
+        Jeśli urządzenie przeglądające odpowiednią stronę spełnia kryteria zapytania, zastosuje style CSS
+        powiązane z zapytaniem:
+    </h3>
+    <textarea rows="10" cols="80">
+<link rel="stylesheet" type="text/css" href="mobile.css"
+      media="screen and (max-device-width: 480px)" />
+
+@media screen and (max-device-width: 480px) {
+article {
+column-count: 1;
+}
+...
+}
+</textarea>
+    <h3>Możesz dołączyć wiele zapytań, łącząc je z and, or, and not. Na przykład:<br />
+                                                                                 <code>
+                                                                                     @media screen and (max-device-width: 480px) and (resolution:300dpi) { <br />
+                                                                                     ... <br />
+                                                                                     }
+                                                                                 </code>
+    </h3>
+    <h3>
+        Możesz przetestować 13 cech urządzenia w zapytaniu o media. Poniższa lista zawiera ich podsumowanie
+    </h3>
+    <h3>
+        • width, height: The width and height of the viewport (usually the browser window). <br/>
+        • device-width, device-height: The width and height of the active device screen (or paper, if printing).<br/>
+        • orientation: Whether the device is in portrait or landscape mode.<br/>
+        • resolution: The pixel density (in dpi or as a ratio) of the target device.<br/>
+        • aspect-ratio: The width to height ratio of the viewport.<br/>
+        • device-aspect-ratio: The width-to-height ratio of the device screen (or paper).<br/>
+        • color: The bits per color of the target display.<br/>
+        • color-index: The total number of colors the target device screen can show.<br/>
+        • monochrome: The bits per pixel in a monochrome frame buffer.<br/>
+        • scan: The scanning method of a TV. Possible values are progressive and interlace.<br/>
+        • grid: The display type of the output device: grid or bitmap.<br/>
+    </h3>
+    <h3>
+        Wszystkie te cechy oprócz skanowania i siatki pozwalają również na zapytanie o minimum i maksimum
+        wartości również. Na przykład możesz określić min-width, max-width, min-resolution, max-resolution...
+    </h3>
+    <h3>Wdrożenie podejścia mobilnego z zapytaniami o media</h3>
+    <textarea rows="30" cols="60">
+/* Start with mobile styles - max width assumed at 480px*/
+article {
+column-count: 1;
+line-height: 1.6;
+font-size: 12px;
+width: 98%;
+}
+@media (max-width: 600px) {
+.article {
+font-size: 14px;
+width: 90%;
+}
+}
+@media (max-width: 800px) {
+.article {
+column-count : 2;
+line-height: 1.5;
+width: 70%;
+}
+}
+/*note min-width here, not max-width*/
+@media (min-width: 1200px) {
+.article {
+column-count : 3;
+width: 60%;
+font-size: 16px;
+line-height : 1.7;
+}
+}
+</textarea>
+
+<hr />
+<h1>
+    Wykrywanie starszej wersji programu Internet Explorer przy użyciu warunkowych komentarzy
+</h1>
+<h3>
+    poniższy kod wykrywa, czy użytkownik korzysta z Internet Explorer 9: <br />
+    <code>
+        &lt;!--[if IE 9]> <br />
+    &lt;p>Welcome to Internet Explorer 9.&lt;/p> <br />
+    &lt;![endif]-->
+    </code>
+</h3>
+<h3>
+    Możesz użyć ! aby odwrócić sens stanu. Możesz także użyć operandu IE w izolacji
+    aby ustalić, czy użytkownik korzysta z przeglądarki innego dostawcy, na przykład:<br />
+                                                                                     <code>
+                                                                                         &lt;!--[if !(IE)]>  <br />
+    &lt;p>You are not using Internet Explorer.&lt;/p> <br />
+    &lt;![endif]-->
+                                                                                     </code>
+</h3>
+<h3>
+    Możesz także użyć operatorów takich jak lt (mniej niż), gt (większy niż), lte (mniejszy lub równy) i gte
+    (większe lub równe) w celu wykrycia zakresu wartości, jak pokazano w poniższym przykładzie, który wykrywa
+    czy użytkownik korzysta z wersji Internet Explorera wcześniejszej niż Internet Explorer 9:<br />
+    <code>
+        &lt;!--[if lt IE 9]> <br />
+        &lt;p>Please upgrade to Internet Explorer 9 or later.&lt;/p><br />
+        &lt;![endif]-->
+    </code>
+</h3>
+<h3>
+    Następny przykład pokazuje, jak używać komentarzy warunkowych, aby załadować odpowiedni arkusz stylów dla pliku
+    wersja przeglądarki Internet Explorer działającej w systemie operacyjnym użytkownika:
+</h3>
+    <textarea rows="15" cols="90">
+        <html>
+        <head>
+            <link href="styles.css" rel="stylesheet" />
+            <!--[if IE 8]> <link href="ie8.css" rel="stylesheet" /><![endif]-->
+            <!--[if lt IE 8]> <link href="ie7.css" rel="stylesheet" /><![endif]-->
+            <!--[if gte IE 9]> <link href="ie9.css" rel="stylesheet" /><![endif]-->
+            <!--[if IEMobile7]> <link href="winPhone7.css" rel="stylesheet" /><![endif]-->
+            <!--[if !(IE)]> <link href="otherBrowsers.css" rel="stylesheet" /> <![endif]-->
+            ...
+        </head>
+        ...
+        </html>
+</textarea>
+    <h3>Możliwe jest również zdefiniowanie wbudowanych komentarzy warunkowych, aby wszystkie style mogły być zawarte w arkuszu stylów</h3>
+    <textarea rows="7" cols="90">
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]> <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]> <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]> <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)|(IE Mobile7)]><!--> <html> <!--<![endif]-->
+</textarea>
+    <h3>
+        Jeśli zastosujesz to podejście, możesz poprzedzać style wersją programu Internet Explorer, dla której styl
+        dotyczy. Na przykład poniższy kod ustawia właściwości modelu pudełka dla elementu artykułu, a następnie dodaje
+        poprawka do przeglądarki Internet Explorer 6:
+    </h3>
+    <textarea rows="10" cols="50">
+article {
+width: 200px;
+margin: 10px;
+border: 5px solid red;
+padding: 10px;
+}
+ie6 article {
+width: 250px;
+}
+</textarea>
+    <h3>Możesz także użyć komentarzy warunkowych, aby uwzględnić skrypty na stronie internetowej w następujący sposób:</h3>
+    <textarea rows="4" cols="80">
+<!--[if IE]>
+<script src="http://contoso.com/scripts/iescript.js"></script>
+<![endif]-->
+</textarea>
+    <hr />
+    <h1>Definiowanie arkuszy stylów do drukowania</h1>
+    <h3>
+        Możesz je utworzyć
+        style w osobnym arkuszu stylów lub możesz użyć
+        Reguła @media, aby dodać je bezpośrednio w istniejącym
+        arkusz stylów, jak pokazano w poniższych przykładach.
+    </h3>
+    <textarea rows="6" cols="80">
+<link rel="stylesheet" type="text/css" href="print.css" media="print" />
+
+@media print {
+.. print styling rules go here ..
+}
+</textarea>
+    <h3>Style drukarki często implementują następujące reguły:</h3>
+    <h4>
+        Usuń page header, footer, navigation menus, background colors, CSS graphics, transforms, and
+        animations.
+    </h4>
+    <textarea rows="12" cols="50">
+header, footer, nav {
+display : none;
+}
+article {
+background : none;
+}
+.highlight {
+transform : none;
+}
+</textarea>
+    <h4>
+        Ustaw rozmiar czcionek na wartości w punktach, tak jak w przypadku dokumentu Word, ustaw ich kolor na
+        ciemnoszary i usuń wszelkie efekty, takie jak cień tekstu.
+    </h4>
+    <textarea rows="4" cols="60">
+article, p, li {
+font-size : 14pt\1.5; color: #222; text-shadow : none;
+}
+</textarea>
+    <h3>
+        Rozwiń wszystkie linki i skróty na stronie, aby adres URL linku lub rozwinięty tekst
+        skrót jest wydrukowany po prawej stronie tekstu.
+    </h3>
+    <textarea rows="7" cols="50">
+a:after {
+content: " (" attr(href) ")";
+}
+abbr:after {
+content: " (" attr(title) ")";
+}
+</textarea>
+    <h3>
+        Ułóż zawartość w jednej kolumnie, chyba że zawiera indeks lub glosariusz, w którym to przypadku dwie kolumny
+        jest do zaakceptowania.
+    </h3>
+    <textarea rows="7" cols="50">
+article {
+column-count : 1;
+}
+#glossary {
+column-count : 2;
+}
+</textarea>
+    <h3>
+        Zdefiniuj docelowy rozmiar drukowanej strony, marginesy wokół sąsiadujących stron i minimum
+        liczba linii w akapicie wydrukowanym na górze (widows) i na dole (orphans) strony.
+        Aby to osiągnąć, możesz użyć reguły @page:
+    </h3>
+    <textarea rows="7" cols="50">
+@page {
+size: A4;
+orphans: 3;
+widows: 3;
+}
+</textarea>
+    <h3>
+        Reguła @page umożliwia także określenie różnych układów dla stron lewej i prawej strony
+        w dokumentach dwustronnych przy użyciu pseudoklasy: left i: right, jak pokazano poniżej:
+    </h3>
+    <textarea rows="10" cols="50">
+@page :left {
+margin-left: 3cm;
+margin-right: 4cm;
+}
+@page :right {
+margin-left: 4cm;
+margin-right: 3cm;
+}
+</textarea>
+</body>
+</html>

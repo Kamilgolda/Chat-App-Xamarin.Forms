@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img src="img/col.png" style="float:right" />
+    <h2>Określanie wartości kolorów</h2>
+
+    <h3>właściwości color:</h3>
+    <h4>
+        Dowolne ze 147 kolorów zdefiniowanych. Na przykład red lub green.
+    </h4>
+    <h4>
+        czerwony-zielony-niebieski (RGB) określona w trzy- lub sześciocyfrowym zapisie szesnastkowym, triplet
+        liczb całkowitych/wartości procentowych.
+    </h4>
+    <code>
+        color: #ff0; /* #rgb */ <br />
+        color: #ffff00; /* #rrggbb */<br />
+        color: rgb(255, 255, 0);<br />
+        color: rgb(100%, 100%, 0%);
+    </code>
+    <h4>
+        czerwony-zielony-niebieski-alfa (RGBA) określona jako triplet liczb całkowitych/
+        wartości procentowych plus wartość krycia od 0 do 1, gdzie 0 jest całkowicie przezroczyste i 1
+        jest całkowicie nieprzezroczysty.
+    </h4>
+    <code>
+        color: rgba(255, 255, 0, 0.2); /* mostly transparent yellow */<br />
+        color: rgba(100%, 100%, 0%, 0.8); /* mostly opaque yellow */
+    </code>
+    <h4>transparent - ma taką samą wartość jak rgba (0,0,0,0).</h4>
+    <code>color: transparent;</code>
+    <h4>
+        Hue-saturation-lightness (HSL) określona jako triplet liczb. Pierwszy to liczba całkowita
+        wartość od 0 do 360 wskazująca kąt koła kolorów (0 = czerwony, 120 = zielony, 240 = niebieski).
+        Druga to procentowa wartość nasycenia, gdzie 0% to odcień szarości, a 100% to pełny kolor.
+        Trzecia to także wartość procentowa jasności, gdzie 0% to czerń, 100% to biel, a 50% to norma
+    </h4>
+    <code>color: hsl(60, 100%, 50%);</code>
+    <h4>
+        A hue-saturation-lightness-alpha (HSLA) określona jako kwadruplet liczb. Pierwszy
+        trzy są modelami HSL, a czwarta to ta sama wartość krycia między 0 a 1 jak w
+        model RGBA.
+    </h4>
+    <code>color: hsla(60, 100%, 50%, 0.2); /* mostly transparent yellow */</code>
+    <h4>
+        inherit - Oznacza to, że element powinien odziedziczyć tę samą wartość koloru co jego element nadrzędny
+        element.
+    </h4>
+    <h4>
+        currentColor. Oznacza to, że element powinien odziedziczyć tę samą wartość koloru co jego element nadrzędny
+        element. Writing color:currentColor is the same as writing color:inherit.
+    </h4>
+    <hr />
+    <h2>Multi-Image Backgrounds</h2>
+    <img src="img/back.png" style="float:right" />
+    <h3>background-position - aby przesunąć każdy obraz wokół siebie</h3>
+    <h3>
+        Regułę ze zdjęcia można
+        też napisać w ten sposób:
+    </h3>
+    <code>
+        article {<br />
+        background: url('bluearrow.png') repeat-x, url('greenarrow.png') repeat-y;<br />
+        }
+    </code>
+    <hr />
+    <h2>Gradienty</h2>
+    <h2>2 Typy gradientu:</h2>
+    <h3>linear gradient, który jest stopniową zmianą koloru z początkowego na końcowy.</h3>
+    <code>background: linear-gradient(direction, start-color, [mid-color-list,] end-color);</code>
+    <h4>
+        Parametr direction(kierunku) jest opcjonalny i jest ustawiany w stopniach; domyślnie jest to 180 stopni.
+        Możesz też
+        ustaw dowolną liczbę kolorów pośrednich między początkiem a końcem.
+    </h4>
+    <code>
+        html {<br />
+        background: -ms-linear-gradient(30deg, lightblue, green, yellow);<br />
+        }
+    </code>
+    <h3>
+        Gradient promieniowy, który jest stopniową zmianą koloru od centralnego punktu w kolorze początkowym na zewnątrz
+        w kształcie koła lub elipsy do koloru końcowego na krawędzi kształtu. Dowolna liczba
+        kolorów pośrednich.
+    </h3>
+    <code>background: radial-gradient(position, shape, start-color, [mid-color-list,] endcolor);</code>
+    <h4>
+        Parametr position jest opcjonalny. Jego wartością domyślną jest center. Parametr shape(kształt) jest również opcjonalny.
+        Jego wartością domyślną jest circle; jedyną inną opcją jest ellipse.
+    </h4>
+    <code>
+        html {<br />
+        background: -ms-radial-gradient(top right, ellipse, red, blue);<br />
+        }
+    </code>
+    <hr />
+    <h2>Transformacje elementów</h2>
+    <img src="img/trans.png" style="float:right" />
+    <h4>
+        translate3d(x,y,z) : Przesuwa cały element o odległość x wzdłuż osi x, y wzdłuż osi y,
+        i z wzdłuż osi z. Wartości x, y, z mogą być dowolną prawidłową jednostką miary.
+    </h4>
+    <h4>translate(x,y) : 2d variant of translate3d().</h4>
+    <h4>translateX(x), translate(y), translateZ(z) : Single axis variants of translate3d().</h4>
+    <h4>
+        scale3d(x,y,z) : Skaluje rozmiar elementu współczynnik x wzdłuż osi x, y wzdłuż osi yi z
+        wzdłuż osi Z. Wartości dla x, y i z muszą być liczbami dodatnimi (użyj wartości dziesiętnej mniejszej niż 1
+        zmniejszyć element w danym wymiarze).
+    </h4>
+    <code>transform: scale3d(2, 4, 0.5);</code>
+    <h4>scale(x,y) : 2d variant of scale3d().</h4>
+    <h4>scaleX(x), scaleY(y), scaleZ(z) : Single axis variants of scale3d().</h4>
+    <h4>
+        rotate3d(x,y,z,a) : Obraca element w 3d o kąt a wokół punktu o współrzędnych (x, y, z).
+        Kąt a jest wartością w stopniach.
+    </h4>
+    <h4>rotate(a) : Rotates an element in 2d by angle a around its center.</h4>
+    <code>
+        transform: rotate(30deg);
+    </code>
+
+    <h4>
+        skew(a,b) : Pochyla element o kąt a wzdłuż osi x i kąt b wzdłuż osi y. a,b są
+        wartości w stopniach od 0 do 180.
+    </h4>
+    <code>transform: skew(15deg, 15deg);</code>
+    <h4>skewX(a), skewY(b) : Single axis-variants of skew().</h4>
+    <h5>Zauważ, że większość współczesnych przeglądarek obsługuje transformacje, ale tylko z dołączonymi prefiksami dostawcy</h5>
+    <code>
+        transform: rotate(30deg);<br />
+        -ms-transform: rotate(30deg); // IE10
+    </code>
+    <h2>Rysowanie kształtów</h2>
+    <h3>kwadrat</h3>
+    <textarea cols="50" rows="12">
+HTML:
+<div id='square'></div>
+...
+CSS:
+#square {
+width: 200px;
+height: 200px;
+background: blue;
+}
+</textarea>
+    <h3>koło</h3>
+    <textarea rows="12" cols="50">
+HTML:
+<div id='circle'></div>
+...
+CSS:
+#circle {
+width: 200px;
+height: 200px;
+background: blue;
+border-radius: 50%;
+}
+</textarea>
+    <h3>trójkąt</h3>
+    <textarea rows="13" cols="50">
+HTML:
+<div id='triangle-topleft'></div>
+...
+CSS:
+#triangle-topleft {
+width: 0;
+height: 0;
+border-top: 200px solid blue;
+border-right: 200px solid transparent;
+}
+</textarea>
+    <div style="margin-top:10px; width: 0;
+height: 0;
+border-top: 200px solid blue;
+border-right: 200px solid transparent;" id='triangle-topleft'></div>
+</body>
+</html>

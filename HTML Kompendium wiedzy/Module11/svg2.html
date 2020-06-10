@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img src="img/svg6.png" style="float:right;" />
+    <h3>
+        SVG zapewnia element text
+        , który umożliwia
+        rysować tekst graficzny. Ty określasz tekst
+        między tagiem początkowym text a /text
+        tag końcowy.
+    </h3>
+    <h3>
+        SVG zapewnia sposoby dostosowania wyglądu
+        tekstu: <br />
+        • Text style<br />
+        • Text decorations<br />
+        • Text paths<br />
+        • Text span<br />
+    </h3>
+    <h2>Text Style</h2>
+    <h3>
+        Element text
+        ma szereg atrybutów, które umożliwiają określenie stylu tekstu. Na przykład ty
+        może ustawić fill, stroke, and stroke-width, aby zdefiniować sposób wypełnienia i konturu tekstu. ty
+        można również ustawić atrybuty font-size, font-family, and font-weight, aby określić czcionkę dla tekstu.
+    </h3>
+    <textarea rows="10" cols="50">
+<svg xmlns="http://www.w3.org/2000/svg">
+<text x="20" y="50"
+      fill="yellow" stroke="purple" stroke-width="2"
+      font-size="36" font-family="verdana" font-weight="bold">
+Styled text
+</text>
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="50"
+              fill="yellow" stroke="purple" stroke-width="2"
+              font-size="36" font-family="verdana" font-weight="bold">
+            Styled text
+        </text>
+    </svg>
+    <h2>Text Decorations</h2>
+    <h3>
+        Element text
+        ma atrybut text-decoration , który pobiera listę dekoracji tekstu oddzieloną spacjami.
+        Obsługiwane są następujące dekoracje tekstu:<br />
+        • underline<br />
+        • overline<br />
+        • line-through<br />
+        • blink<br />
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak ustawić dekoracje tekstowe na elementach text. Elementy text
+        są
+        zgrupowane w elemencie g
+        . Element g
+        umożliwia grupowanie kształtów SVG i obsługę
+        wynik, jakby to był pojedynczy kształt. W takim przypadku element g
+        definiuje wspólny zestaw stylów
+        oraz wartości właściwości, które mają zastosowanie do wszystkich elementów text w grupie:
+    </h4>
+    <textarea rows="15" cols="80">
+<svg xmlns="http://www.w3.org/2000/svg" id="decoratedText">
+<g fill="yellow" stroke="purple" stroke-width="2" font-size="36" fontfamily="
+verdana" font-weight="bold">
+<text x="20" y="50">Normal text</text>
+<text x="20" y="150" text-decoration="line-through">Text with line
+through</text>
+<text x="20" y="250" text-decoration="underline">Underlined text</text>
+<text x="20" y="350" text-decoration="underline line-through">
+Underlined text with line through
+</text>
+</g>
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg" id="decoratedText" style="height:350px;">
+        <g fill="yellow" stroke="purple" stroke-width="2" font-size="36" fontfamily="
+verdana" font-weight="bold">
+            <text x="20" y="50">Normal text</text>
+            <text x="20" y="150" text-decoration="line-through">
+                Text with line
+                through
+            </text>
+            <text x="20" y="250" text-decoration="underline">Underlined text</text>
+            <text x="20" y="350" text-decoration="underline line-through">
+                Underlined text with line through
+            </text>
+        </g>
+    </svg>
+    <h2>Text Paths</h2>
+    <h3>
+        Element text
+        może zawierać element potomny textPath
+        , który wskazuje ścieżkę, która ma być używana jako podstawa
+        tekst, gdy jest wyświetlany na stronie internetowej. Na przykład możesz utworzyć textPath
+        , która rysuje tekst
+        na obwodzie innego kształtu na stronie.
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak używać textPath
+        . W tym przykładzie tworzony jest element path
+        reprezentują falistą linię. Element text
+        ma element potomny textPath
+        , który prowadzi do path
+        elementu za pomocą wyrażenia XLink. Wyrażenie XLink umożliwia odniesienie do fragmentu XML lub
+        Kod HTML za pomocą jego identyfikatora, jak pokazano w poniższym przykładzie:
+    </h4>
+    <textarea rows="15" cols="80">
+<svg xmlns="http://www.w3.org/2000/svg" id="textPath">
+<path id="wavyPath1"
+      fill="none" stroke="green" stroke-width="5"
+      d="M 50 250
+C 150 150 250 50 350 150
+C 450 250 550 350 650 250
+C 750 150 850 150 850 150" />
+
+<text font-size="46" fill="red" font-family="Verdana">
+<textPath xlink:href="#wavyPath1">
+Mae hen wlad fy nhadau yn annwyl i mi!
+</textPath>
+</text>
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg" id="textPath" style="height:300px;">
+        <path id="wavyPath1"
+              fill="none" stroke="green" stroke-width="5"
+              d="M 50 250
+C 150 150 250 50 350 150
+C 450 250 550 350 650 250
+C 750 150 850 150 850 150" />
+        <text font-size="46" fill="red" font-family="Verdana">
+            <textPath xlink:href="#wavyPath1">
+                Mae hen wlad fy nhadau yn annwyl i mi!
+            </textPath>
+        </text>
+    </svg>
+    <h2>Text Spans</h2>
+    <h3>
+        Element textSpan
+        może zawierać dowolną liczbę elementów potomnych tspan
+        , które dzielą tekst na
+        seria dyskretnych sekcji. Każda sekcja może być stylizowana indywidualnie.
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak podzielić element text
+        za pomocą wielu elementów tspan
+        Elementy tspan określają sposób rysowania tej konkretnej części tekstu:
+    </h4>
+    <textarea rows="20" cols="80">
+<svg xmlns="http://www.w3.org/2000/svg" id="textSpans">
+<defs>
+<path id="wavyPath2"
+      d="M 50 250
+C 150 150 250 50 350 150
+C 450 250 550 350 650 250
+C 750 150 850 150 850 150" />
+
+</defs>
+<text font-size="46" fill="orange" font-family="Verdana" stroke="purple">
+<textPath xlink:href="#wavyPath2">
+<tspan>Cubic equation: 5x</tspan>
+<tspan dy="-30" fill="green" font-size="33">3</tspan>
+<tspan dy="+30"> + 4x</tspan>
+<tspan dy="-30" fill="green" font-size="33">2</tspan>
+<tspan dy="+30"> + 6x - 5 = 0</tspan>
+</textPath>
+</text>
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg" id="textSpans" style="width:800px;height:300px;">
+        <defs>
+            <path id="wavyPath2"
+                  d="M 50 250
+C 150 150 250 50 350 150
+C 450 250 550 350 650 250
+C 750 150 850 150 850 150" />
+        </defs>
+        <text font-size="46" fill="orange" font-family="Verdana" stroke="purple">
+            <textPath xlink:href="#wavyPath2">
+                <tspan>Cubic equation: 5x</tspan>
+                <tspan dy="-30" fill="green" font-size="33">3</tspan>
+                <tspan dy="+30"> + 4x</tspan>
+                <tspan dy="-30" fill="green" font-size="33">2</tspan>
+                <tspan dy="+30"> + 6x - 5 = 0</tspan>
+            </textPath>
+        </text>
+    </svg>
+    <hr />
+    <h1>Przekształcanie elementów SVG</h1>
+    <img src="img/svg7.png" style="float:right;" />
+    <h3>
+        Transformacje umożliwiają przeniesienie, relocate, resize,
+        rotate, and reshape elementu. Możesz użyć
+        transformacje w połączeniu z JavaScript
+        kod do tworzenia animowanej grafiki.
+    </h3>
+    <h4>
+        Możesz zastosować wiele transformacji do kształtu, używając zagnieżdżonych elementów g
+            , a następnie stosując
+            przekształć atrybut na każdy kształt. Poniższy przykład pokazuje, jak wykonać wiele transformacji
+            na prostokącie. Przykład definiuje dwa prostokąty; pierwszy prostokąt jest wyświetlany bez
+            transformacja, a drugi prostokąt jest wyświetlany z translacją, skalowaniem 0,5, aby uzyskać połowę
+            oryginalny rozmiar i obrót o 20 stopni wokół punktu środkowego (160, 160):
+    </h4>
+    <textarea rows="27" cols="80">
+<svg xmlns="http://www.w3.org/2000/svg" id="transformations" >
+<defs>
+<pattern id="checkerPattern" width="80" height="80"
+patternUnits="userSpaceOnUse">
+<rect fill="red" x="0" y="0" width="40" height="40" />
+<rect fill="blue" x="40" y="0" width="40" height="40" />
+<rect fill="blue" x="0" y="40" width="40" height="40" />
+<rect fill="red" x="40" y="40" width="40" height="40" />
+</pattern>
+</defs>
+<rect x="0" y="0" width="200" height="200" fill="url(#checkerPattern)"
+stroke="orange" stroke-width="5" />
+<g transform="translate(200, 200)">
+<g transform="scale(0.5)">
+<g transform="rotate(20, 160, 160)">
+<rect x="0" y="0" width="200" height="200"
+fill="url(#checkerPattern)" stroke="orange" stroke-width="5" />
+</g>
+</g>
+</g>
+</svg>
+</textarea>
+    <svg xmlns="http://www.w3.org/2000/svg" id="transformations" style="height:300px;" >
+<defs>
+<pattern id="checkerPattern" width="80" height="80"
+patternUnits="userSpaceOnUse">
+<rect fill="red" x="0" y="0" width="40" height="40" />
+<rect fill="blue" x="40" y="0" width="40" height="40" />
+<rect fill="blue" x="0" y="40" width="40" height="40" />
+<rect fill="red" x="40" y="40" width="40" height="40" />
+</pattern>
+</defs>
+<rect x="0" y="0" width="200" height="200" fill="url(#checkerPattern)"
+stroke="orange" stroke-width="5" />
+<g transform="translate(200, 200)">
+<g transform="scale(0.5)">
+<g transform="rotate(20, 160, 160)">
+<rect x="0" y="0" width="200" height="200"
+fill="url(#checkerPattern)" stroke="orange" stroke-width="5" />
+</g>
+</g>
+</g>
+</svg>
+</body>
+</html>

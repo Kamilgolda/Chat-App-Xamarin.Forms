@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Korzystanie z Canvas API</h1>
+    <img src="img/cn1.png" style="float:right" />
+    <h3>
+        Canvas API to alternatywa dla grafiki SVG i jest przydatna dla Ciebie
+        chcesz wykonać jednorazowe operacje graficzne na stronie internetowej. Jednak grafiki SVG są zdefiniowane
+        przy użyciu elementów HTML5 Canvas API jest programowe i wymaga rysowania grafiki przez pisanie
+        Kod JavaScript.
+    </h3>
+    <h3>
+        Kształty są
+        nie są przechowywane w drzewie DOM, więc nie ma mowy
+        później wchodzić w interakcje z kształtami. Dla
+        na przykład nie można uzyskać dostępu do kształtów za pomocą DOM, nie można zastosować stylów CSS do kształtów na płótnie, oraz
+        nie można obsługiwać zdarzeń na kształtach płótna.
+    </h3>
+    <h3>
+        Aby narysować grafikę na płótnie, musisz napisać kod JavaScript. Wykonaj następujące kroki:<br />
+        1. Uzyskaj odwołanie do elementu canvas
+        , wywołując funkcję DOM, np
+        document.getElementById().<br />
+        2. Wywołaj getContext('2d') na obiekcie canvas, aby uzyskać dwuwymiarowy kontekst rysowania dla
+        brezentowy.<br />
+        3. Wywołaj metody w obiekcie kontekstowym, aby narysować kształty na powierzchni płótna.
+    </h3>
+    <h3>
+        Poniższy przykład pokazuje, jak utworzyć płótno i narysować na nim prostokąt. Przykład ustawia
+        właściwość context.fillStyle, aby ustawić kolor wypełnienia otoczenia na czerwony dla kolejnych operacji rysowania.
+        przykład następnie wywołuje metodę context.fillRect () w celu narysowania pełnego prostokąta. Prostokąt zostanie wypełniony
+        z kolorem wypełnienia otoczenia, który jest czerwony. Płótno ma granatową obwódkę i jasnozielone wypełnienie
+        kolor, ze względu na regułę stylu CSS u góry kodu:
+    </h3>
+    <textarea rows="15" cols="80">
+<style>
+    canvas {
+        border: 2px solid darkblue;
+        background-color: lightgreen;
+    }
+</style>
+<h1>Getting started with canvas</h1>
+<canvas id="myCanvas">No canvas support in this browser</canvas>
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const context = canvas.getContext('2d');
+    context.fillStyle = "red";
+    context.fillRect(20, 20, canvas.width - 40, canvas.height - 40);
+</script>
+</textarea>
+    <canvas id="myCanvas" style="border: 2px solid darkblue;
+        background-color: lightgreen;">
+        No canvas support in this browser
+    </canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d');
+        context.fillStyle = "red";
+        context.fillRect(20, 20, canvas.width - 40, canvas.height - 40);
+    </script>
+    <h3>
+        Canvas API udostępnia również funkcję context.strokeRect (), która rysuje kontur a
+        prostokąt, ale nie wypełnia swojego wnętrza.
+    </h3>
+    <h3>
+        Canvas API posiada szereg funkcji do rysowania kształtów i linii, w tym:<br />
+        • arc () i arcTo (): Narysuj łuk.<br />
+        • quadraticCurveTo (): Narysuj kwadratową krzywą Beziera.<br />
+        • bezierCurveTo (): Narysuj sześcienną krzywą Beziera.
+    </h3>
+    <h2>Drawing Paths</h2>
+    <h3>
+        Możesz rysować złożone kształty za pomocą path.
+        Interfejs API Canvas ma funkcję beginPath(), która
+        umożliwia utworzenie ścieżki łączącej serię
+        punktów. Następnie możesz wywoływać funkcje takie jak
+        moveTo () i lineTo (), aby przejść do nowych lokalizacji,
+        i opcjonalnie możesz wywołać metodę closePath () do
+        połącz ostatni punkt z powrotem z pierwszym punktem.
+        Gdy jesteś gotowy do renderowania ścieżki, możesz
+        wywołaj funkcję stroke (), aby narysować kontur
+        ścieżka. Możesz także wywołać funkcję fill () do
+        narysuj wnętrze ścieżki.
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak narysować
+        ścieżka trójkąta przy użyciu Canvas API. Trójkąt ma niebieski kolor konturu, ponieważ styl strokeStyle
+        właściwość jest ustawiona na rgb (0, 0, 255). Trójkąt ma półprzezroczysty czerwony kolor wypełnienia, ponieważ fillStyle
+        właściwość jest ustawiona na rgba (255, 0, 0, 0,75).
+    </h4>
+    <textarea rows="25" cols="80">
+<canvas id="myCanvas">
+Sorry, your browser does not support canvas.
+    </canvas>
+<script>
+    // Get the canvas element and its drawing context.
+    const canvas = document.getElementById('myCanvas');
+    const context = canvas.getContext('2d');
+    // Clear any existing content in the canvas.
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    // Set the stroke color and the fill color.
+    context.strokeStyle = "rgb(0, 0, 255)";
+    context.fillStyle = "rgba(255, 0, 0, 0.75)";
+    // Create a path in absolute coordinates.
+    context.beginPath();
+    context.moveTo(60, 30);
+    context.lineTo(100, 90);
+    context.lineTo(20, 90);
+    // Close the path.
+    context.closePath();
+    // Draw the path as a stroked shape;
+    context.stroke();
+    // Draw the path as a filled shape.
+    context.fill();
+</script>
+</textarea>
+    <canvas id="myCanvas1">
+        Sorry, your browser does not support canvas.
+    </canvas>
+    <script>
+        // Get the canvas element and its drawing context.
+        const canvas1 = document.getElementById('myCanvas1');
+        const context1 = canvas1.getContext('2d');
+        // Clear any existing content in the canvas.
+        context1.clearRect(0, 0, canvas1.width, canvas1.height);
+        // Set the stroke color and the fill color.
+        context1.strokeStyle = "rgb(0, 0, 255)";
+        context1.fillStyle = "rgba(255, 0, 0, 0.75)";
+        // Create a path in absolute coordinates.
+        context1.beginPath();
+        context1.moveTo(60, 30);
+        context1.lineTo(100, 90);
+        context1.lineTo(20, 90);
+        // Close the path.
+        context1.closePath();
+        // Draw the path as a stroked shape;
+        context1.stroke();
+        // Draw the path as a filled shape.
+        context1.fill();
+    </script>
+    <hr />
+    <h1>Using Gradients and Patterns</h1>
+    <img src="img/cn2.png" style="float:right" />
+    <h3>
+        Interfejs API Canvas udostępnia funkcje, które umożliwiają
+        możesz określić gradienty i wzory, które możesz
+        użyj, aby wypełnić kształt lub narysować kontur:<br />
+        • createLinearGradient ()<br />
+        • createRadialGradient ()<br />
+        • createPattern ()
+    </h3>
+    <h2>createLinearGradient()</h2>
+    <h3>
+        Funkcja createLinearGradient () tworzy
+        gradient liniowy. Metoda createLinearGradient () ma parametry definiujące początkową i końcową lokalizację pliku
+        gradient liniowy i zwraca obiekt gradientu liniowego. Możesz dodać punkty przejścia koloru do gradientu liniowego przez
+        wywołanie funkcji addColorStop (). Następnie możesz ustawić gradient liniowy jako styl wypełnienia lub
+        styl obrysu dla kontekstu obszaru roboczego, ustawiając właściwość fillStyle lub strokeStyle. Możesz także użyć
+        gradient, aby zdefiniować kolor wypełnienia lub kolor obrysu tekstu.
+    </h3>
+    <h2>createRadialGradient()</h2>
+    <h3>
+        Funkcja createRadialGradient () tworzy gradient promieniowy. createRadialGradient () ma parametry
+        które określają punkt centralny gradientu radialnego. Możesz dodać punkty przejścia koloru do gradientu i zastosować je do
+        kontekst w taki sam sposób, jak dla gradientu liniowego.
+    </h3>
+    <h2>createPattern()</h2>
+    <h3>
+        Funkcja createPattern () tworzy wzorzec, zwykle oparty na obrazie lub innej zawartości w
+        Strona internetowa. Możesz zastosować wzór w taki sam sposób, jak w przypadku gradientu liniowego lub promieniowego
+        gradient.
+    </h3>
+    <h4>
+        Poniższy przykład pokazuje, jak utworzyć gradient liniowy, gradient promieniowy i wzór. Wzór
+        używany jest na podstawie obrazu Walii (ten obraz to flaga Walii w Wielkiej Brytanii).
+    </h4>
+    <textarea rows="40" cols="90">
+<canvas id="myCanvas">
+Sorry, your browser doesn't support canvas.
+</canvas>
+<img id="wales" src="Wales.png" style="display: none;" />
+
+<script>
+    // Get the canvas element and its drawing context.
+    const canvas = document.getElementById('myCanvas');
+    const context = canvas.getContext('2d');
+    context.lineWidth = 5;
+    demoLinearGradient();
+    demoRadialGradient();
+    demoPattern();
+    function demoLinearGradient() {
+        const linearGradient = context.createLinearGradient(0, 0, 0, canvas.height);
+        linearGradient.addColorStop(0, "red");
+        linearGradient.addColorStop(0.4, "yellow");
+        linearGradient.addColorStop(1, "green");
+        drawShapes(linearGradient);
+    }
+    function demoRadialGradient() {
+        const radialGradient = context.createRadialGradient(canvas.width / 2,
+            canvas.height / 2, 10, canvas.width / 2, canvas.height / 2, 100);
+        radialGradient.addColorStop(0, "red");
+        radialGradient.addColorStop(0.4, "yellow");
+        radialGradient.addColorStop(1, "green");
+        drawShapes(radialGradient);
+    }
+    function demoPattern() {
+        const image = document.getElementById("wales");
+        const pattern = context.createPattern(image, "repeat");
+        drawShapes(pattern);
+    }
+    function drawShapes(theStyle) {
+        // Clear any existing content in the canvas.
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        // Draw a filled triangle, using the specified style.
+        context.fillStyle = theStyle;
+        context.strokeStyle = "rgb(200, 200, 200)";
+        context.beginPath();
+        context.moveTo(70, 30);
+        context.lineTo(130, 140);
+        context.lineTo(10, 140);
+        context.closePath();
+        context.fill();
+        context.stroke();
+        // Draw a stroked circle, still using the specified style.
+        context.beginPath();
+        context.arc(canvas.width / 2, canvas.height / 2, 50, 0, 2 * Math.PI);
+        context.fill();
+        // Draw a stroked triangle, using the specified style.
+        context.fillStyle = "rgb(200, 200, 200)";
+        context.strokeStyle = theStyle;
+        context.beginPath();
+        context.moveTo(230, 30);
+        context.lineTo(290, 140);
+        context.lineTo(170, 140);
+        context.closePath();
+        context.fill();
+        context.stroke();
+    }
+</script>
+</textarea>
+    <hr />
+
+    <h1>Przekształcanie kształtów</h1>
+    <img src="img/cn3.png" />
+    <h3>
+        • rotate(angle): Rotates the coordinate system
+        by the specified angle clockwise in radians.<br/>
+        • translate(dx, dy): Translates the coordinate
+        system by the specified distance in the X and
+        Y directions.<br/>
+        • scale(sx, sy): Scales the coordinate system by the specified fraction in the X and Y directions.
+        transform(scaleX, skewX, scaleY, skewY, translateX, translateY): Adjusts the current
+        transformation matrix to perform scaling, skewing, and translation.<br/>
+        • setTransform(scaleX, skewX, scaleY, skewY, translateX, translateY): Sets a new transformation
+        matrix to perform scaling, skewing, and translation.<br/>
+    </h3>
+</body>
+</html>
