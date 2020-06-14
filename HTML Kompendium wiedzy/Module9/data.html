@@ -209,5 +209,26 @@ getRequest.onerror = function() {
 // Handle failure
 };
 </textarea>
+    <hr />
+    <textarea rows="25" cols="80">
+ load() {
+        /// <summary>Loads the starred sessions from storage.</summary>
+
+        // TODO: get the "stars" from local storage
+        var js = this.localStorage.getItem("stars");
+        // TODO: parse the JSON string into this.sessions
+        if (js) {
+            try {
+                this.sessions = JSON.parse(js) || [];
+            } catch (exception) {
+                this.sessions = [];
+            }
+        } else {
+            this.sessions = [];
+        }
+        // TODO: handle failures due to missing data, etc
+        this.localStorage.setItem("stars", JSON.stringify(this.sessions));
+    }
+</textarea>
 </body>
 </html>

@@ -211,6 +211,26 @@
         }
     </script>
 
+    <hr />
+    <h3> sprawdzenie czy pobrany file jest zdjęciem:</h3>
+    <textarea rows="20" cols="80">
+const files = event.dataTransfer.files;
+
+        if (files.length == 0) return;
+
+        
+        const file = files[0];
+       
+        if (this.isImageType(file.type)) {
+            this.readFile(file).then((file) => this.displayImage(file));
+        } else {
+            alert("DROP");
+        }
+
+
+//czytanie URL
+reader.readAsDataURL(file);
+</textarea>
 </body>
 
 
